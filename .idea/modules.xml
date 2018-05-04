@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/WGS-Mall.iml" filepath="$PROJECT_DIR$/.idea/modules/WGS-Mall.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/WGS-Mall_main.iml" filepath="$PROJECT_DIR$/.idea/modules/WGS-Mall_main.iml" group="WGS-Mall" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/WGS-Mall_test.iml" filepath="$PROJECT_DIR$/.idea/modules/WGS-Mall_test.iml" group="WGS-Mall" />
+      <module fileurl="file://$PROJECT_DIR$/client-api/client-api.iml" filepath="$PROJECT_DIR$/client-api/client-api.iml" group="client-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/client-api/client-api_main.iml" filepath="$PROJECT_DIR$/.idea/modules/client-api/client-api_main.iml" group="client-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/client-api/client-api_test.iml" filepath="$PROJECT_DIR$/.idea/modules/client-api/client-api_test.iml" group="client-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/entity.iml" filepath="$PROJECT_DIR$/.idea/modules/entity.iml" group="entity" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/entity/entity_main.iml" filepath="$PROJECT_DIR$/.idea/modules/entity/entity_main.iml" group="entity" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/entity/entity_test.iml" filepath="$PROJECT_DIR$/.idea/modules/entity/entity_test.iml" group="entity" />
+      <module fileurl="file://$PROJECT_DIR$/euraka-server/euraka-server.iml" filepath="$PROJECT_DIR$/euraka-server/euraka-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/euraka-server_main.iml" filepath="$PROJECT_DIR$/.idea/modules/euraka-server_main.iml" group="euraka-server" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/euraka-server_test.iml" filepath="$PROJECT_DIR$/.idea/modules/euraka-server_test.iml" group="euraka-server" />
+      <module fileurl="file://$PROJECT_DIR$/eureka-provider/eureka-provider.iml" filepath="$PROJECT_DIR$/eureka-provider/eureka-provider.iml" group="eureka-provider" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/eureka-provider_main.iml" filepath="$PROJECT_DIR$/.idea/modules/eureka-provider_main.iml" group="eureka-provider" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/eureka-provider_test.iml" filepath="$PROJECT_DIR$/.idea/modules/eureka-provider_test.iml" group="eureka-provider" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/.idea/modules/eureka-server/eureka-server.iml" group="eureka-server" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/repository.iml" filepath="$PROJECT_DIR$/.idea/modules/repository.iml" group="repository" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/repository/repository_main.iml" filepath="$PROJECT_DIR$/.idea/modules/repository/repository_main.iml" group="repository" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/repository/repository_test.iml" filepath="$PROJECT_DIR$/.idea/modules/repository/repository_test.iml" group="repository" />
+    </modules>
+  </component>
+</project>
