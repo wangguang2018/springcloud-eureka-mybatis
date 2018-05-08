@@ -1,4 +1,5 @@
 package com.wgs.mapper;
+import com.wgs.dto.video.VideoDTO;
 import com.wgs.entity.Video;
 
 
@@ -9,7 +10,7 @@ import java.util.List;
  * Mapper - 视频
  *
  * @author zhaoziyu
- * @since 2018-05-07
+ * @since 2018-05-08
  */
 public interface VideoMapper {
 
@@ -58,4 +59,5 @@ public interface VideoMapper {
      */
     List<Video> findAll();
 
+    List<VideoDTO> findVideoList();
 }

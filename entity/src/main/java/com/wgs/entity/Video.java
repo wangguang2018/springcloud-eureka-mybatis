@@ -7,7 +7,7 @@ import java.util.Date;
  * Entity - 视频
  *
  * @author zhaoziyu
- * @since 2018-05-07
+ * @since 2018-05-08
  */
 public class Video implements Serializable {
 
@@ -26,6 +26,11 @@ public class Video implements Serializable {
      * 排序
      */
     private Integer sort;
+
+    /**
+     * 封面
+     */
+    private String cover;
 
     /**
      * 创建者编号
@@ -110,6 +115,25 @@ public class Video implements Serializable {
      */
     public Integer getSort(){
         return sort;
+    }
+
+
+    /**
+     * 设置封面
+     *
+     * @param cover 封面
+     */
+    public void setCover(String cover){
+        this.cover = cover;
+    }
+
+    /**
+     * 获取封面
+     *
+     * @return 封面
+     */
+    public String getCover(){
+        return cover;
     }
 
 

@@ -2,40 +2,46 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wgs.mapper.VideoMapper">
 
-<resultMap id="VideoMap" type="com.wgs.entity.Video">
-
-		<id column="id" jdbcType="INTEGER" property="id" />
-		<result column="video_url" property="videoUrl" />
-		<result column="sort" property="sort" />
-		<result column="created_id" property="createdId" />
-		<result column="modified_id" property="modifiedId" />
-		<result column="created_time" property="createdTime" />
-		<result column="modified_time" property="modifiedTime" />
-		<result column="deleted" property="deleted" />
+    <resultMap id="VideoMap" type="com.wgs.entity.Video">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="video_url" property="videoUrl"/>
+        <result column="sort" property="sort"/>
+        <result column="cover" property="cover"/>
+        <result column="created_id" property="createdId"/>
+        <result column="modified_id" property="modifiedId"/>
+        <result column="created_time" property="createdTime"/>
+        <result column="modified_time" property="modifiedTime"/>
+        <result column="deleted" property="deleted"/>
     </resultMap>
-	
-	<!--表名 -->
-	<sql id="tableName">
+
+    <resultMap id="VideoDTOMap" type="com.wgs.dto.video.VideoDTO" extends="VideoMap">
+        <collection property="goodsList" select="findVideoGoodsList" column="id"></collection>
+    </resultMap>
+
+    <!--表名 -->
+    <sql id="tableName">
 		wgs_video
 	</sql>
-	
-	<!-- 字段 -->
-	<sql id="Field">
+
+    <!-- 字段 -->
+    <sql id="Field">
 		id,
 		video_url,
 		sort,
+		cover,
 		created_id,
 		modified_id,
 		created_time,
 		modified_time,
 		deleted
 	</sql>
-	
-	<!-- 字段值 -->
-	<sql id="FieldValue">
+
+    <!-- 字段值 -->
+    <sql id="FieldValue">
 		#{id, jdbcType=INTEGER},
 		#{videoUrl, jdbcType=VARCHAR},
 		#{sort, jdbcType=INTEGER},
+		#{cover, jdbcType=VARCHAR},
 		#{createdId, jdbcType=INTEGER},
 		#{modifiedId, jdbcType=INTEGER},
 		#{createdTime, jdbcType=TIMESTAMP},
@@ -43,135 +49,158 @@
 		#{deleted, jdbcType=TINYINT}
 	</sql>
 
-	<!-- 查询全部记录 -->
+    <!-- 查询全部记录 -->
     <select id="findAll" resultMap="VideoMap">
         SELECT
-        	<include refid="Field"></include>
+        <include refid="Field"></include>
         FROM
-        	<include refid="tableName"></include>
-		WHERE
-			deleted = 0
+        <include refid="tableName"></include>
+        WHERE
+        deleted = 0
     </select>
-	
-	<!-- 新增-->
-<insert id="insert" parameterType="com.wgs.entity.Video" useGeneratedKeys="true" keyProperty="id">
+
+    <!-- 新增-->
+    <insert id="insert" parameterType="com.wgs.entity.Video" useGeneratedKeys="true" keyProperty="id">
 
         INSERT INTO
-			<include refid="tableName"></include>
+        <include refid="tableName"></include>
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
-				id,
+                id,
             </if>
             <if test="videoUrl != null">
-				video_url,
+                video_url,
             </if>
             <if test="sort != null">
-				sort,
+                sort,
+            </if>
+            <if test="cover != null">
+                cover,
             </if>
             <if test="createdId != null">
-				created_id,
+                created_id,
             </if>
             <if test="modifiedId != null">
-				modified_id,
+                modified_id,
             </if>
             <if test="createdTime != null">
-				created_time,
+                created_time,
             </if>
             <if test="modifiedTime != null">
-				modified_time,
+                modified_time,
             </if>
             <if test="deleted != null">
-				deleted,
+                deleted,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
-				#{id},
+                #{id},
             </if>
             <if test="videoUrl != null">
-				#{videoUrl},
+                #{videoUrl},
             </if>
             <if test="sort != null">
-				#{sort},
+                #{sort},
+            </if>
+            <if test="cover != null">
+                #{cover},
             </if>
             <if test="createdId != null">
-				#{createdId},
+                #{createdId},
             </if>
             <if test="modifiedId != null">
-				#{modifiedId},
+                #{modifiedId},
             </if>
             <if test="createdTime != null">
-				#{createdTime},
+                #{createdTime},
             </if>
             <if test="modifiedTime != null">
-				#{modifiedTime},
+                #{modifiedTime},
             </if>
             <if test="deleted != null">
-				#{deleted},
+                #{deleted},
             </if>
         </trim>
-	</insert>
-	
-	<!-- 删除-->
-	<delete id="delete" parameterType="java.lang.Integer">
-		UPDATE
-			<include refid="tableName"></include>
-		SET
-			deleted = 1
-		WHERE
-			id = #{id}
-	</delete>
+    </insert>
+
+    <!-- 删除-->
+    <delete id="delete" parameterType="java.lang.Integer">
+        UPDATE
+        <include refid="tableName"></include>
+        SET
+        deleted = 1
+        WHERE
+        id = #{id}
+    </delete>
 
     <!-- 批量删除 -->
     <delete id="deleteByIds">
         UPDATE
-        	<include refid="tableName"></include>
-		SET
-			deleted = 1
+        <include refid="tableName"></include>
+        SET
+        deleted = 1
         WHERE
-			id IN
-			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
-				#{item}
-			</foreach>
+        id IN
+        <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </delete>
-	
-	<!-- 更新记录 -->
-<update id="update" parameterType="com.wgs.entity.Video">
-		UPDATE
-			<include refid="tableName"></include>
+
+    <!-- 更新记录 -->
+    <update id="update" parameterType="com.wgs.entity.Video">
+        UPDATE
+        <include refid="tableName"></include>
         <set>
-			<if test="videoUrl != null">
-				video_url = #{videoUrl},
-			</if>
-			<if test="sort != null">
-				sort = #{sort},
-			</if>
-			<if test="createdId != null">
-				created_id = #{createdId},
-			</if>
-			<if test="modifiedId != null">
-				modified_id = #{modifiedId},
-			</if>
-			<if test="createdTime != null">
-				created_time = #{createdTime},
-			</if>
-			<if test="modifiedTime != null">
-				modified_time = #{modifiedTime},
-			</if>
-			<if test="deleted != null">
-				deleted = #{deleted},
-			</if>
+            <if test="videoUrl != null">
+                video_url = #{videoUrl},
+            </if>
+            <if test="sort != null">
+                sort = #{sort},
+            </if>
+            <if test="cover != null">
+                cover = #{cover},
+            </if>
+            <if test="createdId != null">
+                created_id = #{createdId},
+            </if>
+            <if test="modifiedId != null">
+                modified_id = #{modifiedId},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+            <if test="modifiedTime != null">
+                modified_time = #{modifiedTime},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted},
+            </if>
         </set>
         WHERE id = #{id}
-	</update>
-	
-	<!-- 通过编号查询 -->
-	<select id="findById" parameterType="java.lang.Integer" resultMap="VideoMap">
-		SELECT
-			<include refid="Field"></include>
-		FROM
-			<include refid="tableName"></include>
-		WHERE id = #{id}
-	</select>
+    </update>
+
+    <!-- 通过编号查询 -->
+    <select id="findById" parameterType="java.lang.Integer" resultMap="VideoMap">
+        SELECT
+        <include refid="Field"></include>
+        FROM
+        <include refid="tableName"></include>
+        WHERE id = #{id}
+    </select>
+
+    <select id="findVideoList" resultMap="VideoDTOMap">
+        SELECT id,video_url,cover from
+        <include refid="tableName"></include>
+        where deleted= 0
+        ORDER BY sort desc
+    </select>
+
+    <select id="findVideoGoodsList" resultMap="com.wgs.mapper.GoodsMapper.GoodsDTOMap">
+        SELECT g.id,goods_name,`desc`,price,cover from wgs_goods g
+        LEFT JOIN wgs_video_goods v
+        on v.goods_id = g.id
+        where v.id = 1 and v.deleted= 0 and g.deleted= 0
+    </select>
 
 </mapper>
