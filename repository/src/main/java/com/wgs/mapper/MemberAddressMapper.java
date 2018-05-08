@@ -1,6 +1,6 @@
 package com.wgs.mapper;
 import com.wgs.entity.MemberAddress;
-
+import org.apache.ibatis.annotations.Param;
 
 
 import java.util.List;
@@ -57,5 +57,11 @@ public interface MemberAddressMapper {
      * @return 用户收货地址集合
      */
     List<MemberAddress> findAll();
+
+    List<MemberAddress> findByMemberId(@Param("memberId") Integer memberId);
+
+    void updateMemberAddressDefault(@Param("memberId") Integer memberId,@Param("addressId") Integer addressId,@Param("isDefault") Integer isDefault);
+
+    void deleteByMemberId(@Param("memberId") Integer memberId,@Param("addressId") Integer addressId);
 
 }
