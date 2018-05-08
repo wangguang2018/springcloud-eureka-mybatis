@@ -1,4 +1,4 @@
-package com.wgs.eurekaprovider.service;
+package com.wgs.eurekaprovider.service.goods;
 
 import com.wgs.entity.GoodsCategory;
 import com.wgs.mapper.GoodsCategoryMapper;

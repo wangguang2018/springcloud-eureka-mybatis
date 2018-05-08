@@ -3,12 +3,12 @@ package com.wgs.eurekaprovider.controller;
 import com.wgs.dto.goods.GoodsDTO;
 import com.wgs.dto.goods.GoodsSkuGroupDTO;
 import com.wgs.entity.GoodsCategory;
-import com.wgs.eurekaprovider.service.GoodsCategoryService;
+import com.wgs.eurekaprovider.service.goods.GoodsCategoryService;
 import com.ydd.framework.core.common.Pagination;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.wgs.eurekaprovider.service.GoodsService;
+import com.wgs.eurekaprovider.service.goods.GoodsService;
 import javax.annotation.Resource;
 import java.util.List;
 
