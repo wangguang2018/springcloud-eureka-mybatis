@@ -1,6 +1,10 @@
 package com.wgs.mapper;
+import com.wgs.dto.goods.GoodsDTO;
+import com.wgs.entity.Goods;
 import com.wgs.entity.Topic;
 
+import com.wgs.dto.topic.*;
+import org.apache.ibatis.annotations.Param;
 
 
 import java.util.List;
@@ -58,4 +62,9 @@ public interface TopicMapper {
      */
     List<Topic> findAll();
 
+    List<TopicDTO> findList();
+
+    TopicDTO findInfoById(Integer id);
+
+    List<GoodsDTO> findTopicGoods(@Param("id") Integer id,@Param("recommend") Integer recommend);
 }

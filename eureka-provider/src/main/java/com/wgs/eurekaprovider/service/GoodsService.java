@@ -3,7 +3,6 @@ package com.wgs.eurekaprovider.service;
 import com.github.pagehelper.PageHelper;
 import com.wgs.dto.goods.GoodsDTO;
 import com.wgs.dto.goods.GoodsSkuGroupDTO;
-import com.wgs.entity.GoodsCategory;
 import com.wgs.mapper.GoodsMapper;
 import com.ydd.framework.core.common.Pagination;
 import com.ydd.framework.core.service.impl.BaseServiceImpl;

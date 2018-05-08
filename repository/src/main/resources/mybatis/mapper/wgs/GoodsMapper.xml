@@ -21,6 +21,9 @@
         <result property="desc" column="desc"></result>
         <result property="cover" column="cover"></result>
         <result property="price" column="price"></result>
+    </resultMap>
+
+    <resultMap id="GoodsInfoDTOMap" type="com.wgs.dto.goods.GoodsDTO" extends="GoodsDTOMap">
         <collection property="skuList" column="id" select="findGoodsSkuById"></collection>
     </resultMap>
 
@@ -225,7 +228,7 @@
         WHERE id = #{id}
     </select>
 
-    <select id="findGoodsInfoById" resultMap="GoodsDTOMap">
+    <select id="findGoodsInfoById" resultMap="GoodsInfoDTOMap">
         SELECT id,goods_name,`desc`,price,cover from wgs_goods where id = #{goodsId} and deleted = 0
     </select>
 
