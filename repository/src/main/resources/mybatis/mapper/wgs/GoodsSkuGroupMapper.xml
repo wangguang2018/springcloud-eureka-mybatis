@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wgs.mapper.GoodsSkuGroupMapper">
+
+<resultMap id="GoodsSkuGroupMap" type="com.wgs.entity.GoodsSkuGroup">
+
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="goods_id" property="goodsId" />
+		<result column="goods_sku_info_ids" property="goodsSkuInfoIds" />
+		<result column="price" property="price" />
+		<result column="created_id" property="createdId" />
+		<result column="modified_id" property="modifiedId" />
+		<result column="created_time" property="createdTime" />
+		<result column="modified_time" property="modifiedTime" />
+		<result column="deleted" property="deleted" />
+    </resultMap>
+	
+	<!--表名 -->
+	<sql id="tableName">
+		wgs_goods_sku_group
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		id,
+		goods_id,
+		goods_sku_info_ids,
+		price,
+		created_id,
+		modified_id,
+		created_time,
+		modified_time,
+		deleted
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{id, jdbcType=INTEGER},
+		#{goodsId, jdbcType=INTEGER},
+		#{goodsSkuInfoIds, jdbcType=VARCHAR},
+		#{price, jdbcType=DECIMAL},
+		#{createdId, jdbcType=INTEGER},
+		#{modifiedId, jdbcType=INTEGER},
+		#{createdTime, jdbcType=TIMESTAMP},
+		#{modifiedTime, jdbcType=TIMESTAMP},
+		#{deleted, jdbcType=TINYINT}
+	</sql>
+
+	<!-- 查询全部记录 -->
+    <select id="findAll" resultMap="GoodsSkuGroupMap">
+        SELECT
+        	<include refid="Field"></include>
+        FROM
+        	<include refid="tableName"></include>
+		WHERE
+			deleted = 0
+    </select>
+	
+	<!-- 新增-->
+<insert id="insert" parameterType="com.wgs.entity.GoodsSkuGroup" useGeneratedKeys="true" keyProperty="id">
+
+        INSERT INTO
+			<include refid="tableName"></include>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+				id,
+            </if>
+            <if test="goodsId != null">
+				goods_id,
+            </if>
+            <if test="goodsSkuInfoIds != null">
+				goods_sku_info_ids,
+            </if>
+            <if test="price != null">
+				price,
+            </if>
+            <if test="createdId != null">
+				created_id,
+            </if>
+            <if test="modifiedId != null">
+				modified_id,
+            </if>
+            <if test="createdTime != null">
+				created_time,
+            </if>
+            <if test="modifiedTime != null">
+				modified_time,
+            </if>
+            <if test="deleted != null">
+				deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+				#{id},
+            </if>
+            <if test="goodsId != null">
+				#{goodsId},
+            </if>
+            <if test="goodsSkuInfoIds != null">
+				#{goodsSkuInfoIds},
+            </if>
+            <if test="price != null">
+				#{price},
+            </if>
+            <if test="createdId != null">
+				#{createdId},
+            </if>
+            <if test="modifiedId != null">
+				#{modifiedId},
+            </if>
+            <if test="createdTime != null">
+				#{createdTime},
+            </if>
+            <if test="modifiedTime != null">
+				#{modifiedTime},
+            </if>
+            <if test="deleted != null">
+				#{deleted},
+            </if>
+        </trim>
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="java.lang.Integer">
+		UPDATE
+			<include refid="tableName"></include>
+		SET
+			deleted = 1
+		WHERE
+			id = #{id}
+	</delete>
+
+    <!-- 批量删除 -->
+    <delete id="deleteByIds">
+        UPDATE
+        	<include refid="tableName"></include>
+		SET
+			deleted = 1
+        WHERE
+			id IN
+			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+    </delete>
+	
+	<!-- 更新记录 -->
+<update id="update" parameterType="com.wgs.entity.GoodsSkuGroup">
+		UPDATE
+			<include refid="tableName"></include>
+        <set>
+			<if test="goodsId != null">
+				goods_id = #{goodsId},
+			</if>
+			<if test="goodsSkuInfoIds != null">
+				goods_sku_info_ids = #{goodsSkuInfoIds},
+			</if>
+			<if test="price != null">
+				price = #{price},
+			</if>
+			<if test="createdId != null">
+				created_id = #{createdId},
+			</if>
+			<if test="modifiedId != null">
+				modified_id = #{modifiedId},
+			</if>
+			<if test="createdTime != null">
+				created_time = #{createdTime},
+			</if>
+			<if test="modifiedTime != null">
+				modified_time = #{modifiedTime},
+			</if>
+			<if test="deleted != null">
+				deleted = #{deleted},
+			</if>
+        </set>
+        WHERE id = #{id}
+	</update>
+	
+	<!-- 通过编号查询 -->
+	<select id="findById" parameterType="java.lang.Integer" resultMap="GoodsSkuGroupMap">
+		SELECT
+			<include refid="Field"></include>
+		FROM
+			<include refid="tableName"></include>
+		WHERE id = #{id}
+	</select>
+
+</mapper>

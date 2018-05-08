@@ -1,0 +1,78 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9001/eureka/
+server:
+  port: 9002
+spring:
+  application:
+    name: service-api
+  http:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 30MB
+      enabled: true
+  profiles:
+    include:
+      -development
+      -test
+      -production
+    active: development
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+
+    # 数据库连接池配置
+    druid:
+      filters: stat
+      initialSize: 1
+      minIdle: 1
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      WebStatFilter:
+        enabled: false
+        urlPattern:
+        exclusions:
+        sessionStatMaxCount:
+        sessionStatEnable:
+        principalSessionName:
+        principalCookieName:
+        profileEnable:
+      StatViewServlet:
+        enabled: true
+        urlPattern: /druid/*
+        resetEnable: true
+        loginUsername: druid
+        loginPassword: druid
+        allow:
+        deny:
+  aop:
+    auto: true
+  mvc:
+    log-resolved-exception: false
+  jackson:
+    default-property-inclusion: NON_NULL
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      WRITE_NULL_MAP_VALUES: false
+      INDENT_OUTPUT: true
+# MyBatis Configuration
+mybatis:
+  type-aliases-package: com.ydd.oms.entity
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*/*.xml
+
+oss:
+  accessKeyId: LTAIALhDnclBYATv
+  accessKeySecret: 4i9zJ5aDljBkFVRbp8pazK1l21XS79
+  protocol: https
+  name: yingdd
+  endPoint: oss-cn-hangzhou.aliyuncs.com

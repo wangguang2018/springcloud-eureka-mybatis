@@ -5,6 +5,10 @@ apply plugin: 'java'
 
 sourceCompatibility = 1.8
 
+ext {
+    frameworkVersion = '1.8.4'
+}
+
 repositories {
     mavenCentral()
 }

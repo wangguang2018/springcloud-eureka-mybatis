@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wgs.mapper.OrderMapper">
+
+<resultMap id="OrderMap" type="com.wgs.entity.Order">
+
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="order_sn" property="orderSn" />
+		<result column="transaction_sn" property="transactionSn" />
+		<result column="pay_type" property="payType" />
+		<result column="member_id" property="memberId" />
+		<result column="status" property="status" />
+		<result column="total_price" property="totalPrice" />
+		<result column="pay_price" property="payPrice" />
+		<result column="pay_time" property="payTime" />
+		<result column="created_id" property="createdId" />
+		<result column="modified_id" property="modifiedId" />
+		<result column="created_time" property="createdTime" />
+		<result column="modified_time" property="modifiedTime" />
+		<result column="deleted" property="deleted" />
+    </resultMap>
+	
+	<!--表名 -->
+	<sql id="tableName">
+		wgs_order
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		id,
+		order_sn,
+		transaction_sn,
+		pay_type,
+		member_id,
+		status,
+		total_price,
+		pay_price,
+		pay_time,
+		created_id,
+		modified_id,
+		created_time,
+		modified_time,
+		deleted
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{id, jdbcType=INTEGER},
+		#{orderSn, jdbcType=VARCHAR},
+		#{transactionSn, jdbcType=VARCHAR},
+		#{payType, jdbcType=TINYINT},
+		#{memberId, jdbcType=INTEGER},
+		#{status, jdbcType=TINYINT},
+		#{totalPrice, jdbcType=DECIMAL},
+		#{payPrice, jdbcType=DECIMAL},
+		#{payTime, jdbcType=TIMESTAMP},
+		#{createdId, jdbcType=INTEGER},
+		#{modifiedId, jdbcType=INTEGER},
+		#{createdTime, jdbcType=TIMESTAMP},
+		#{modifiedTime, jdbcType=TIMESTAMP},
+		#{deleted, jdbcType=TINYINT}
+	</sql>
+
+	<!-- 查询全部记录 -->
+    <select id="findAll" resultMap="OrderMap">
+        SELECT
+        	<include refid="Field"></include>
+        FROM
+        	<include refid="tableName"></include>
+		WHERE
+			deleted = 0
+    </select>
+	
+	<!-- 新增-->
+<insert id="insert" parameterType="com.wgs.entity.Order" useGeneratedKeys="true" keyProperty="id">
+
+        INSERT INTO
+			<include refid="tableName"></include>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+				id,
+            </if>
+            <if test="orderSn != null">
+				order_sn,
+            </if>
+            <if test="transactionSn != null">
+				transaction_sn,
+            </if>
+            <if test="payType != null">
+				pay_type,
+            </if>
+            <if test="memberId != null">
+				member_id,
+            </if>
+            <if test="status != null">
+				status,
+            </if>
+            <if test="totalPrice != null">
+				total_price,
+            </if>
+            <if test="payPrice != null">
+				pay_price,
+            </if>
+            <if test="payTime != null">
+				pay_time,
+            </if>
+            <if test="createdId != null">
+				created_id,
+            </if>
+            <if test="modifiedId != null">
+				modified_id,
+            </if>
+            <if test="createdTime != null">
+				created_time,
+            </if>
+            <if test="modifiedTime != null">
+				modified_time,
+            </if>
+            <if test="deleted != null">
+				deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+				#{id},
+            </if>
+            <if test="orderSn != null">
+				#{orderSn},
+            </if>
+            <if test="transactionSn != null">
+				#{transactionSn},
+            </if>
+            <if test="payType != null">
+				#{payType},
+            </if>
+            <if test="memberId != null">
+				#{memberId},
+            </if>
+            <if test="status != null">
+				#{status},
+            </if>
+            <if test="totalPrice != null">
+				#{totalPrice},
+            </if>
+            <if test="payPrice != null">
+				#{payPrice},
+            </if>
+            <if test="payTime != null">
+				#{payTime},
+            </if>
+            <if test="createdId != null">
+				#{createdId},
+            </if>
+            <if test="modifiedId != null">
+				#{modifiedId},
+            </if>
+            <if test="createdTime != null">
+				#{createdTime},
+            </if>
+            <if test="modifiedTime != null">
+				#{modifiedTime},
+            </if>
+            <if test="deleted != null">
+				#{deleted},
+            </if>
+        </trim>
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="java.lang.Integer">
+		UPDATE
+			<include refid="tableName"></include>
+		SET
+			deleted = 1
+		WHERE
+			id = #{id}
+	</delete>
+
+    <!-- 批量删除 -->
+    <delete id="deleteByIds">
+        UPDATE
+        	<include refid="tableName"></include>
+		SET
+			deleted = 1
+        WHERE
+			id IN
+			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+    </delete>
+	
+	<!-- 更新记录 -->
+<update id="update" parameterType="com.wgs.entity.Order">
+		UPDATE
+			<include refid="tableName"></include>
+        <set>
+			<if test="orderSn != null">
+				order_sn = #{orderSn},
+			</if>
+			<if test="transactionSn != null">
+				transaction_sn = #{transactionSn},
+			</if>
+			<if test="payType != null">
+				pay_type = #{payType},
+			</if>
+			<if test="memberId != null">
+				member_id = #{memberId},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="totalPrice != null">
+				total_price = #{totalPrice},
+			</if>
+			<if test="payPrice != null">
+				pay_price = #{payPrice},
+			</if>
+			<if test="payTime != null">
+				pay_time = #{payTime},
+			</if>
+			<if test="createdId != null">
+				created_id = #{createdId},
+			</if>
+			<if test="modifiedId != null">
+				modified_id = #{modifiedId},
+			</if>
+			<if test="createdTime != null">
+				created_time = #{createdTime},
+			</if>
+			<if test="modifiedTime != null">
+				modified_time = #{modifiedTime},
+			</if>
+			<if test="deleted != null">
+				deleted = #{deleted},
+			</if>
+        </set>
+        WHERE id = #{id}
+	</update>
+	
+	<!-- 通过编号查询 -->
+	<select id="findById" parameterType="java.lang.Integer" resultMap="OrderMap">
+		SELECT
+			<include refid="Field"></include>
+		FROM
+			<include refid="tableName"></include>
+		WHERE id = #{id}
+	</select>
+
+    <!--更新订单状态-->
+    <update id="updateStatus">
+        UPDATE
+        	<include refid="tableName"></include>
+        SET
+        	status = #{status, jdbcType=TINYINT}
+        WHERE
+        	id
+        IN
+        <foreach collection="ids" item="id" index="index" open="(" close=")" separator=",">
+			#{id}
+        </foreach>
+    </update>
+
+</mapper>

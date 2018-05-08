@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:mysql://yingdiandian.mysql.rds.aliyuncs.com:3306/wgs_mall?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2b8
+    username: yingdd
+    password: Yingdd2015
+
+  redis:
+    host: 121.41.101.63
+    password: yingdiandian2015
+    timeout: 6000
+    port: 6379
+  jpa:
+    show-sql: true

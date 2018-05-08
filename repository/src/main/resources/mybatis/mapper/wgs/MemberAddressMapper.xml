@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wgs.mapper.MemberAddressMapper">
+
+<resultMap id="MemberAddressMap" type="com.wgs.entity.MemberAddress">
+
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="member_id" property="memberId" />
+		<result column="address" property="address" />
+		<result column="street" property="street" />
+		<result column="phone" property="phone" />
+		<result column="contact" property="contact" />
+		<result column="is_default" property="isDefault" />
+		<result column="city_id" property="cityId" />
+		<result column="province_id" property="provinceId" />
+		<result column="area_id" property="areaId" />
+		<result column="city_name" property="cityName" />
+		<result column="province_name" property="provinceName" />
+		<result column="area" property="area" />
+		<result column="created_id" property="createdId" />
+		<result column="modified_id" property="modifiedId" />
+		<result column="created_time" property="createdTime" />
+		<result column="modified_time" property="modifiedTime" />
+		<result column="deleted" property="deleted" />
+    </resultMap>
+	
+	<!--表名 -->
+	<sql id="tableName">
+		wgs_member_address
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		id,
+		member_id,
+		address,
+		street,
+		phone,
+		contact,
+		is_default,
+		city_id,
+		province_id,
+		area_id,
+		city_name,
+		province_name,
+		area,
+		created_id,
+		modified_id,
+		created_time,
+		modified_time,
+		deleted
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{id, jdbcType=INTEGER},
+		#{memberId, jdbcType=INTEGER},
+		#{address, jdbcType=VARCHAR},
+		#{street, jdbcType=VARCHAR},
+		#{phone, jdbcType=VARCHAR},
+		#{contact, jdbcType=VARCHAR},
+		#{isDefault, jdbcType=TINYINT},
+		#{cityId, jdbcType=INTEGER},
+		#{provinceId, jdbcType=INTEGER},
+		#{areaId, jdbcType=INTEGER},
+		#{cityName, jdbcType=VARCHAR},
+		#{provinceName, jdbcType=VARCHAR},
+		#{area, jdbcType=VARCHAR},
+		#{createdId, jdbcType=INTEGER},
+		#{modifiedId, jdbcType=INTEGER},
+		#{createdTime, jdbcType=TIMESTAMP},
+		#{modifiedTime, jdbcType=TIMESTAMP},
+		#{deleted, jdbcType=TINYINT}
+	</sql>
+
+	<!-- 查询全部记录 -->
+    <select id="findAll" resultMap="MemberAddressMap">
+        SELECT
+        	<include refid="Field"></include>
+        FROM
+        	<include refid="tableName"></include>
+		WHERE
+			deleted = 0
+    </select>
+	
+	<!-- 新增-->
+<insert id="insert" parameterType="com.wgs.entity.MemberAddress" useGeneratedKeys="true" keyProperty="id">
+
+        INSERT INTO
+			<include refid="tableName"></include>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+				id,
+            </if>
+            <if test="memberId != null">
+				member_id,
+            </if>
+            <if test="address != null">
+				address,
+            </if>
+            <if test="street != null">
+				street,
+            </if>
+            <if test="phone != null">
+				phone,
+            </if>
+            <if test="contact != null">
+				contact,
+            </if>
+            <if test="isDefault != null">
+				is_default,
+            </if>
+            <if test="cityId != null">
+				city_id,
+            </if>
+            <if test="provinceId != null">
+				province_id,
+            </if>
+            <if test="areaId != null">
+				area_id,
+            </if>
+            <if test="cityName != null">
+				city_name,
+            </if>
+            <if test="provinceName != null">
+				province_name,
+            </if>
+            <if test="area != null">
+				area,
+            </if>
+            <if test="createdId != null">
+				created_id,
+            </if>
+            <if test="modifiedId != null">
+				modified_id,
+            </if>
+            <if test="createdTime != null">
+				created_time,
+            </if>
+            <if test="modifiedTime != null">
+				modified_time,
+            </if>
+            <if test="deleted != null">
+				deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+				#{id},
+            </if>
+            <if test="memberId != null">
+				#{memberId},
+            </if>
+            <if test="address != null">
+				#{address},
+            </if>
+            <if test="street != null">
+				#{street},
+            </if>
+            <if test="phone != null">
+				#{phone},
+            </if>
+            <if test="contact != null">
+				#{contact},
+            </if>
+            <if test="isDefault != null">
+				#{isDefault},
+            </if>
+            <if test="cityId != null">
+				#{cityId},
+            </if>
+            <if test="provinceId != null">
+				#{provinceId},
+            </if>
+            <if test="areaId != null">
+				#{areaId},
+            </if>
+            <if test="cityName != null">
+				#{cityName},
+            </if>
+            <if test="provinceName != null">
+				#{provinceName},
+            </if>
+            <if test="area != null">
+				#{area},
+            </if>
+            <if test="createdId != null">
+				#{createdId},
+            </if>
+            <if test="modifiedId != null">
+				#{modifiedId},
+            </if>
+            <if test="createdTime != null">
+				#{createdTime},
+            </if>
+            <if test="modifiedTime != null">
+				#{modifiedTime},
+            </if>
+            <if test="deleted != null">
+				#{deleted},
+            </if>
+        </trim>
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="java.lang.Integer">
+		UPDATE
+			<include refid="tableName"></include>
+		SET
+			deleted = 1
+		WHERE
+			id = #{id}
+	</delete>
+
+    <!-- 批量删除 -->
+    <delete id="deleteByIds">
+        UPDATE
+        	<include refid="tableName"></include>
+		SET
+			deleted = 1
+        WHERE
+			id IN
+			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+    </delete>
+	
+	<!-- 更新记录 -->
+<update id="update" parameterType="com.wgs.entity.MemberAddress">
+		UPDATE
+			<include refid="tableName"></include>
+        <set>
+			<if test="memberId != null">
+				member_id = #{memberId},
+			</if>
+			<if test="address != null">
+				address = #{address},
+			</if>
+			<if test="street != null">
+				street = #{street},
+			</if>
+			<if test="phone != null">
+				phone = #{phone},
+			</if>
+			<if test="contact != null">
+				contact = #{contact},
+			</if>
+			<if test="isDefault != null">
+				is_default = #{isDefault},
+			</if>
+			<if test="cityId != null">
+				city_id = #{cityId},
+			</if>
+			<if test="provinceId != null">
+				province_id = #{provinceId},
+			</if>
+			<if test="areaId != null">
+				area_id = #{areaId},
+			</if>
+			<if test="cityName != null">
+				city_name = #{cityName},
+			</if>
+			<if test="provinceName != null">
+				province_name = #{provinceName},
+			</if>
+			<if test="area != null">
+				area = #{area},
+			</if>
+			<if test="createdId != null">
+				created_id = #{createdId},
+			</if>
+			<if test="modifiedId != null">
+				modified_id = #{modifiedId},
+			</if>
+			<if test="createdTime != null">
+				created_time = #{createdTime},
+			</if>
+			<if test="modifiedTime != null">
+				modified_time = #{modifiedTime},
+			</if>
+			<if test="deleted != null">
+				deleted = #{deleted},
+			</if>
+        </set>
+        WHERE id = #{id}
+	</update>
+	
+	<!-- 通过编号查询 -->
+	<select id="findById" parameterType="java.lang.Integer" resultMap="MemberAddressMap">
+		SELECT
+			<include refid="Field"></include>
+		FROM
+			<include refid="tableName"></include>
+		WHERE id = #{id}
+	</select>
+
+</mapper>

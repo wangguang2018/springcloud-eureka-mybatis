@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wgs.mapper.GoodsSkuGroupInfoMapper">
+
+<resultMap id="GoodsSkuGroupInfoMap" type="com.wgs.entity.GoodsSkuGroupInfo">
+
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="spectacles_frame_material" property="spectaclesFrameMaterial" />
+		<result column="lens_color" property="lensColor" />
+		<result column="sku_group_id" property="skuGroupId" />
+    </resultMap>
+	
+	<!--表名 -->
+	<sql id="tableName">
+		wgs_goods_sku_group_info
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		id,
+		spectacles_frame_material,
+		lens_color,
+		sku_group_id
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{id, jdbcType=INTEGER},
+		#{spectaclesFrameMaterial, jdbcType=VARCHAR},
+		#{lensColor, jdbcType=VARCHAR},
+		#{skuGroupId, jdbcType=INTEGER}
+	</sql>
+
+	<!-- 查询全部记录 -->
+    <select id="findAll" resultMap="GoodsSkuGroupInfoMap">
+        SELECT
+        	<include refid="Field"></include>
+        FROM
+        	<include refid="tableName"></include>
+		WHERE
+			deleted = 0
+    </select>
+	
+	<!-- 新增-->
+<insert id="insert" parameterType="com.wgs.entity.GoodsSkuGroupInfo" useGeneratedKeys="true" keyProperty="id">
+
+        INSERT INTO
+			<include refid="tableName"></include>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+				id,
+            </if>
+            <if test="spectaclesFrameMaterial != null">
+				spectacles_frame_material,
+            </if>
+            <if test="lensColor != null">
+				lens_color,
+            </if>
+            <if test="skuGroupId != null">
+				sku_group_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+				#{id},
+            </if>
+            <if test="spectaclesFrameMaterial != null">
+				#{spectaclesFrameMaterial},
+            </if>
+            <if test="lensColor != null">
+				#{lensColor},
+            </if>
+            <if test="skuGroupId != null">
+				#{skuGroupId},
+            </if>
+        </trim>
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="java.lang.Integer">
+		UPDATE
+			<include refid="tableName"></include>
+		SET
+			deleted = 1
+		WHERE
+			id = #{id}
+	</delete>
+
+    <!-- 批量删除 -->
+    <delete id="deleteByIds">
+        UPDATE
+        	<include refid="tableName"></include>
+		SET
+			deleted = 1
+        WHERE
+			id IN
+			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+    </delete>
+	
+	<!-- 更新记录 -->
+<update id="update" parameterType="com.wgs.entity.GoodsSkuGroupInfo">
+		UPDATE
+			<include refid="tableName"></include>
+        <set>
+			<if test="spectaclesFrameMaterial != null">
+				spectacles_frame_material = #{spectaclesFrameMaterial},
+			</if>
+			<if test="lensColor != null">
+				lens_color = #{lensColor},
+			</if>
+			<if test="skuGroupId != null">
+				sku_group_id = #{skuGroupId},
+			</if>
+        </set>
+        WHERE id = #{id}
+	</update>
+	
+	<!-- 通过编号查询 -->
+	<select id="findById" parameterType="java.lang.Integer" resultMap="GoodsSkuGroupInfoMap">
+		SELECT
+			<include refid="Field"></include>
+		FROM
+			<include refid="tableName"></include>
+		WHERE id = #{id}
+	</select>
+
+</mapper>
