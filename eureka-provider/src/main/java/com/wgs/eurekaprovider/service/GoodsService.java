@@ -1,8 +1,11 @@
 package com.wgs.eurekaprovider.service;
 
+import com.github.pagehelper.PageHelper;
 import com.wgs.dto.goods.GoodsDTO;
 import com.wgs.dto.goods.GoodsSkuGroupDTO;
+import com.wgs.entity.GoodsCategory;
 import com.wgs.mapper.GoodsMapper;
+import com.ydd.framework.core.common.Pagination;
 import com.ydd.framework.core.service.impl.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +34,17 @@ public class GoodsService extends BaseServiceImpl{
      */
     public List<GoodsSkuGroupDTO> findGoodsGroupInfo(Integer goodsId){
         return goodsMapper.findGoodsSkuGroupByGoodsId(goodsId);
+    }
+
+    /**
+     * 根据分类查找商品
+     * @param categoryId
+     * @return
+     */
+    public Pagination findGoodsByCategory(Integer categoryId,Pagination pagination){
+        PageHelper.startPage(pagination.getPage(), pagination.getPageSize());
+        pagination.setQueryResult(goodsMapper.findGoodsByCategory(categoryId));
+        return pagination;
     }
 
 }

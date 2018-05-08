@@ -22,7 +22,7 @@
 	<!-- 字段 -->
 	<sql id="Field">
 		id,
-		name,
+		`name`,
 		img,
 		created_id,
 		modified_id,
@@ -50,7 +50,7 @@
         FROM
         	<include refid="tableName"></include>
 		WHERE
-			deleted = 0
+			deleted = 0 ORDER BY sort desc
     </select>
 	
 	<!-- 新增-->
@@ -63,7 +63,7 @@
 				id,
             </if>
             <if test="name != null">
-				name,
+				`name`,
             </if>
             <if test="img != null">
 				img,
@@ -141,7 +141,7 @@
 			<include refid="tableName"></include>
         <set>
 			<if test="name != null">
-				name = #{name},
+				`name` = #{name},
 			</if>
 			<if test="img != null">
 				img = #{img},

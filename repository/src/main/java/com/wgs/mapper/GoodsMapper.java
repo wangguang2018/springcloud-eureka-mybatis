@@ -65,4 +65,6 @@ public interface GoodsMapper {
     GoodsDTO findGoodsInfoById(@Param("goodsId") Integer goodsId);
 
     List<GoodsSkuGroupDTO> findGoodsSkuGroupByGoodsId(@Param("goodsId") Integer goodsId);
+
+    List<GoodsDTO> findGoodsByCategory(@Param("categoryId") Integer categoryId);
 }

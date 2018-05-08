@@ -19,6 +19,8 @@
         <result property="id" column="id"></result>
         <result property="name" column="goods_name"></result>
         <result property="desc" column="desc"></result>
+        <result property="cover" column="cover"></result>
+        <result property="price" column="price"></result>
         <collection property="skuList" column="id" select="findGoodsSkuById"></collection>
     </resultMap>
 
@@ -224,7 +226,7 @@
     </select>
 
     <select id="findGoodsInfoById" resultMap="GoodsDTOMap">
-        SELECT id,goods_name,`desc` from wgs_goods where id = #{goodsId} and deleted = 0
+        SELECT id,goods_name,`desc`,price,cover from wgs_goods where id = #{goodsId} and deleted = 0
     </select>
 
     <select id="findGoodsSkuById" resultMap="GoodsSkuDTOMap">
@@ -240,5 +242,9 @@
         LEFT JOIN wgs_goods_sku_group_info i
         on g.id = i.sku_group_id
         where goods_id = 1
+    </select>
+
+    <select id="findGoodsByCategory" resultMap="GoodsDTOMap">
+        SELECT id,goods_name,`desc`,price,cover from wgs_goods where category_id = #{categoryId} and deleted = 0
     </select>
 </mapper>

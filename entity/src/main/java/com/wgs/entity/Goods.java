@@ -1,6 +1,7 @@
 package com.wgs.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -36,6 +37,16 @@ public class Goods implements Serializable {
      * 商品编号
      */
     private String goodsSn;
+
+    /**
+     * 封面
+     */
+    private String cover;
+
+    /**
+     * 价格(用于显示)
+     */
+    private BigDecimal price;
 
     /**
      * 创建者编号
@@ -258,4 +269,19 @@ public class Goods implements Serializable {
         return deleted;
     }
 
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 }
