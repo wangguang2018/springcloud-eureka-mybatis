@@ -1,6 +1,6 @@
 package com.wgs.eurekaprovider.controller;
 
-import com.wgs.eurekaprovider.video.VideoService;
+import com.wgs.eurekaprovider.service.video.VideoService;
 import com.ydd.framework.core.common.Pagination;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

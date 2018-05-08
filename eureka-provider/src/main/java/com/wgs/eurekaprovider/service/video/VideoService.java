@@ -1,4 +1,4 @@
-package com.wgs.eurekaprovider.video;
+package com.wgs.eurekaprovider.service.video;
 
 import com.github.pagehelper.PageHelper;
 import com.wgs.dto.video.VideoDTO;
