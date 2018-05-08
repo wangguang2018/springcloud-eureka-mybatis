@@ -64,9 +64,10 @@ spring:
     serialization:
       WRITE_NULL_MAP_VALUES: false
       INDENT_OUTPUT: true
+
 # MyBatis Configuration
 mybatis:
-  type-aliases-package: com.ydd.oms.entity
+  type-aliases-package: com.wgs.entity
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mybatis/mapper/*/*.xml
 
