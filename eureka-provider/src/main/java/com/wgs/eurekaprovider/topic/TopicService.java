@@ -1,4 +1,4 @@
-package com.wgs.eurekaprovider.service.topic;
+package com.wgs.eurekaprovider.topic;
 
 import com.github.pagehelper.PageHelper;
 import com.wgs.dto.topic.TopicDTO;

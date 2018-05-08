@@ -1,7 +1,7 @@
 package com.wgs.eurekaprovider.controller;
 
 import com.wgs.dto.topic.TopicDTO;
-import com.wgs.eurekaprovider.service.topic.TopicService;
+import com.wgs.eurekaprovider.topic.TopicService;
 import com.ydd.framework.core.common.Pagination;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

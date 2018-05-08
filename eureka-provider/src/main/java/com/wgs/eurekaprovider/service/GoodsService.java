@@ -1,4 +1,4 @@
-package com.wgs.eurekaprovider.service.goods;
+package com.wgs.eurekaprovider.service;
 
 import com.github.pagehelper.PageHelper;
 import com.wgs.dto.goods.GoodsDTO;
