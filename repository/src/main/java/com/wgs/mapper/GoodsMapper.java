@@ -3,6 +3,7 @@ package com.wgs.mapper;
 
 
 import com.wgs.dto.goods.GoodsDTO;
+import com.wgs.dto.goods.GoodsSkuGroupDTO;
 import com.wgs.entity.Goods;
 import org.apache.ibatis.annotations.Param;
 
@@ -62,4 +63,6 @@ public interface GoodsMapper {
     List<Goods> findAll();
 
     GoodsDTO findGoodsInfoById(@Param("goodsId") Integer goodsId);
+
+    List<GoodsSkuGroupDTO> findGoodsSkuGroupByGoodsId(@Param("goodsId") Integer goodsId);
 }
