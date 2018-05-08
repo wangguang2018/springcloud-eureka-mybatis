@@ -1,6 +1,6 @@
 package com.wgs.mapper;
 import com.wgs.entity.Member;
-
+import org.apache.ibatis.annotations.Param;
 
 
 import java.util.List;
@@ -57,5 +57,7 @@ public interface MemberMapper {
      * @return 用户集合
      */
     List<Member> findAll();
+
+    Member findByOpenId(@Param("openId") String openId);
 
 }

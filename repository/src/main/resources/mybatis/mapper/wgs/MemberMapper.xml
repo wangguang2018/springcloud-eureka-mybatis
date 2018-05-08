@@ -186,4 +186,9 @@
 		WHERE id = #{id}
 	</select>
 
+	<select id="findByOpenId" resultMap="MemberMap">
+		SELECT * from wgs_member where xcx_open_id = #{openId}
+		and deleted = 0
+	</select>
+
 </mapper>
