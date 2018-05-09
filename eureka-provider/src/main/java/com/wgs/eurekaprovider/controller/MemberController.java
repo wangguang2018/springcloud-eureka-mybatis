@@ -25,9 +25,37 @@ public class MemberController{
         return memberService.loginWithXcx(code,nickname,avatar);
     }
 
+    /**
+     *  购物车列表
+     * @param memberId
+     * @return
+     */
     @RequestMapping("/findGoodsCarByMemberId")
     public List<GoodsCarDTO> findByMemberId(@RequestParam("memberId") Integer memberId){
         return goodsCarService.findGoodsCarByMember(memberId);
+    }
+
+    /**
+     * 添加到购物车
+     * @param skuGroupId
+     * @param memberId
+     * @param goodsId
+     * @param num
+     */
+    @RequestMapping("/addGoodsCar")
+    public void addGoodsCar(@RequestParam("skuGroupId") Integer skuGroupId, @RequestParam("memberId") Integer memberId,
+                            @RequestParam("goodsId") Integer goodsId, @RequestParam("num") Integer num) {
+        goodsCarService.addGoodsCar(skuGroupId,memberId,goodsId,num);
+    }
+
+    /**
+     * 删除购物车
+     * @param skuGroupId
+     * @param memberId
+     */
+    @RequestMapping("/deleteGoodsCar")
+    public void deleteGoodsCar(@RequestParam("skuGroupId") Integer skuGroupId, @RequestParam("memberId") Integer memberId){
+        goodsCarService.delete(skuGroupId,memberId);
     }
 
 }
