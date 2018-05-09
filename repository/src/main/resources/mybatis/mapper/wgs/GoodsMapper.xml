@@ -20,6 +20,7 @@
         <result property="name" column="goods_name"></result>
         <result property="desc" column="desc"></result>
         <result property="cover" column="cover"></result>
+        <result column="goods_sn" property="goodsSn"></result>
         <result property="price" column="price"></result>
     </resultMap>
 

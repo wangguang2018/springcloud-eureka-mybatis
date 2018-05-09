@@ -7,6 +7,7 @@ import java.util.List;
 public class GoodsDTO implements Serializable {
     private Integer id;
     private String name;
+    private String goodsSn;
     private String desc;
     private String cover;
     private BigDecimal price;
@@ -58,5 +59,13 @@ public class GoodsDTO implements Serializable {
 
     public void setCover(String cover) {
         this.cover = cover;
+    }
+
+    public String getGoodsSn() {
+        return goodsSn;
+    }
+
+    public void setGoodsSn(String goodsSn) {
+        this.goodsSn = goodsSn;
     }
 }
