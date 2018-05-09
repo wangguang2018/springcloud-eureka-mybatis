@@ -3,7 +3,6 @@
 <mapper namespace="com.wgs.mapper.MemberGoodsCarMapper">
 
     <resultMap id="MemberGoodsCarMap" type="com.wgs.entity.MemberGoodsCar">
-
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="goods_id" property="goodsId"/>
         <result column="sku_group_id" property="skuGroupId"/>
@@ -13,6 +12,12 @@
         <result column="created_time" property="createdTime"/>
         <result column="modified_time" property="modifiedTime"/>
         <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <resultMap id="MemberGoodsCarDTOMap" type="com.wgs.dto.goods.GoodsCarDTO"
+               extends="com.wgs.mapper.GoodsMapper.GoodsDTOMap">
+        <result column="num" property="num"></result>
+        <result column="goods_sku_info_ids" property="goodsSkuInfoIds"></result>
     </resultMap>
 
     <!--表名 -->
@@ -26,6 +31,7 @@
 		goods_id,
 		sku_group_id,
 		num,
+		member_id,
 		created_id,
 		modified_id,
 		created_time,
@@ -39,6 +45,7 @@
 		#{goodsId, jdbcType=INTEGER},
 		#{skuGroupId, jdbcType=INTEGER},
 		#{num, jdbcType=INTEGER},
+		#{member_id, jdbcType=INTEGER},
 		#{createdId, jdbcType=INTEGER},
 		#{modifiedId, jdbcType=INTEGER},
 		#{createdTime, jdbcType=TIMESTAMP},
@@ -74,6 +81,9 @@
             <if test="num != null">
                 num,
             </if>
+            <if test="memberId != null">
+                member_id,
+            </if>
             <if test="createdId != null">
                 created_id,
             </if>
@@ -102,6 +112,9 @@
             </if>
             <if test="num != null">
                 #{num},
+            </if>
+            <if test="memberId != null">
+                #{memberId},
             </if>
             <if test="createdId != null">
                 #{createdId},
@@ -202,4 +215,13 @@
         deleted = 1
         WHERE deleted = 0 and member_id = #{memberId} and sku_group_id = #{skuGroupId}
     </update>
+
+    <select id="findByMember" resultMap="MemberGoodsCarDTOMap">
+        select g.goods_name,g.goods_sn,g.cover,c.num,c.sku_group_id,i.price,i.goods_sku_info_ids from wgs_goods_car c
+        left JOIN wgs_goods g
+        on c.goods_id = g.id
+        LEFT JOIN wgs_goods_sku_group i
+        on i.id = c.sku_group_id
+        where member_id = #{memberId}
+    </select>
 </mapper>

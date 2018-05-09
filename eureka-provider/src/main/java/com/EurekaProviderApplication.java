@@ -1,4 +1,4 @@
-package com.wgs;
+package com;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -10,8 +10,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 @MapperScan(value = {"com.wgs.mapper"})
 public class EurekaProviderApplication {
 
-	public static void main(String[] args)
-	{
+	public static void main(String[] args){
 		SpringApplication.run(EurekaProviderApplication.class, args);
 	}
 }

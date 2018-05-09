@@ -20,13 +20,17 @@ import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 
-@Resource
+/**
+ * 用户
+ */
+@Service
 public class MemberService extends BaseServiceImpl {
 
     @Resource

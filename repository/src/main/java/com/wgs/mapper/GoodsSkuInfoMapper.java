@@ -1,6 +1,6 @@
 package com.wgs.mapper;
 import com.wgs.entity.GoodsSkuInfo;
-
+import org.apache.ibatis.annotations.Param;
 
 
 import java.util.List;
@@ -57,5 +57,7 @@ public interface GoodsSkuInfoMapper {
      * @return 商品的sku属性列表集合
      */
     List<GoodsSkuInfo> findAll();
+
+    List<GoodsSkuInfo> findByIds(@Param("ids") String[] ids);
 
 }

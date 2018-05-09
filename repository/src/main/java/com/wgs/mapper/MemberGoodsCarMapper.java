@@ -1,4 +1,5 @@
 package com.wgs.mapper;
+import com.wgs.dto.goods.GoodsCarDTO;
 import com.wgs.entity.MemberGoodsCar;
 import org.apache.ibatis.annotations.Param;
 
@@ -64,4 +65,5 @@ public interface MemberGoodsCarMapper {
 
     void deleteBySkuGroupId(@Param("skuGroupId") Integer skuGroupId, @Param("memberId") Integer memberId);
 
+    List<GoodsCarDTO> findByMember(@Param("memberId") Integer memberId);
 }
