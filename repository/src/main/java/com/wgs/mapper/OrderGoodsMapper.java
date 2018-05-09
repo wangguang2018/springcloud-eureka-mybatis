@@ -1,6 +1,7 @@
 package com.wgs.mapper;
+import com.wgs.entity.Order;
 import com.wgs.entity.OrderGoods;
-
+import org.apache.ibatis.annotations.Param;
 
 
 import java.util.List;
@@ -57,5 +58,7 @@ public interface OrderGoodsMapper {
      * @return 订单商品集合
      */
     List<OrderGoods> findAll();
+
+    void save(@Param("orderGoodsList") List<OrderGoods> orderGoodsList, @Param("order") Order order);
 
 }

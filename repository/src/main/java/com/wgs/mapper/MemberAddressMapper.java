@@ -64,4 +64,5 @@ public interface MemberAddressMapper {
 
     void deleteByMemberId(@Param("memberId") Integer memberId,@Param("addressId") Integer addressId);
 
+    MemberAddress findByIdAndMemberId(@Param("memberId") Integer memberId,@Param("addressId") Integer addressId);
 }

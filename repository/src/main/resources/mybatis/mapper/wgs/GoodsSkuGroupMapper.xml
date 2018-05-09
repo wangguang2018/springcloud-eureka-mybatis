@@ -183,7 +183,9 @@
         <include refid="Field"></include>
         FROM
         <include refid="tableName"></include>
-        WHERE id = #{id}
+        WHERE id = #{id} and deleted = 0
     </select>
+
+
 
 </mapper>

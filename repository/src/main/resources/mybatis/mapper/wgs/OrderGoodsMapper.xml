@@ -2,25 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wgs.mapper.OrderGoodsMapper">
 
-<resultMap id="OrderGoodsMap" type="com.wgs.entity.OrderGoods">
+    <resultMap id="OrderGoodsMap" type="com.wgs.entity.OrderGoods">
 
-		<id column="id" jdbcType="INTEGER" property="id" />
-		<result column="goods_id" property="goodsId" />
-		<result column="sku_group_id" property="skuGroupId" />
-		<result column="num" property="num" />
-		<result column="order_id" property="orderId" />
-		<result column="order_sn" property="orderSn" />
-		<result column="goods_price" property="goodsPrice" />
-		<result column="total_price" property="totalPrice" />
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="goods_id" property="goodsId"/>
+        <result column="sku_group_id" property="skuGroupId"/>
+        <result column="num" property="num"/>
+        <result column="order_id" property="orderId"/>
+        <result column="order_sn" property="orderSn"/>
+        <result column="goods_price" property="goodsPrice"/>
+        <result column="total_price" property="totalPrice"/>
     </resultMap>
-	
-	<!--表名 -->
-	<sql id="tableName">
+
+    <!--表名 -->
+    <sql id="tableName">
 		wgs_order_goods
 	</sql>
-	
-	<!-- 字段 -->
-	<sql id="Field">
+
+    <!-- 字段 -->
+    <sql id="Field">
 		id,
 		goods_id,
 		sku_group_id,
@@ -30,9 +30,9 @@
 		goods_price,
 		total_price
 	</sql>
-	
-	<!-- 字段值 -->
-	<sql id="FieldValue">
+
+    <!-- 字段值 -->
+    <sql id="FieldValue">
 		#{id, jdbcType=INTEGER},
 		#{goodsId, jdbcType=INTEGER},
 		#{skuGroupId, jdbcType=INTEGER},
@@ -43,135 +43,144 @@
 		#{totalPrice, jdbcType=DECIMAL}
 	</sql>
 
-	<!-- 查询全部记录 -->
+    <!-- 查询全部记录 -->
     <select id="findAll" resultMap="OrderGoodsMap">
         SELECT
-        	<include refid="Field"></include>
+        <include refid="Field"></include>
         FROM
-        	<include refid="tableName"></include>
-		WHERE
-			deleted = 0
+        <include refid="tableName"></include>
+        WHERE
+        deleted = 0
     </select>
-	
-	<!-- 新增-->
-<insert id="insert" parameterType="com.wgs.entity.OrderGoods" useGeneratedKeys="true" keyProperty="id">
+
+    <!-- 新增-->
+    <insert id="insert" parameterType="com.wgs.entity.OrderGoods" useGeneratedKeys="true" keyProperty="id">
 
         INSERT INTO
-			<include refid="tableName"></include>
+        <include refid="tableName"></include>
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
-				id,
+                id,
             </if>
             <if test="goodsId != null">
-				goods_id,
+                goods_id,
             </if>
             <if test="skuGroupId != null">
-				sku_group_id,
+                sku_group_id,
             </if>
             <if test="num != null">
-				num,
+                num,
             </if>
             <if test="orderId != null">
-				order_id,
+                order_id,
             </if>
             <if test="orderSn != null">
-				order_sn,
+                order_sn,
             </if>
             <if test="goodsPrice != null">
-				goods_price,
+                goods_price,
             </if>
             <if test="totalPrice != null">
-				total_price,
+                total_price,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
-				#{id},
+                #{id},
             </if>
             <if test="goodsId != null">
-				#{goodsId},
+                #{goodsId},
             </if>
             <if test="skuGroupId != null">
-				#{skuGroupId},
+                #{skuGroupId},
             </if>
             <if test="num != null">
-				#{num},
+                #{num},
             </if>
             <if test="orderId != null">
-				#{orderId},
+                #{orderId},
             </if>
             <if test="orderSn != null">
-				#{orderSn},
+                #{orderSn},
             </if>
             <if test="goodsPrice != null">
-				#{goodsPrice},
+                #{goodsPrice},
             </if>
             <if test="totalPrice != null">
-				#{totalPrice},
+                #{totalPrice},
             </if>
         </trim>
-	</insert>
-	
-	<!-- 删除-->
-	<delete id="delete" parameterType="java.lang.Integer">
-		UPDATE
-			<include refid="tableName"></include>
-		SET
-			deleted = 1
-		WHERE
-			id = #{id}
-	</delete>
+    </insert>
+
+    <!-- 删除-->
+    <delete id="delete" parameterType="java.lang.Integer">
+        UPDATE
+        <include refid="tableName"></include>
+        SET
+        deleted = 1
+        WHERE
+        id = #{id}
+    </delete>
 
     <!-- 批量删除 -->
     <delete id="deleteByIds">
         UPDATE
-        	<include refid="tableName"></include>
-		SET
-			deleted = 1
+        <include refid="tableName"></include>
+        SET
+        deleted = 1
         WHERE
-			id IN
-			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
-				#{item}
-			</foreach>
+        id IN
+        <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </delete>
-	
-	<!-- 更新记录 -->
-<update id="update" parameterType="com.wgs.entity.OrderGoods">
-		UPDATE
-			<include refid="tableName"></include>
+
+    <!-- 更新记录 -->
+    <update id="update" parameterType="com.wgs.entity.OrderGoods">
+        UPDATE
+        <include refid="tableName"></include>
         <set>
-			<if test="goodsId != null">
-				goods_id = #{goodsId},
-			</if>
-			<if test="skuGroupId != null">
-				sku_group_id = #{skuGroupId},
-			</if>
-			<if test="num != null">
-				num = #{num},
-			</if>
-			<if test="orderId != null">
-				order_id = #{orderId},
-			</if>
-			<if test="orderSn != null">
-				order_sn = #{orderSn},
-			</if>
-			<if test="goodsPrice != null">
-				goods_price = #{goodsPrice},
-			</if>
-			<if test="totalPrice != null">
-				total_price = #{totalPrice},
-			</if>
+            <if test="goodsId != null">
+                goods_id = #{goodsId},
+            </if>
+            <if test="skuGroupId != null">
+                sku_group_id = #{skuGroupId},
+            </if>
+            <if test="num != null">
+                num = #{num},
+            </if>
+            <if test="orderId != null">
+                order_id = #{orderId},
+            </if>
+            <if test="orderSn != null">
+                order_sn = #{orderSn},
+            </if>
+            <if test="goodsPrice != null">
+                goods_price = #{goodsPrice},
+            </if>
+            <if test="totalPrice != null">
+                total_price = #{totalPrice},
+            </if>
         </set>
         WHERE id = #{id}
-	</update>
-	
-	<!-- 通过编号查询 -->
-	<select id="findById" parameterType="java.lang.Integer" resultMap="OrderGoodsMap">
-		SELECT
-			<include refid="Field"></include>
-		FROM
-			<include refid="tableName"></include>
-		WHERE id = #{id}
-	</select>
+    </update>
+
+    <!-- 通过编号查询 -->
+    <select id="findById" parameterType="java.lang.Integer" resultMap="OrderGoodsMap">
+        SELECT
+        <include refid="Field"></include>
+        FROM
+        <include refid="tableName"></include>
+        WHERE id = #{id}
+    </select>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `wgs_order_goods` (`goods_id`, `sku_group_id`, `num`, `order_id`, `order_sn`, `goods_price`, `total_price`)
+        VALUES
+        <foreach item="g" index="index" collection="orderGoodsList" separator=",">
+            (#{g.goodsId}, #{g.skuGroupId}, #{g.num}, #{order.id}, #{order.orderSn}, #{g.goodsPrice}, #{g.totalPrice})
+        </foreach>
+
+    </insert>
 
 </mapper>

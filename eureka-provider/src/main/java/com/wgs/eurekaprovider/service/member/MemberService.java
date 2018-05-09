@@ -151,4 +151,9 @@ public class MemberService extends BaseServiceImpl {
     private String generateRefreshToken(String openId, String accessToken) {
         return Md5Util.GetMD5Code(accessToken + openId + System.currentTimeMillis());
     }
+
+
+    public Member findById(Integer memberId){
+        return memberMapper.findById(memberId);
+    }
 }

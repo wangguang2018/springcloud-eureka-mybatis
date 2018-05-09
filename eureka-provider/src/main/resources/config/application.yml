@@ -81,3 +81,7 @@ oss:
 wechat:
   appId: 111
   secrectKey: 11222
+  cert: /opt/
+  key: 111
+  mchId: 333
+  notifyUrl: http

@@ -312,5 +312,11 @@
         where member_id = #{memberId}
         and id = #{addressId}
     </update>
-
+    <select id="findByIdAndMemberId" resultMap="MemberAddressMap">
+        SELECT
+        <include refid="Field"></include>
+        FROM
+        <include refid="tableName"></include>
+        WHERE id = #{addressId} and member_id = #{memberId} and deleted= 0
+    </select>
 </mapper>

@@ -23,7 +23,7 @@ public class GoodsCarService extends BaseServiceImpl {
     private MemberGoodsCarMapper memberGoodsCarMapper;
 
     @Resource
-    private GoodsSkuInfoMapper goodsSkuInfoMapper;
+    private GoodsService goodsService;
 
     /**
      * 添加到购物车
@@ -65,13 +65,8 @@ public class GoodsCarService extends BaseServiceImpl {
         List<GoodsCarDTO> goodsCarDTOS = memberGoodsCarMapper.findByMember(memberId);
         if (goodsCarDTOS != null && goodsCarDTOS.size() > 0) {
             for (GoodsCarDTO g : goodsCarDTOS) {
-                String[] skuIds = g.getGoodsSkuInfoIds().split(";");
-                List<GoodsSkuInfo> skuInfos = goodsSkuInfoMapper.findByIds(skuIds);
-                StringBuilder skuInfo = new StringBuilder();
-                for(GoodsSkuInfo i : skuInfos){
-                    skuInfo.append(i.getName()+" ");
-                }
-                g.setSkuInfo(skuInfo.toString().trim());
+                String skuInfo = goodsService.getSkuInfoNameBySkuIds(g.getGoodsSkuInfoIds());
+                g.setSkuInfo(skuInfo);
             }
         }
         return goodsCarDTOS;

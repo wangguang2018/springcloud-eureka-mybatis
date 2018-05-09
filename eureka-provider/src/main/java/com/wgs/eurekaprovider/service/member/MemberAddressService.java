@@ -67,4 +67,8 @@ public class MemberAddressService extends BaseServiceImpl {
         memberAddressMapper.deleteByMemberId(memberId,addressId);
     }
 
+    public MemberAddress findById(Integer memberId,Integer addressId){
+        return memberAddressMapper.findByIdAndMemberId(memberId,addressId);
+    }
+
 }

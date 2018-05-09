@@ -1,0 +1,14 @@
+.gradle
+.idea
+.log
+build
+out
+.DS_Store
+*/.gradle
+*/build
+*/.DS_Store
+*/*.iml
+*/.idea/*
+classes
+dump.rdb
+sh/

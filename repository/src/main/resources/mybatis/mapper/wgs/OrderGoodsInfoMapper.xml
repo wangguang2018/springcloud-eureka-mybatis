@@ -1,38 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wgs.mapper.GoodsSkuGroupInfoMapper">
+<mapper namespace="com.wgs.mapper.OrderGoodsInfoMapper">
 
-    <resultMap id="GoodsSkuGroupInfoMap" type="com.wgs.entity.GoodsSkuGroupInfo">
-
+    <resultMap id="OrderGoodsInfoMap" type="com.wgs.entity.OrderGoodsInfo">
         <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="sku_name" property="skuName"/>
         <result column="spectacles_frame_material" property="spectaclesFrameMaterial"/>
         <result column="lens_color" property="lensColor"/>
-        <result column="sku_group_id" property="skuGroupId"/>
+        <result column="goods_name" property="goodsName"/>
+        <result column="goods_sn" property="goodsSn"/>
+        <result column="goods_img" property="goodsImg"/>
+        <result column="order_goods_id" property="orderGoodsId"/>
     </resultMap>
 
     <!--表名 -->
     <sql id="tableName">
-		wgs_goods_sku_group_info
+		wgs_order_goods_info
 	</sql>
 
     <!-- 字段 -->
     <sql id="Field">
 		id,
+		sku_name,
 		spectacles_frame_material,
 		lens_color,
-		sku_group_id
+		goods_name,
+		goods_sn,
+		goods_img,
+		order_goods_id
 	</sql>
 
     <!-- 字段值 -->
     <sql id="FieldValue">
 		#{id, jdbcType=INTEGER},
+		#{skuName, jdbcType=VARCHAR},
 		#{spectaclesFrameMaterial, jdbcType=VARCHAR},
 		#{lensColor, jdbcType=VARCHAR},
-		#{skuGroupId, jdbcType=INTEGER}
+		#{goodsName, jdbcType=VARCHAR},
+		#{goodsSn, jdbcType=VARCHAR},
+		#{goodsImg, jdbcType=VARCHAR},
+		#{orderGoodsId, jdbcType=INTEGER}
 	</sql>
 
     <!-- 查询全部记录 -->
-    <select id="findAll" resultMap="GoodsSkuGroupInfoMap">
+    <select id="findAll" resultMap="OrderGoodsInfoMap">
         SELECT
         <include refid="Field"></include>
         FROM
@@ -42,7 +53,7 @@
     </select>
 
     <!-- 新增-->
-    <insert id="insert" parameterType="com.wgs.entity.GoodsSkuGroupInfo" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.wgs.entity.OrderGoodsInfo" useGeneratedKeys="true" keyProperty="id">
 
         INSERT INTO
         <include refid="tableName"></include>
@@ -50,19 +61,34 @@
             <if test="id != null">
                 id,
             </if>
+            <if test="skuName != null">
+                sku_name,
+            </if>
             <if test="spectaclesFrameMaterial != null">
                 spectacles_frame_material,
             </if>
             <if test="lensColor != null">
                 lens_color,
             </if>
-            <if test="skuGroupId != null">
-                sku_group_id,
+            <if test="goodsName != null">
+                goods_name,
+            </if>
+            <if test="goodsSn != null">
+                goods_sn,
+            </if>
+            <if test="goodsImg != null">
+                goods_img,
+            </if>
+            <if test="orderGoodsId != null">
+                order_goods_id,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 #{id},
+            </if>
+            <if test="skuName != null">
+                #{skuName},
             </if>
             <if test="spectaclesFrameMaterial != null">
                 #{spectaclesFrameMaterial},
@@ -70,8 +96,17 @@
             <if test="lensColor != null">
                 #{lensColor},
             </if>
-            <if test="skuGroupId != null">
-                #{skuGroupId},
+            <if test="goodsName != null">
+                #{goodsName},
+            </if>
+            <if test="goodsSn != null">
+                #{goodsSn},
+            </if>
+            <if test="goodsImg != null">
+                #{goodsImg},
+            </if>
+            <if test="orderGoodsId != null">
+                #{orderGoodsId},
             </if>
         </trim>
     </insert>
@@ -100,25 +135,37 @@
     </delete>
 
     <!-- 更新记录 -->
-    <update id="update" parameterType="com.wgs.entity.GoodsSkuGroupInfo">
+    <update id="update" parameterType="com.wgs.entity.OrderGoodsInfo">
         UPDATE
         <include refid="tableName"></include>
         <set>
+            <if test="skuName != null">
+                sku_name = #{skuName},
+            </if>
             <if test="spectaclesFrameMaterial != null">
                 spectacles_frame_material = #{spectaclesFrameMaterial},
             </if>
             <if test="lensColor != null">
                 lens_color = #{lensColor},
             </if>
-            <if test="skuGroupId != null">
-                sku_group_id = #{skuGroupId},
+            <if test="goodsName != null">
+                goods_name = #{goodsName},
+            </if>
+            <if test="goodsSn != null">
+                goods_sn = #{goodsSn},
+            </if>
+            <if test="goodsImg != null">
+                goods_img = #{goodsImg},
+            </if>
+            <if test="orderGoodsId != null">
+                order_goods_id = #{orderGoodsId},
             </if>
         </set>
         WHERE id = #{id}
     </update>
 
     <!-- 通过编号查询 -->
-    <select id="findById" parameterType="java.lang.Integer" resultMap="GoodsSkuGroupInfoMap">
+    <select id="findById" parameterType="java.lang.Integer" resultMap="OrderGoodsInfoMap">
         SELECT
         <include refid="Field"></include>
         FROM
@@ -126,13 +173,11 @@
         WHERE id = #{id}
     </select>
 
-
-    <select id="findBySkuGroupId" resultMap="GoodsSkuGroupInfoMap">
-        SELECT
-        <include refid="Field"></include>
-        FROM
-        <include refid="tableName"></include>
-        WHERE sku_group_id = #{skuGroupId}
-    </select>
-
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `wgs_mall`.`wgs_order_goods_info` (`sku_name`, `spectacles_frame_material`, `lens_color`, `goods_name`, `goods_sn`, `goods_img`, `order_goods_id`)
+        VALUES
+        <foreach item="item" index="index" collection="array" separator=",">
+        (#{item.skuName}, #{item.spectaclesFrameMaterial}, #{item.lensColor}, #{item.goodsName}, #{item.goodsImg}, #{item.goodsImg}, #{item.orderGoods.id})
+        </foreach>
+    </insert>
 </mapper>

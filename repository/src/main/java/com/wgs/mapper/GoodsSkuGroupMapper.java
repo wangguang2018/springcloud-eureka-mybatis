@@ -1,6 +1,7 @@
 package com.wgs.mapper;
 import com.wgs.entity.GoodsSkuGroup;
-
+import com.wgs.entity.OrderGoodsInfo;
+import org.apache.ibatis.annotations.Param;
 
 
 import java.util.List;
@@ -57,5 +58,7 @@ public interface GoodsSkuGroupMapper {
      * @return sku属性组合信息集合
      */
     List<GoodsSkuGroup> findAll();
+
+
 
 }

@@ -17,6 +17,7 @@
     <resultMap id="MemberGoodsCarDTOMap" type="com.wgs.dto.goods.GoodsCarDTO"
                extends="com.wgs.mapper.GoodsMapper.GoodsDTOMap">
         <result column="num" property="num"></result>
+        <result column="sku_group_id" property="skuGroupId"></result>
         <result column="goods_sku_info_ids" property="goodsSkuInfoIds"></result>
     </resultMap>
 
@@ -222,6 +223,6 @@
         on c.goods_id = g.id
         LEFT JOIN wgs_goods_sku_group i
         on i.id = c.sku_group_id
-        where member_id = #{memberId}
+        where member_id = #{memberId} and g.deleted = 0 and c.deleted = 0 and i.deleted = 0
     </select>
 </mapper>
