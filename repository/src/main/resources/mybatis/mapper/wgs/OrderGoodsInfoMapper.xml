@@ -176,8 +176,8 @@
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO `wgs_mall`.`wgs_order_goods_info` (`sku_name`, `spectacles_frame_material`, `lens_color`, `goods_name`, `goods_sn`, `goods_img`, `order_goods_id`)
         VALUES
-        <foreach item="item" index="index" collection="array" separator=",">
-        (#{item.skuName}, #{item.spectaclesFrameMaterial}, #{item.lensColor}, #{item.goodsName}, #{item.goodsImg}, #{item.goodsImg}, #{item.orderGoods.id})
+        <foreach item="item" index="index" collection="list" separator=",">
+        (#{item.skuName}, #{item.spectaclesFrameMaterial}, #{item.lensColor}, #{item.goodsName}, #{item.goodsSn}, #{item.goodsImg}, #{item.orderGoods.id})
         </foreach>
     </insert>
 </mapper>

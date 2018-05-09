@@ -69,7 +69,7 @@ public class OrderService extends BaseServiceImpl {
                 GoodsSkuGroup skuGroup = goodsService.findSkuGroupById(g.getSkuGroupId());
                 if (skuGroup == null)
                     continue;
-                Goods goods = goodsService.findById(g.getId());
+                Goods goods = goodsService.findById(skuGroup.getGoodsId());
                 if (goods == null)
                     continue;
                 GoodsSkuGroupInfo goodsSkuGroupInfo = goodsService.findSkuGroupInfoByGroupId(skuGroup.getId());
@@ -81,7 +81,7 @@ public class OrderService extends BaseServiceImpl {
                 orderGoods.setNum(g.getNum());
                 orderGoods.setSkuGroupId(skuGroup.getId());
                 //总计累加价格
-                totalPrice.add(orderGoods.getTotalPrice());
+                totalPrice = totalPrice.add(orderGoods.getTotalPrice());
                 orderGoodsList.add(orderGoods);
 
                 //商品详细文本信息
@@ -89,6 +89,7 @@ public class OrderService extends BaseServiceImpl {
                 orderGoodsInfo.setOrderGoods(orderGoods);
                 orderGoodsInfo.setGoodsImg(g.getCover());
                 orderGoodsInfo.setGoodsSn(g.getGoodsSn());
+                orderGoodsInfo.setGoodsName(g.getName());
                 orderGoodsInfo.setSkuName(goodsService.getSkuInfoNameBySkuIds(skuGroup.getGoodsSkuInfoIds()));
                 orderGoodsInfo.setLensColor(goodsSkuGroupInfo.getLensColor());
                 orderGoodsInfo.setSpectaclesFrameMaterial(goodsSkuGroupInfo.getSpectaclesFrameMaterial());

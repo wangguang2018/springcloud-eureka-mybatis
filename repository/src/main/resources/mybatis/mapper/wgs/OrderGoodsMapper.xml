@@ -177,7 +177,7 @@
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO `wgs_order_goods` (`goods_id`, `sku_group_id`, `num`, `order_id`, `order_sn`, `goods_price`, `total_price`)
         VALUES
-        <foreach item="g" index="index" collection="orderGoodsList" separator=",">
+        <foreach item="g" index="index" collection="list" separator=",">
             (#{g.goodsId}, #{g.skuGroupId}, #{g.num}, #{order.id}, #{order.orderSn}, #{g.goodsPrice}, #{g.totalPrice})
         </foreach>
 

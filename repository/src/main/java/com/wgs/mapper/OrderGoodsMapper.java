@@ -59,6 +59,6 @@ public interface OrderGoodsMapper {
      */
     List<OrderGoods> findAll();
 
-    void save(@Param("orderGoodsList") List<OrderGoods> orderGoodsList, @Param("order") Order order);
+    void save(@Param("list") List<OrderGoods> orderGoodsList, @Param("order") Order order);
 
 }
