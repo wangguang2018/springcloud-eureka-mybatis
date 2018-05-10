@@ -1,6 +1,7 @@
 package com.wgs.api.service;
 
 
+import com.wgs.dto.BaseResult;
 import com.wgs.dto.goods.GoodsDTO;
 import com.wgs.dto.goods.GoodsSkuGroupDTO;
 import com.wgs.entity.GoodsCategory;
@@ -21,7 +22,7 @@ public interface GoodsService {
      * @return
      */
     @RequestMapping(value = "/findGoodsInfo")
-    GoodsDTO findGoodsInfo(@RequestParam(value = "goodsId") Integer goodsId);
+    BaseResult<GoodsDTO> findGoodsInfo(@RequestParam(value = "goodsId") Integer goodsId);
 
     /**
      * 获取商品sku属性的价格信息
@@ -29,14 +30,14 @@ public interface GoodsService {
      * @return
      */
     @RequestMapping(value="/findGoodsGroupInfo")
-    List<GoodsSkuGroupDTO> findGoodsGroupInfo(@RequestParam("goodsId") Integer goodsId);
+    BaseResult<List<GoodsSkuGroupDTO>> findGoodsGroupInfo(@RequestParam("goodsId") Integer goodsId);
 
     /**
      * 获取所有商品分类
      * @return
      */
     @RequestMapping("/findGoodsCategory")
-    List<GoodsCategory> findGoodsCategory();
+    BaseResult<List<GoodsCategory>> findGoodsCategory();
 
 
     /**
@@ -45,6 +46,6 @@ public interface GoodsService {
      * @return
      */
     @RequestMapping("/findGoodsByCategory")
-    Pagination findGoodsByCategory(@RequestParam("cateId") Integer cateId, Pagination pagination);
+    BaseResult<Pagination> findGoodsByCategory(@RequestParam("cateId") Integer cateId, Pagination pagination);
 
 }

@@ -1,5 +1,6 @@
 package com.wgs.eurekaprovider.controller;
 
+import com.wgs.dto.BaseResult;
 import com.wgs.eurekaprovider.service.video.VideoService;
 import com.ydd.framework.core.common.Pagination;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +15,8 @@ public class VideoController {
     private VideoService videoService;
 
     @RequestMapping("/findVideoList")
-    public Pagination findVideoList(Pagination pagination){
-        return videoService.findVideoList(pagination);
+    public BaseResult<Pagination> findVideoList(Pagination pagination){
+        return new BaseResult(videoService.findVideoList(pagination));
     }
 
 }

@@ -1,5 +1,6 @@
 package com.wgs.api.service;
 
+import com.wgs.dto.BaseResult;
 import com.ydd.framework.core.common.Pagination;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,7 @@ public interface VideoService {
      * @return
      */
     @RequestMapping("/findVideoList")
-    Pagination findVideoList(Pagination pagination);
+    BaseResult<Pagination> findVideoList(Pagination pagination);
 
 
 }

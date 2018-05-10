@@ -4,6 +4,7 @@ import com.wgs.api.service.TopicService;
 import com.wgs.dto.topic.TopicDTO;
 import com.ydd.framework.core.common.Pagination;
 import com.ydd.framework.core.common.dto.ResponseDTO;
+import com.ydd.framework.core.controller.BaseApiController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +13,7 @@ import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("/topic")
-public class TopicController {
+public class TopicController extends BaseApiController {
 
     @Resource
     private TopicService topicService;

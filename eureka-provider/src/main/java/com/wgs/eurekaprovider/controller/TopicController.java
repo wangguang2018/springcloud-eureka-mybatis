@@ -1,5 +1,6 @@
 package com.wgs.eurekaprovider.controller;
 
+import com.wgs.dto.BaseResult;
 import com.wgs.dto.topic.TopicDTO;
 import com.wgs.eurekaprovider.service.topic.TopicService;
 import com.ydd.framework.core.common.Pagination;
@@ -16,17 +17,17 @@ public class TopicController {
     private TopicService topicService;
 
     @RequestMapping("/findTopicList")
-    public Pagination findTopicList(Pagination pagination){
-        return topicService.findTopicList(pagination);
+    public BaseResult<Pagination> findTopicList(Pagination pagination){
+        return new BaseResult(topicService.findTopicList(pagination));
     }
 
     @RequestMapping("/findTopicInfoById")
-    public TopicDTO findTopicInfoById(@RequestParam("topicId")Integer topicId){
-        return topicService.findTopicInfoById(topicId);
+    public BaseResult<TopicDTO> findTopicInfoById(@RequestParam("topicId")Integer topicId){
+        return new BaseResult(topicService.findTopicInfoById(topicId));
     }
 
     @RequestMapping("/findTopicGoods")
-    public Pagination findTopicGoodsList(Pagination pagination,@RequestParam("topicId") Integer topicId){
-        return topicService.findTopicGoodsList(pagination,topicId);
+    public BaseResult<Pagination> findTopicGoodsList(Pagination pagination,@RequestParam("topicId") Integer topicId){
+        return new BaseResult(topicService.findTopicGoodsList(pagination,topicId));
     }
 }

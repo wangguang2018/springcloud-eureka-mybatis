@@ -1,5 +1,6 @@
 package com.wgs.eurekaprovider.controller;
 
+import com.wgs.dto.BaseResult;
 import com.wgs.entity.MemberAddress;
 import com.wgs.eurekaprovider.service.member.MemberAddressService;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +17,9 @@ public class MemberAddressController {
     private MemberAddressService memberAddressService;
 
     @RequestMapping("/save")
-    public void save(MemberAddress memberAddress,@RequestParam("memberId") Integer memberId){
+    public BaseResult save(MemberAddress memberAddress, @RequestParam("memberId") Integer memberId){
         memberAddressService.save(memberAddress,memberId);
+        return new BaseResult();
     }
 
     /**
@@ -27,8 +29,8 @@ public class MemberAddressController {
      * @return
      */
     @RequestMapping("/list")
-    public List<MemberAddress> findMemberAddress(@RequestParam("memberId")Integer memberId) {
-        return memberAddressService.findMemberAddress(memberId);
+    public BaseResult<List<MemberAddress>> findMemberAddress(@RequestParam("memberId")Integer memberId) {
+        return new BaseResult(memberAddressService.findMemberAddress(memberId));
     }
 
     /**
@@ -38,8 +40,9 @@ public class MemberAddressController {
      * @param addressId
      */
     @RequestMapping("/default")
-    public void setAddressDefault(@RequestParam("memberId")Integer memberId, @RequestParam("addressId") Integer addressId) {
+    public BaseResult setAddressDefault(@RequestParam("memberId")Integer memberId, @RequestParam("addressId") Integer addressId) {
         memberAddressService.setAddressDefault(memberId,addressId);
+        return new BaseResult();
     }
 
     /**
@@ -48,8 +51,9 @@ public class MemberAddressController {
      * @param addressId
      */
     @RequestMapping("/delete")
-    public void deleteAddress(@RequestParam("memberId") Integer memberId,@RequestParam("addressId") Integer addressId){
+    public BaseResult deleteAddress(@RequestParam("memberId") Integer memberId,@RequestParam("addressId") Integer addressId){
         memberAddressService.deleteAddress(memberId,addressId);
+        return new BaseResult();
     }
 
 }

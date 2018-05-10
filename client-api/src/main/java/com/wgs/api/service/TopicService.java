@@ -1,5 +1,6 @@
 package com.wgs.api.service;
 
+import com.wgs.dto.BaseResult;
 import com.wgs.dto.topic.TopicDTO;
 import com.ydd.framework.core.common.Pagination;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -15,7 +16,7 @@ public interface TopicService {
      * @return
      */
     @RequestMapping("/findTopicList")
-    Pagination findTopicList(Pagination pagination);
+    BaseResult<Pagination> findTopicList(Pagination pagination);
 
     /**
      * 获取主题详细
@@ -23,7 +24,7 @@ public interface TopicService {
      * @return
      */
     @RequestMapping("/findTopicInfoById")
-    TopicDTO findTopicInfoById(@RequestParam("topicId")Integer topicId);
+    BaseResult<TopicDTO> findTopicInfoById(@RequestParam("topicId")Integer topicId);
 
     /**
      * 获取主题下的商品
@@ -32,6 +33,6 @@ public interface TopicService {
      * @return
      */
     @RequestMapping("/findTopicGoods")
-    Pagination findTopicGoodsList(Pagination pagination,@RequestParam("topicId") Integer topicId);
+    BaseResult<Pagination> findTopicGoodsList(Pagination pagination,@RequestParam("topicId") Integer topicId);
 
 }

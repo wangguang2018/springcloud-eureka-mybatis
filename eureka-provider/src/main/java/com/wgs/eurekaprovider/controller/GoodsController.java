@@ -1,5 +1,6 @@
 package com.wgs.eurekaprovider.controller;
 
+import com.wgs.dto.BaseResult;
 import com.wgs.dto.goods.GoodsDTO;
 import com.wgs.dto.goods.GoodsSkuGroupDTO;
 import com.wgs.entity.GoodsCategory;
@@ -22,22 +23,22 @@ public class GoodsController {
     private GoodsCategoryService goodsCategoryService;
 
     @RequestMapping("/findGoodsInfo")
-    public GoodsDTO findGoodsInfo(@RequestParam("goodsId") Integer goodsId){
-        return goodsService.findGoodsInfo(goodsId);
+    public BaseResult<GoodsDTO> findGoodsInfo(@RequestParam("goodsId") Integer goodsId){
+        return new BaseResult(goodsService.findGoodsInfo(goodsId));
     }
 
     @RequestMapping("/findGoodsGroupInfo")
-    public List<GoodsSkuGroupDTO> findGoodsGroupInfo(@RequestParam("goodsId") Integer goodsId){
-        return goodsService.findGoodsGroupInfo(goodsId);
+    public BaseResult<List<GoodsSkuGroupDTO>> findGoodsGroupInfo(@RequestParam("goodsId") Integer goodsId){
+        return new BaseResult(goodsService.findGoodsGroupInfo(goodsId));
     }
 
     @RequestMapping("/findGoodsCategory")
-    public List<GoodsCategory> findGoodsCategory(){
-        return goodsCategoryService.findGoodsCategory();
+    public BaseResult<List<GoodsCategory>> findGoodsCategory(){
+        return new BaseResult(goodsCategoryService.findGoodsCategory());
     }
 
     @RequestMapping("/findGoodsByCategory")
-    public Pagination findGoodsByCategory(@RequestParam("cateId") Integer cateId, Pagination pagination){
-        return goodsService.findGoodsByCategory(cateId, pagination);
+    public BaseResult<Pagination> findGoodsByCategory(@RequestParam("cateId") Integer cateId, Pagination pagination){
+        return new BaseResult(goodsService.findGoodsByCategory(cateId, pagination));
     }
 }

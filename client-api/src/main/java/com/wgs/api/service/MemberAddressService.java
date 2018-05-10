@@ -1,5 +1,6 @@
 package com.wgs.api.service;
 
+import com.wgs.dto.BaseResult;
 import com.wgs.entity.MemberAddress;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +16,7 @@ public interface MemberAddressService {
      * @param memberAddress
      */
     @RequestMapping("/address/save")
-    void save(MemberAddress memberAddress, @RequestParam("memberId") Integer memberId);
+    BaseResult save(MemberAddress memberAddress, @RequestParam("memberId") Integer memberId);
 
     /**
      * 获取用户地址
@@ -24,7 +25,7 @@ public interface MemberAddressService {
      * @return
      */
     @RequestMapping("/address/list")
-    List<MemberAddress> findMemberAddress(@RequestParam("memberId")Integer memberId);
+    BaseResult<List<MemberAddress>> findMemberAddress(@RequestParam("memberId") Integer memberId);
 
 
     /**
@@ -34,13 +35,14 @@ public interface MemberAddressService {
      * @param addressId
      */
     @RequestMapping("/address/default")
-    void setAddressDefault(@RequestParam("memberId")Integer memberId, @RequestParam("addressId") Integer addressId);
+    BaseResult setAddressDefault(@RequestParam("memberId") Integer memberId, @RequestParam("addressId") Integer addressId);
 
     /**
      * 删除收货地址
+     *
      * @param memberId
      * @param addressId
      */
     @RequestMapping("/address/delete")
-    void deleteAddress(@RequestParam("memberId") Integer memberId,@RequestParam("addressId") Integer addressId);
+    BaseResult deleteAddress(@RequestParam("memberId") Integer memberId, @RequestParam("addressId") Integer addressId);
 }

@@ -1,5 +1,6 @@
 package com.wgs.api.service;
 
+import com.wgs.dto.BaseResult;
 import com.wgs.dto.goods.GoodsCarDTO;
 import com.wgs.entity.MemberToken;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -19,7 +20,7 @@ public interface MemberService {
      * @return
      */
     @RequestMapping("/login")
-    MemberToken login(@RequestParam("code") String code, @RequestParam("nickname") String nickname, @RequestParam("avatar") String avatar);
+    BaseResult<MemberToken> login(@RequestParam("code") String code, @RequestParam("nickname") String nickname, @RequestParam("avatar") String avatar);
 
 
     /**
@@ -28,7 +29,7 @@ public interface MemberService {
      * @return
      */
     @RequestMapping("/findGoodsCarByMemberId")
-    List<GoodsCarDTO> findByMemberId(@RequestParam("memberId") Integer memberId);
+    BaseResult<List<GoodsCarDTO>> findByMemberId(@RequestParam("memberId") Integer memberId);
 
     /**
      * 添加到购物车
@@ -38,7 +39,7 @@ public interface MemberService {
      * @param num
      */
     @RequestMapping("/addGoodsCar")
-    void addGoodsCar(@RequestParam("skuGroupId") Integer skuGroupId, @RequestParam("memberId") Integer memberId,
+    BaseResult addGoodsCar(@RequestParam("skuGroupId") Integer skuGroupId, @RequestParam("memberId") Integer memberId,
                             @RequestParam("goodsId") Integer goodsId, @RequestParam("num") Integer num);
 
 
@@ -48,5 +49,13 @@ public interface MemberService {
      * @param memberId
      */
     @RequestMapping("/deleteGoodsCar")
-    void deleteGoodsCar(@RequestParam("skuGroupId") Integer skuGroupId, @RequestParam("memberId") Integer memberId);
+    BaseResult deleteGoodsCar(@RequestParam("skuGroupId") Integer skuGroupId, @RequestParam("memberId") Integer memberId);
+
+    /**
+     * 通过token获取用户ID
+     * @param accessToken
+     */
+    @RequestMapping("/getMemberIdByAccessToken")
+    BaseResult<Integer> getMemberIdByAccessToken(@RequestParam("accessToken") String accessToken);
+
 }

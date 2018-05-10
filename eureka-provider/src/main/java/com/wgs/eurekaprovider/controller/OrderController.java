@@ -1,5 +1,6 @@
 package com.wgs.eurekaprovider.controller;
 
+import com.wgs.dto.BaseResult;
 import com.wgs.entity.MemberAddress;
 import com.wgs.eurekaprovider.service.order.OrderService;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +21,9 @@ public class OrderController {
      * @param addressId
      */
     @RequestMapping("/orderWithGoodsCar")
-    public void orderWithGoodsCar(@RequestParam("memberId") Integer memberId, @RequestParam("addressId") Integer addressId){
+    public BaseResult orderWithGoodsCar(@RequestParam("memberId") Integer memberId, @RequestParam("addressId") Integer addressId){
         orderService.orderWithGoodsCar(memberId,addressId);
+        return new BaseResult();
     }
 
     /**
@@ -30,8 +32,9 @@ public class OrderController {
      * @param memberAddress
      */
     @RequestMapping("/orderWithGoodsCar/wechat/address")
-    public void orderWithGoodsCar(@RequestParam("memberId") Integer memberId, MemberAddress memberAddress){
+    public BaseResult orderWithGoodsCar(@RequestParam("memberId") Integer memberId, MemberAddress memberAddress){
         orderService.orderWithGoodsCar(memberId,memberAddress);
+        return new BaseResult();
     }
 
     /**
@@ -41,9 +44,10 @@ public class OrderController {
      * @param skuGroupId
      */
     @RequestMapping("/orderWithGoods")
-    public void orderWithGoods(@RequestParam("memberId") Integer memberId,@RequestParam("addressId") Integer addressId,
+    public BaseResult orderWithGoods(@RequestParam("memberId") Integer memberId,@RequestParam("addressId") Integer addressId,
                                @RequestParam("skuGroupId") Integer skuGroupId,@RequestParam("num") Integer num){
         orderService.orderWithGoods(memberId,addressId,skuGroupId,num);
+        return new BaseResult();
     }
 
     /**
@@ -54,9 +58,10 @@ public class OrderController {
      * @param num
      */
     @RequestMapping("/orderWithGoods/wechat/address")
-    public void orderWithGoods(@RequestParam("memberId") Integer memberId,MemberAddress memberAddress,
+    public BaseResult orderWithGoods(@RequestParam("memberId") Integer memberId,MemberAddress memberAddress,
                                @RequestParam("skuGroupId") Integer skuGroupId,@RequestParam("num") Integer num){
         orderService.orderWithGoods(memberId,memberAddress,skuGroupId,num);
+        return new BaseResult();
     }
 
 }

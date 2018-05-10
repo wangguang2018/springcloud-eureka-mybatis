@@ -1,5 +1,6 @@
 package com.wgs.eurekaprovider.service.member;
 
+import com.wgs.dto.BaseResult;
 import com.wgs.entity.Member;
 import com.wgs.entity.MemberToken;
 import com.wgs.entity.enums.LiveTime;
@@ -55,7 +56,7 @@ public class MemberService extends BaseServiceImpl {
      * @param avatar
      * @return
      */
-    public MemberToken loginWithXcx(String code, String nickname, String avatar) {
+    public BaseResult<MemberToken> loginWithXcx(String code, String nickname, String avatar) {
         String openId = wechatService.getXcxOpenId(code);
         if (StringUtils.isEmpty(openId)) {
             throw new ServiceException(ExceptionCodeTemplate.LOGIN_FAILED);
@@ -70,7 +71,7 @@ public class MemberService extends BaseServiceImpl {
         }
     }
 
-    private MemberToken login(Member member) {
+    private BaseResult<MemberToken> login(Member member) {
         MemberToken token = memberTokenMapper.findByMemberId(member.getId());
         if (token == null) {
             token = new MemberToken();
@@ -91,12 +92,11 @@ public class MemberService extends BaseServiceImpl {
         }
         // 保存新的access_token信息到缓存中
         cacheService.setEntity(AccessTokenInterceptor.ACCESS_TOKEN_CACHE_KEY + token.getAccessToken(), member.getId(), expireTime.time);
-        return token;
+        return new BaseResult<>(token);
     }
 
     /**
      * 注册
-     *
      * @param openid
      * @param nickname
      * @param avatar
@@ -127,6 +127,20 @@ public class MemberService extends BaseServiceImpl {
         HttpEntity resEntity = response.getEntity();
         InputStream inputStream = resEntity.getContent();
         return OSSHelper.upload(System.currentTimeMillis() + ".png", inputStream);
+    }
+
+    /**
+     * 通过accessToken获取用户ID
+     * @param accessToken
+     * @return
+     */
+    public Integer getMemberIdByAccessToken(String accessToken){
+        String id = cacheService.getEntity(AccessTokenInterceptor.ACCESS_TOKEN_CACHE_KEY + accessToken);
+        try {
+            return Integer.parseInt(id);
+        }catch (Exception e){
+            return null;
+        }
     }
 
     /**
