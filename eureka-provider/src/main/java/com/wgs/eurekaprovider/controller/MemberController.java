@@ -24,7 +24,7 @@ public class MemberController{
 
     @RequestMapping("/login")
     public BaseResult<MemberToken> login(@RequestParam("code") String code, @RequestParam("nickname") String nickname, @RequestParam("avatar") String avatar) throws ServiceException{
-        return memberService.loginWithXcx(code,nickname,avatar);
+        return new BaseResult(memberService.loginWithXcx(code,nickname,avatar));
     }
 
     /**

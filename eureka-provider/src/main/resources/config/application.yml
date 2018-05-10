@@ -79,8 +79,8 @@ oss:
   endPoint: oss-cn-hangzhou.aliyuncs.com
 
 wechat:
-  appId: 111
-  secrectKey: 11222
+  appId: wx6196d98aa4b9692a
+  secrectKey: 52a01c2305121507e273f2b2a3d40e9c
   cert: /opt/
   key: 111
   mchId: 333

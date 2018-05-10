@@ -70,7 +70,7 @@ public class AccessTokensInterceptor extends HandlerInterceptorAdapter {
         }
 
         // 查询缓存获取登录用户编号
-        Integer memberId = memberService.getMemberIdByAccessToken(accessToken);
+        Integer memberId = memberService.getMemberIdByAccessToken(accessToken).getContent();
         // 判断登录用户编号是否合法
         if (memberId == null) {
             throw new ServiceException(ExceptionCodeTemplate.INVALID_ACCESS_TOKEN);

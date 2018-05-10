@@ -22,6 +22,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.io.IOException;
@@ -56,7 +57,8 @@ public class MemberService extends BaseServiceImpl {
      * @param avatar
      * @return
      */
-    public BaseResult<MemberToken> loginWithXcx(String code, String nickname, String avatar) {
+    @Transactional
+    public MemberToken loginWithXcx(String code, String nickname, String avatar) {
         String openId = wechatService.getXcxOpenId(code);
         if (StringUtils.isEmpty(openId)) {
             throw new ServiceException(ExceptionCodeTemplate.LOGIN_FAILED);
@@ -71,7 +73,7 @@ public class MemberService extends BaseServiceImpl {
         }
     }
 
-    private BaseResult<MemberToken> login(Member member) {
+    private MemberToken login(Member member) {
         MemberToken token = memberTokenMapper.findByMemberId(member.getId());
         if (token == null) {
             token = new MemberToken();
@@ -92,7 +94,7 @@ public class MemberService extends BaseServiceImpl {
         }
         // 保存新的access_token信息到缓存中
         cacheService.setEntity(AccessTokenInterceptor.ACCESS_TOKEN_CACHE_KEY + token.getAccessToken(), member.getId(), expireTime.time);
-        return new BaseResult<>(token);
+        return token;
     }
 
     /**

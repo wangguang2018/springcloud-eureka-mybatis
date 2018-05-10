@@ -33,7 +33,8 @@ import static com.wgs.entity.exception.ExceptionCodeTemplate.SERVER_ERROR;
 public class WechatService extends BaseServiceImpl{
     private Logger logger = Logger.getLogger(WechatService.class);
 
-    private static final String ACCESS_TOKEN_URL = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code";
+    //小程序登录 获取信息url
+    private static final String ACCESS_TOKEN_URL = "https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code";
 
     /**
      * 微信全局token缓存变量

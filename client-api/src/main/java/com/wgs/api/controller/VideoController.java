@@ -1,6 +1,7 @@
 package com.wgs.api.controller;
 
 import com.wgs.api.service.VideoService;
+import com.wgs.dto.BaseResult;
 import com.ydd.framework.core.common.Pagination;
 import com.ydd.framework.core.common.dto.ResponseDTO;
 import com.ydd.framework.core.controller.BaseApiController;
@@ -18,8 +19,8 @@ public class VideoController extends BaseApiController {
 
     @RequestMapping("/list")
     public ResponseDTO videoList(Pagination pagination){
-        Pagination p = videoService.findVideoList(pagination);
-        return ResponseDTO.ok().addAttribute("data",p);
+        BaseResult<Pagination> p = videoService.findVideoList(pagination);
+        return ResponseDTO.ok().addAttribute("data",p.getContent());
     }
 
 }
