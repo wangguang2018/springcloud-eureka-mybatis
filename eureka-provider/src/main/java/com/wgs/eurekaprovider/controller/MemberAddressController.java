@@ -37,7 +37,6 @@ public class MemberAddressController {
      * @param memberId
      * @param addressId
      */
-
     @RequestMapping("/default")
     public void setAddressDefault(@RequestParam("memberId")Integer memberId, @RequestParam("addressId") Integer addressId) {
         memberAddressService.setAddressDefault(memberId,addressId);

@@ -1,0 +1,21 @@
+server:
+  port: 9003
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9001/eureka/
+feign:
+  hystrix:
+    enabled: true
+ribbon:
+  ReadTimeout: 11000
+  ConnectTimeout: 10000
+spring:
+  application:
+    name: client-api
+  jackson:
+    default-property-inclusion: NON_NULL
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      WRITE_NULL_MAP_VALUES: false
+      INDENT_OUTPUT: true

@@ -38,6 +38,6 @@ public class GoodsController {
 
     @RequestMapping("/findGoodsByCategory")
     public Pagination findGoodsByCategory(@RequestParam("cateId") Integer cateId, Pagination pagination){
-        return goodsService.findGoodsByCategory(cateId,pagination);
+        return goodsService.findGoodsByCategory(cateId, pagination);
     }
 }

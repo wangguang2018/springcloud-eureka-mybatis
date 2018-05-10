@@ -7,7 +7,10 @@ import com.wgs.entity.enums.OrderStatusEnum;
 import com.wgs.eurekaprovider.service.goods.GoodsCarService;
 import com.wgs.eurekaprovider.service.goods.GoodsService;
 import com.wgs.eurekaprovider.service.member.MemberAddressService;
-import com.wgs.mapper.*;
+import com.wgs.mapper.OrderAddressMapper;
+import com.wgs.mapper.OrderGoodsInfoMapper;
+import com.wgs.mapper.OrderGoodsMapper;
+import com.wgs.mapper.OrderMapper;
 import com.ydd.framework.core.exception.ServiceException;
 import com.ydd.framework.core.service.impl.BaseServiceImpl;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -87,9 +90,9 @@ public class OrderService extends BaseServiceImpl {
                 //商品详细文本信息
                 OrderGoodsInfoDTO orderGoodsInfo = new OrderGoodsInfoDTO();
                 orderGoodsInfo.setOrderGoods(orderGoods);
-                orderGoodsInfo.setGoodsImg(g.getCover());
-                orderGoodsInfo.setGoodsSn(g.getGoodsSn());
-                orderGoodsInfo.setGoodsName(g.getName());
+                orderGoodsInfo.setGoodsImg(goods.getCover());
+                orderGoodsInfo.setGoodsSn(goods.getGoodsSn());
+                orderGoodsInfo.setGoodsName(goods.getGoodsName());
                 orderGoodsInfo.setSkuName(goodsService.getSkuInfoNameBySkuIds(skuGroup.getGoodsSkuInfoIds()));
                 orderGoodsInfo.setLensColor(goodsSkuGroupInfo.getLensColor());
                 orderGoodsInfo.setSpectaclesFrameMaterial(goodsSkuGroupInfo.getSpectaclesFrameMaterial());
@@ -135,6 +138,52 @@ public class OrderService extends BaseServiceImpl {
         order(memberId,addressId,goodsCarDTOS);
     }
 
+    /**
+     * 购物车结算
+     * @param memberId
+     * @param memberAddress
+     */
+    @Transactional
+    public void orderWithGoodsCar(Integer memberId,MemberAddress memberAddress){
+        List<GoodsCarDTO> goodsCarDTOS = goodsCarService.findGoodsCarByMember(memberId);
+        if(goodsCarDTOS == null || goodsCarDTOS.size() <= 0)
+            throw new ServiceException(ORDER_ERROR);
+        order(memberId,memberAddress,goodsCarDTOS);
+    }
+
+    /**
+     * 单个商品下单
+     * @param memberId
+     * @param addressId 收货地址ID
+     * @param skuGroupId 商品sku组合ID
+     * @param num 数量
+     */
+    public void orderWithGoods(Integer memberId,Integer addressId,Integer skuGroupId,Integer num){
+        List<GoodsCarDTO> goodsCarDTOS = getGoodsCarDTOS(skuGroupId, num);
+        order(memberId,addressId,goodsCarDTOS);
+    }
+
+    /**
+     * 单个商品下单
+     * @param memberId
+     * @param memberAddress  收货地址（微信）
+     * @param skuGroupId 商品sku组合ID
+     * @param num 数量
+     */
+    public void orderWithGoods(Integer memberId,MemberAddress memberAddress,Integer skuGroupId,Integer num) {
+        List<GoodsCarDTO> goodsCarDTOS = getGoodsCarDTOS(skuGroupId, num);
+        order(memberId,memberAddress,goodsCarDTOS);
+    }
+
+
+    private List<GoodsCarDTO> getGoodsCarDTOS(Integer skuGroupId, Integer num) {
+        GoodsCarDTO goodsCarDTO = new GoodsCarDTO();
+        goodsCarDTO.setSkuGroupId(skuGroupId);
+        goodsCarDTO.setNum(num);
+        List<GoodsCarDTO> goodsCarDTOS = new ArrayList<>();
+        goodsCarDTOS.add(goodsCarDTO);
+        return goodsCarDTOS;
+    }
     /**
      * 保存订单商品信息
      * @param orderGoodsList 订单商品价格信息
