@@ -1,6 +1,7 @@
 package com.wgs.api.controller;
 
 import com.wgs.api.service.GoodsService;
+import com.wgs.dto.BaseResult;
 import com.wgs.dto.goods.GoodsDTO;
 import com.ydd.framework.core.common.Pagination;
 import com.ydd.framework.core.common.dto.ResponseDTO;
@@ -25,8 +26,8 @@ public class GoodsController extends BaseApiController{
      */
     @RequestMapping("/info")
     public ResponseDTO findGoodsInfo(@RequestParam("goodsId") Integer goodsId){
-        GoodsDTO goodsDTO = goodsService.findGoodsInfo(goodsId);
-        return ResponseDTO.ok().addAttribute("data",goodsDTO);
+        BaseResult<GoodsDTO> goodsDTO = goodsService.findGoodsInfo(goodsId);
+        return ResponseDTO.ok().addAttribute("data",goodsDTO.getContent());
     }
 
     /**
@@ -36,7 +37,7 @@ public class GoodsController extends BaseApiController{
      */
     @RequestMapping("/sku/info")
     public ResponseDTO findGoodsSkuInfo(@RequestParam("goodsId") Integer goodsId){
-        return ResponseDTO.ok().addAttribute("data",goodsService.findGoodsGroupInfo(goodsId));
+        return ResponseDTO.ok().addAttribute("data",goodsService.findGoodsGroupInfo(goodsId).getContent());
     }
 
     /**
@@ -45,7 +46,7 @@ public class GoodsController extends BaseApiController{
      */
     @RequestMapping("/categories")
     public ResponseDTO findGoodsCategories(){
-        return ResponseDTO.ok().addAttribute("data",goodsService.findGoodsCategory());
+        return ResponseDTO.ok().addAttribute("data",goodsService.findGoodsCategory().getContent());
     }
 
     /**
@@ -56,8 +57,8 @@ public class GoodsController extends BaseApiController{
      */
     @RequestMapping("/category/goods")
     public ResponseDTO findGoodsByCategory(@RequestParam("cateId") Integer cateId, Pagination pagination){
-        Pagination data = goodsService.findGoodsByCategory(cateId,pagination);
-        return ResponseDTO.ok().addAttribute("data",data);
+        BaseResult<Pagination> data = goodsService.findGoodsByCategory(cateId,pagination);
+        return ResponseDTO.ok().addAttribute("data",data.getContent());
     }
 
 }

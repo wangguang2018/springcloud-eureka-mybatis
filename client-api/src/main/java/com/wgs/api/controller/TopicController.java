@@ -1,6 +1,7 @@
 package com.wgs.api.controller;
 
 import com.wgs.api.service.TopicService;
+import com.wgs.dto.BaseResult;
 import com.wgs.dto.topic.TopicDTO;
 import com.ydd.framework.core.common.Pagination;
 import com.ydd.framework.core.common.dto.ResponseDTO;
@@ -24,8 +25,8 @@ public class TopicController extends BaseApiController {
      */
     @RequestMapping("/list")
     public ResponseDTO topicList(Pagination pagination){
-        pagination = topicService.findTopicList(pagination);
-        return ResponseDTO.ok().addAttribute("data",pagination);
+        BaseResult<Pagination> p = topicService.findTopicList(pagination);
+        return ResponseDTO.ok().addAttribute("data",p.getContent());
     }
 
     /**
@@ -35,8 +36,8 @@ public class TopicController extends BaseApiController {
      */
     @RequestMapping("/info")
     public ResponseDTO topicList(@RequestParam("topicId") Integer topicId){
-        TopicDTO topicDTO = topicService.findTopicInfoById(topicId);
-        return ResponseDTO.ok().addAttribute("data",topicDTO);
+        BaseResult<TopicDTO> topicDTO = topicService.findTopicInfoById(topicId);
+        return ResponseDTO.ok().addAttribute("data",topicDTO.getContent());
     }
 
     /**
@@ -47,8 +48,8 @@ public class TopicController extends BaseApiController {
      */
     @RequestMapping("/info/goods")
     public ResponseDTO topicList(@RequestParam("topicId") Integer topicId,Pagination pagination){
-        pagination = topicService.findTopicGoodsList(pagination,topicId);
-        return ResponseDTO.ok().addAttribute("data",pagination);
+        BaseResult<Pagination> p = topicService.findTopicGoodsList(pagination,topicId);
+        return ResponseDTO.ok().addAttribute("data",p.getContent());
     }
 
 }
