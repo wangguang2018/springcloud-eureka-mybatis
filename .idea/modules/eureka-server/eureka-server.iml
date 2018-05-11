@@ -5,6 +5,7 @@
     <content url="file://$MODULE_DIR$/../../../eureka-server">
       <excludeFolder url="file://$MODULE_DIR$/../../../eureka-server/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/../../../eureka-server/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../eureka-server/out" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

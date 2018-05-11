@@ -1,6 +1,7 @@
 package com.wgs.eurekaprovider.service.order;
 
 import com.wgs.dto.goods.GoodsCarDTO;
+import com.wgs.dto.order.OrderDTO;
 import com.wgs.dto.order.OrderGoodsInfoDTO;
 import com.wgs.entity.*;
 import com.wgs.entity.enums.OrderStatusEnum;
@@ -11,6 +12,7 @@ import com.wgs.mapper.OrderAddressMapper;
 import com.wgs.mapper.OrderGoodsInfoMapper;
 import com.wgs.mapper.OrderGoodsMapper;
 import com.wgs.mapper.OrderMapper;
+import com.ydd.framework.core.common.Pagination;
 import com.ydd.framework.core.exception.ServiceException;
 import com.ydd.framework.core.service.impl.BaseServiceImpl;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -210,6 +212,11 @@ public class OrderService extends BaseServiceImpl {
         orderAddress.setAddress(memberAddress.getAddress());
         orderAddressMapper.insert(orderAddress);
     }
+
+    public Pagination orderList(Integer memberId, Pagination pagination){
+        return null;
+    }
+
     /**
      * 生成订单号
      *

@@ -14,13 +14,22 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../eureka-provider/src/libs/wechat-base-1.0.46-RELEASE.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntry type="library" name="Gradle: org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:2.0.0.RC1" level="project" />
     <orderEntry type="module" module-name="repository_main" />
     <orderEntry type="module" module-name="entity_main" />
     <orderEntry type="library" name="Gradle: com.ydd:framework-core:1.8.4" level="project" />
     <orderEntry type="library" name="Gradle: cn.jpush.api:jpush-client:3.3.3" level="project" />
     <orderEntry type="library" name="Gradle: com.yunpian.sdk:yunpian-java-sdk:1.2.5" level="project" />
-    <orderEntry type="library" name="Gradle: com.qiniu:qiniu-java-sdk:7.2.11" level="project" />
+    <orderEntry type="library" name="Gradle: com.qiniu:qiniu-java-sdk:7.2.12" level="project" />
     <orderEntry type="library" name="Gradle: com.github.binarywang:weixin-java-miniapp:2.8.0" level="project" />
     <orderEntry type="library" name="Gradle: com.github.binarywang:weixin-java-pay:2.8.0" level="project" />
     <orderEntry type="library" name="Gradle: com.github.binarywang:weixin-java-common:2.8.0" level="project" />
