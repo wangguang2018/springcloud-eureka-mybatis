@@ -26,7 +26,7 @@
     <orderEntry type="library" name="Gradle: org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:2.0.0.RC1" level="project" />
     <orderEntry type="module" module-name="repository_main" />
     <orderEntry type="module" module-name="entity_main" />
-    <orderEntry type="library" name="Gradle: com.ydd:framework-core:1.8.4" level="project" />
+    <orderEntry type="library" name="Gradle: com.ydd:framework-core:2.0.0" level="project" />
     <orderEntry type="library" name="Gradle: cn.jpush.api:jpush-client:3.3.3" level="project" />
     <orderEntry type="library" name="Gradle: com.yunpian.sdk:yunpian-java-sdk:1.2.5" level="project" />
     <orderEntry type="library" name="Gradle: com.qiniu:qiniu-java-sdk:7.2.12" level="project" />

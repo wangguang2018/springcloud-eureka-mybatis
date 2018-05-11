@@ -16,7 +16,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="client-api_main" />
     <orderEntry type="module" module-name="entity_main" />
-    <orderEntry type="library" name="Gradle: com.ydd:framework-core:1.8.4" level="project" />
+    <orderEntry type="library" name="Gradle: com.ydd:framework-core:2.0.0" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-web:2.0.1.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.cloud:spring-cloud-starter-eureka:1.4.4.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.cloud:spring-cloud-starter-feign:1.4.4.RELEASE" level="project" />

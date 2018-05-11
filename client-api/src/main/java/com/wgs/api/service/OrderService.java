@@ -2,6 +2,7 @@ package com.wgs.api.service;
 
 import com.wgs.dto.BaseResult;
 import com.wgs.entity.MemberAddress;
+import com.ydd.framework.core.common.Pagination;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,4 +51,12 @@ public interface OrderService {
     BaseResult orderWithGoods(@RequestParam("memberId") Integer memberId, MemberAddress memberAddress,
                               @RequestParam("skuGroupId") Integer skuGroupId, @RequestParam("num") Integer num);
 
+    /**
+     * 用户订单列表
+     * @param memberId
+     * @param pagination
+     * @return
+     */
+    @RequestMapping("/findMemberOrderList")
+    BaseResult<Pagination> findOrderListByMember(@RequestParam("memberId") Integer memberId,Pagination pagination);
 }

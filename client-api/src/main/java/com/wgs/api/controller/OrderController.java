@@ -1,8 +1,10 @@
 package com.wgs.api.controller;
 
 import com.wgs.api.service.OrderService;
+import com.wgs.dto.BaseResult;
 import com.wgs.entity.MemberAddress;
 import com.ydd.framework.core.annotation.AccessToken;
+import com.ydd.framework.core.common.Pagination;
 import com.ydd.framework.core.common.dto.ResponseDTO;
 import com.ydd.framework.core.controller.BaseApiController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -75,5 +77,17 @@ public class OrderController extends BaseApiController {
     public ResponseDTO orderWithGoodsCarWechatAddr(MemberAddress memberAddress){
         orderService.orderWithGoodsCar(getLoginMemberId(),memberAddress);
         return ResponseDTO.ok();
+    }
+
+    /**
+     * 用户的订单列表
+     * @param pagination
+     * @return
+     */
+    @AccessToken
+    @RequestMapping("/list")
+    public ResponseDTO orderList(Pagination pagination){
+        BaseResult<Pagination> baseResult = orderService.findOrderListByMember(getLoginMemberId(),pagination);
+        return ResponseDTO.ok().addAttribute("data",baseResult.getContent());
     }
 }

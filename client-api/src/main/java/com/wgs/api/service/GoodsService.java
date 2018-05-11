@@ -16,6 +16,7 @@ import java.util.List;
 @FeignClient(value = "service-api")
 public interface GoodsService {
 
+
     /**
      * 获取商品主体信息
      * @param goodsId

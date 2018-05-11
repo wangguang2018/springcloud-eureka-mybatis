@@ -3,6 +3,7 @@ package com.wgs.eurekaprovider.controller;
 import com.wgs.dto.BaseResult;
 import com.wgs.entity.MemberAddress;
 import com.wgs.eurekaprovider.service.order.OrderService;
+import com.ydd.framework.core.common.Pagination;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -64,4 +65,15 @@ public class OrderController {
         return new BaseResult();
     }
 
+    /**
+     * 订单列表
+     * @param memberId
+     * @param pagination
+     * @return
+     */
+    @RequestMapping("/findMemberOrderList")
+    public BaseResult<Pagination> findMemberOrderList(@RequestParam("memberId") Integer memberId,Pagination pagination){
+        pagination = orderService.orderList(memberId,pagination);
+        return new BaseResult<>(pagination);
+    }
 }

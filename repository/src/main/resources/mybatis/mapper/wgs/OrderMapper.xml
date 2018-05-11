@@ -2,31 +2,50 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wgs.mapper.OrderMapper">
 
-<resultMap id="OrderMap" type="com.wgs.entity.Order">
+    <resultMap id="OrderMap" type="com.wgs.entity.Order">
 
-		<id column="id" jdbcType="INTEGER" property="id" />
-		<result column="order_sn" property="orderSn" />
-		<result column="transaction_sn" property="transactionSn" />
-		<result column="pay_type" property="payType" />
-		<result column="member_id" property="memberId" />
-		<result column="status" property="status" />
-		<result column="total_price" property="totalPrice" />
-		<result column="pay_price" property="payPrice" />
-		<result column="pay_time" property="payTime" />
-		<result column="created_id" property="createdId" />
-		<result column="modified_id" property="modifiedId" />
-		<result column="created_time" property="createdTime" />
-		<result column="modified_time" property="modifiedTime" />
-		<result column="deleted" property="deleted" />
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="order_sn" property="orderSn"/>
+        <result column="transaction_sn" property="transactionSn"/>
+        <result column="pay_type" property="payType"/>
+        <result column="member_id" property="memberId"/>
+        <result column="status" property="status"/>
+        <result column="total_price" property="totalPrice"/>
+        <result column="pay_price" property="payPrice"/>
+        <result column="pay_time" property="payTime"/>
+        <result column="created_id" property="createdId"/>
+        <result column="modified_id" property="modifiedId"/>
+        <result column="created_time" property="createdTime"/>
+        <result column="modified_time" property="modifiedTime"/>
+        <result column="deleted" property="deleted"/>
     </resultMap>
-	
-	<!--表名 -->
-	<sql id="tableName">
+
+    <resultMap id="OrderDTOMap" type="com.wgs.dto.order.OrderDTO" extends="OrderMap">
+        <collection property="goodsList" column="id" select="findOrderGoodsList"></collection>
+    </resultMap>
+
+    <resultMap id="OrderGoodsDTOMap" type="com.wgs.dto.order.OrderGoodsDTO">
+        <result property="goodsId" column="goods_id"></result>
+        <result property="goodsPrice" column="goods_price"></result>
+        <result property="totalPrice" column="total_price"></result>
+        <result property="orderSn" column="order_sn"></result>
+        <result property="skuGroupId" column="sku_group_id"></result>
+        <result property="num" column="num"></result>
+        <result property="info.goodsImg" column="goods_img"></result>
+        <result property="info.goodsName" column="goods_name"></result>
+        <result property="info.goodsSn" column="goods_sn"></result>
+        <result property="info.lensColor" column="lens_color"></result>
+        <result property="info.skuName" column="sku_name"></result>
+        <result property="info.spectaclesFrameMaterial" column="spectacles_frame_material"></result>
+    </resultMap>
+
+    <!--表名 -->
+    <sql id="tableName">
 		wgs_order
 	</sql>
-	
-	<!-- 字段 -->
-	<sql id="Field">
+
+    <!-- 字段 -->
+    <sql id="Field">
 		id,
 		order_sn,
 		transaction_sn,
@@ -42,9 +61,9 @@
 		modified_time,
 		deleted
 	</sql>
-	
-	<!-- 字段值 -->
-	<sql id="FieldValue">
+
+    <!-- 字段值 -->
+    <sql id="FieldValue">
 		#{id, jdbcType=INTEGER},
 		#{orderSn, jdbcType=VARCHAR},
 		#{transactionSn, jdbcType=VARCHAR},
@@ -61,203 +80,217 @@
 		#{deleted, jdbcType=TINYINT}
 	</sql>
 
-	<!-- 查询全部记录 -->
+    <!-- 查询全部记录 -->
     <select id="findAll" resultMap="OrderMap">
         SELECT
-        	<include refid="Field"></include>
+        <include refid="Field"></include>
         FROM
-        	<include refid="tableName"></include>
-		WHERE
-			deleted = 0
+        <include refid="tableName"></include>
+        WHERE
+        deleted = 0
     </select>
-	
-	<!-- 新增-->
-<insert id="insert" parameterType="com.wgs.entity.Order" useGeneratedKeys="true" keyProperty="id">
+
+    <!-- 新增-->
+    <insert id="insert" parameterType="com.wgs.entity.Order" useGeneratedKeys="true" keyProperty="id">
 
         INSERT INTO
-			<include refid="tableName"></include>
+        <include refid="tableName"></include>
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
-				id,
+                id,
             </if>
             <if test="orderSn != null">
-				order_sn,
+                order_sn,
             </if>
             <if test="transactionSn != null">
-				transaction_sn,
+                transaction_sn,
             </if>
             <if test="payType != null">
-				pay_type,
+                pay_type,
             </if>
             <if test="memberId != null">
-				member_id,
+                member_id,
             </if>
             <if test="status != null">
-				status,
+                status,
             </if>
             <if test="totalPrice != null">
-				total_price,
+                total_price,
             </if>
             <if test="payPrice != null">
-				pay_price,
+                pay_price,
             </if>
             <if test="payTime != null">
-				pay_time,
+                pay_time,
             </if>
             <if test="createdId != null">
-				created_id,
+                created_id,
             </if>
             <if test="modifiedId != null">
-				modified_id,
+                modified_id,
             </if>
             <if test="createdTime != null">
-				created_time,
+                created_time,
             </if>
             <if test="modifiedTime != null">
-				modified_time,
+                modified_time,
             </if>
             <if test="deleted != null">
-				deleted,
+                deleted,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
-				#{id},
+                #{id},
             </if>
             <if test="orderSn != null">
-				#{orderSn},
+                #{orderSn},
             </if>
             <if test="transactionSn != null">
-				#{transactionSn},
+                #{transactionSn},
             </if>
             <if test="payType != null">
-				#{payType},
+                #{payType},
             </if>
             <if test="memberId != null">
-				#{memberId},
+                #{memberId},
             </if>
             <if test="status != null">
-				#{status},
+                #{status},
             </if>
             <if test="totalPrice != null">
-				#{totalPrice},
+                #{totalPrice},
             </if>
             <if test="payPrice != null">
-				#{payPrice},
+                #{payPrice},
             </if>
             <if test="payTime != null">
-				#{payTime},
+                #{payTime},
             </if>
             <if test="createdId != null">
-				#{createdId},
+                #{createdId},
             </if>
             <if test="modifiedId != null">
-				#{modifiedId},
+                #{modifiedId},
             </if>
             <if test="createdTime != null">
-				#{createdTime},
+                #{createdTime},
             </if>
             <if test="modifiedTime != null">
-				#{modifiedTime},
+                #{modifiedTime},
             </if>
             <if test="deleted != null">
-				#{deleted},
+                #{deleted},
             </if>
         </trim>
-	</insert>
-	
-	<!-- 删除-->
-	<delete id="delete" parameterType="java.lang.Integer">
-		UPDATE
-			<include refid="tableName"></include>
-		SET
-			deleted = 1
-		WHERE
-			id = #{id}
-	</delete>
+    </insert>
+
+    <!-- 删除-->
+    <delete id="delete" parameterType="java.lang.Integer">
+        UPDATE
+        <include refid="tableName"></include>
+        SET
+        deleted = 1
+        WHERE
+        id = #{id}
+    </delete>
 
     <!-- 批量删除 -->
     <delete id="deleteByIds">
         UPDATE
-        	<include refid="tableName"></include>
-		SET
-			deleted = 1
+        <include refid="tableName"></include>
+        SET
+        deleted = 1
         WHERE
-			id IN
-			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
-				#{item}
-			</foreach>
+        id IN
+        <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </delete>
-	
-	<!-- 更新记录 -->
-<update id="update" parameterType="com.wgs.entity.Order">
-		UPDATE
-			<include refid="tableName"></include>
+
+    <!-- 更新记录 -->
+    <update id="update" parameterType="com.wgs.entity.Order">
+        UPDATE
+        <include refid="tableName"></include>
         <set>
-			<if test="orderSn != null">
-				order_sn = #{orderSn},
-			</if>
-			<if test="transactionSn != null">
-				transaction_sn = #{transactionSn},
-			</if>
-			<if test="payType != null">
-				pay_type = #{payType},
-			</if>
-			<if test="memberId != null">
-				member_id = #{memberId},
-			</if>
-			<if test="status != null">
-				status = #{status},
-			</if>
-			<if test="totalPrice != null">
-				total_price = #{totalPrice},
-			</if>
-			<if test="payPrice != null">
-				pay_price = #{payPrice},
-			</if>
-			<if test="payTime != null">
-				pay_time = #{payTime},
-			</if>
-			<if test="createdId != null">
-				created_id = #{createdId},
-			</if>
-			<if test="modifiedId != null">
-				modified_id = #{modifiedId},
-			</if>
-			<if test="createdTime != null">
-				created_time = #{createdTime},
-			</if>
-			<if test="modifiedTime != null">
-				modified_time = #{modifiedTime},
-			</if>
-			<if test="deleted != null">
-				deleted = #{deleted},
-			</if>
+            <if test="orderSn != null">
+                order_sn = #{orderSn},
+            </if>
+            <if test="transactionSn != null">
+                transaction_sn = #{transactionSn},
+            </if>
+            <if test="payType != null">
+                pay_type = #{payType},
+            </if>
+            <if test="memberId != null">
+                member_id = #{memberId},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="totalPrice != null">
+                total_price = #{totalPrice},
+            </if>
+            <if test="payPrice != null">
+                pay_price = #{payPrice},
+            </if>
+            <if test="payTime != null">
+                pay_time = #{payTime},
+            </if>
+            <if test="createdId != null">
+                created_id = #{createdId},
+            </if>
+            <if test="modifiedId != null">
+                modified_id = #{modifiedId},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+            <if test="modifiedTime != null">
+                modified_time = #{modifiedTime},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted},
+            </if>
         </set>
         WHERE id = #{id}
-	</update>
-	
-	<!-- 通过编号查询 -->
-	<select id="findById" parameterType="java.lang.Integer" resultMap="OrderMap">
-		SELECT
-			<include refid="Field"></include>
-		FROM
-			<include refid="tableName"></include>
-		WHERE id = #{id}
-	</select>
+    </update>
+
+    <!-- 通过编号查询 -->
+    <select id="findById" parameterType="java.lang.Integer" resultMap="OrderMap">
+        SELECT
+        <include refid="Field"></include>
+        FROM
+        <include refid="tableName"></include>
+        WHERE id = #{id}
+    </select>
 
     <!--更新订单状态-->
     <update id="updateStatus">
         UPDATE
-        	<include refid="tableName"></include>
+        <include refid="tableName"></include>
         SET
-        	status = #{status, jdbcType=TINYINT}
+        status = #{status, jdbcType=TINYINT}
         WHERE
-        	id
+        id
         IN
         <foreach collection="ids" item="id" index="index" open="(" close=")" separator=",">
-			#{id}
+            #{id}
         </foreach>
     </update>
+
+
+    <select id="findOrderList" resultMap="OrderDTOMap">
+		select o.order_sn,o.pay_type,o.`status`,o.pay_price,o.pay_time,o.created_time
+		from wgs_order o
+		where o.member_id = #{memberId}
+	</select>
+
+    <select id="findOrderGoodsList" resultMap="OrderGoodsDTOMap">
+        SELECT og.*,i.* from wgs_order_goods og
+        LEFT JOIN wgs_order_goods_info i
+        on og.id = i.order_goods_id
+        where og.order_id = #{id}
+    </select>
 
 </mapper>

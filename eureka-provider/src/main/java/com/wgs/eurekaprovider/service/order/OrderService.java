@@ -1,5 +1,6 @@
 package com.wgs.eurekaprovider.service.order;
 
+import com.github.pagehelper.PageHelper;
 import com.wgs.dto.goods.GoodsCarDTO;
 import com.wgs.dto.order.OrderDTO;
 import com.wgs.dto.order.OrderGoodsInfoDTO;
@@ -213,8 +214,16 @@ public class OrderService extends BaseServiceImpl {
         orderAddressMapper.insert(orderAddress);
     }
 
+    /**
+     * 获取订单列表
+     * @param memberId
+     * @param pagination
+     * @return
+     */
     public Pagination orderList(Integer memberId, Pagination pagination){
-        return null;
+        PageHelper.startPage(pagination.getPage(), pagination.getPageSize());
+        pagination.setQueryResult(orderMapper.findOrderList(memberId));
+        return pagination;
     }
 
     /**

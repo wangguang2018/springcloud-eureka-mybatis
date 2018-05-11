@@ -15,9 +15,9 @@
       <module name="client-api_test" target="1.8" />
       <module name="entity_main" target="1.8" />
       <module name="entity_test" target="1.8" />
-      <module name="euraka-server" target="1.8" />
-      <module name="euraka-server_main" target="1.8" />
-      <module name="euraka-server_test" target="1.8" />
+      <module name="eureka-server" target="1.8" />
+      <module name="eureka-server_main" target="1.8" />
+      <module name="eureka-server_test" target="1.8" />
       <module name="eureka-provider_main" target="1.8" />
       <module name="eureka-provider_test" target="1.8" />
       <module name="repository_main" target="1.8" />

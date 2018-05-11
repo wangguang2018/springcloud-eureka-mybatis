@@ -1,4 +1,5 @@
 package com.wgs.mapper;
+import com.wgs.dto.order.OrderDTO;
 import com.wgs.entity.Order;
 import org.apache.ibatis.annotations.Param;
 
@@ -66,5 +67,7 @@ public interface OrderMapper {
      * @return 更新数量
      */
     int updateStatus(@Param("ids") Integer[] ids, @Param("status") Byte status);
+
+    List<OrderDTO> findOrderList(@Param("memberId") Integer memberId);
 
 }
