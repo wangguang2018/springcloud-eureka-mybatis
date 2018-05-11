@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.util.List;
 
-@RestController("/address")
+@RestController
+@RequestMapping("/address")
 public class MemberAddressController {
 
     @Resource

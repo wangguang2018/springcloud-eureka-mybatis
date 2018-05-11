@@ -56,12 +56,7 @@ public class AccessTokensInterceptor extends HandlerInterceptorAdapter {
         }
         if(accessToken.equals("123456")){
             // 将登陆用户的用户编号放入本次请求中
-            request.setAttribute(LOGIN_MEMBER_ID_KEY, 39);
-            return true;
-        }
-        if(accessToken.equals("1234567")){
-            // 将登陆用户的用户编号放入本次请求中
-            request.setAttribute(LOGIN_MEMBER_ID_KEY, 43);
+            request.setAttribute(LOGIN_MEMBER_ID_KEY, 1);
             return true;
         }
         // 判断访问凭证是否为空

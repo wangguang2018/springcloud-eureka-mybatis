@@ -25,6 +25,7 @@ public class ExceptionResolver {
     @ResponseBody
     @ExceptionHandler(ServiceException.class)
     public BaseResult handleServiceException(Throwable ex) {
+        ex.printStackTrace();
         ExceptionCode exceptionCode = ((ServiceException) ex).getExceptionCode();
         return new BaseResult(exceptionCode.code,exceptionCode.msg);
     }

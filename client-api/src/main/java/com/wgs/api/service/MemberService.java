@@ -29,7 +29,7 @@ public interface MemberService {
      * @return
      */
     @RequestMapping("/findGoodsCarByMemberId")
-    BaseResult<List<GoodsCarDTO>> findByMemberId(@RequestParam("memberId") Integer memberId);
+    BaseResult<List<GoodsCarDTO>> findGoodsCar(@RequestParam("memberId") Integer memberId);
 
     /**
      * 添加到购物车

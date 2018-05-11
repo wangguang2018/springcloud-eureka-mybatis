@@ -37,6 +37,7 @@ public class ExceptionResolver {
             }
         } else {
             ret.setErrorMsg(ex.getMessage());
+            ex.printStackTrace();
             logger.error("系统出现异常，原因：" + ex.getMessage(), ex);
         }
 
