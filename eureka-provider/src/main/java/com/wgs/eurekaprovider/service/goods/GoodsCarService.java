@@ -72,4 +72,14 @@ public class GoodsCarService extends BaseServiceImpl {
         return goodsCarDTOS;
     }
 
+    /**
+     * 获取购物车数量
+     * @param memberId
+     * @return
+     */
+    public Integer findGoodsCarCount(Integer memberId){
+        Integer count = memberGoodsCarMapper.countByMember(memberId);
+        return count == null ? 0:count;
+    }
+
 }

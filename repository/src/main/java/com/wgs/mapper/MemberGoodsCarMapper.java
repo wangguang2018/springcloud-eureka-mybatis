@@ -66,4 +66,6 @@ public interface MemberGoodsCarMapper {
     void deleteBySkuGroupId(@Param("skuGroupId") Integer skuGroupId, @Param("memberId") Integer memberId);
 
     List<GoodsCarDTO> findByMember(@Param("memberId") Integer memberId);
+
+    Integer countByMember(@Param("memberId") Integer memberId);
 }

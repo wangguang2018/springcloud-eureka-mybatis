@@ -1,6 +1,7 @@
 package com.wgs.eurekaprovider.service.member;
 
 import com.wgs.dto.BaseResult;
+import com.wgs.dto.member.MemberInfoDTO;
 import com.wgs.entity.Member;
 import com.wgs.entity.MemberToken;
 import com.wgs.entity.enums.LiveTime;
@@ -170,5 +171,14 @@ public class MemberService extends BaseServiceImpl {
 
     public Member findById(Integer memberId) {
         return memberMapper.findById(memberId);
+    }
+
+    /**
+     * 获取用户信息
+     * @param memberId
+     * @return
+     */
+    public MemberInfoDTO findMemberInfo(Integer memberId){
+        return memberMapper.findMemberInfo(memberId);
     }
 }

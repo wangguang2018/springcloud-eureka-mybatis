@@ -4,6 +4,7 @@ import com.wgs.api.service.MemberAddressService;
 import com.wgs.api.service.MemberService;
 import com.wgs.dto.BaseResult;
 import com.wgs.dto.goods.GoodsCarDTO;
+import com.wgs.dto.member.MemberInfoDTO;
 import com.wgs.entity.MemberAddress;
 import com.wgs.entity.MemberToken;
 import com.ydd.framework.core.annotation.AccessToken;
@@ -121,4 +122,27 @@ public class MemberController extends BaseApiController {
         memberAddressService.setAddressDefault(getLoginMemberId(),addressId);
         return ResponseDTO.ok();
     }
+
+    /**
+     * 获取用户信息
+     * @return
+     */
+    @RequestMapping("/info")
+    @AccessToken
+    public ResponseDTO findMemberInfo(){
+        BaseResult result = memberService.findMemberInfo(getLoginMemberId());
+        return ResponseDTO.ok().addAttribute("data",result.getContent());
+    }
+
+    /**
+     * 获取用户信息
+     * @return
+     */
+    @RequestMapping("/goodscar/count")
+    @AccessToken
+    public ResponseDTO findGoodsCarCount(){
+        BaseResult result = memberService.findGoodsCarCount(getLoginMemberId());
+        return ResponseDTO.ok().addAttribute("data",result.getContent());
+    }
+
 }

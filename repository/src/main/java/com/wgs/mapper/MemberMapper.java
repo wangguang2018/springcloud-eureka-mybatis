@@ -1,4 +1,5 @@
 package com.wgs.mapper;
+import com.wgs.dto.member.MemberInfoDTO;
 import com.wgs.entity.Member;
 import org.apache.ibatis.annotations.Param;
 
@@ -60,4 +61,5 @@ public interface MemberMapper {
 
     Member findByOpenId(@Param("openId") String openId);
 
+    MemberInfoDTO findMemberInfo(@Param("memberId") Integer memberId);
 }

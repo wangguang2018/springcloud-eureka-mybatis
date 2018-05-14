@@ -2,26 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wgs.mapper.MemberMapper">
 
-<resultMap id="MemberMap" type="com.wgs.entity.Member">
+    <resultMap id="MemberMap" type="com.wgs.entity.Member">
 
-		<id column="id" jdbcType="INTEGER" property="id" />
-		<result column="nickname" property="nickname" />
-		<result column="avatar" property="avatar" />
-		<result column="xcx_open_id" property="xcxOpenId" />
-		<result column="created_id" property="createdId" />
-		<result column="modified_id" property="modifiedId" />
-		<result column="created_time" property="createdTime" />
-		<result column="modified_time" property="modifiedTime" />
-		<result column="deleted" property="deleted" />
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="nickname" property="nickname"/>
+        <result column="avatar" property="avatar"/>
+        <result column="xcx_open_id" property="xcxOpenId"/>
+        <result column="created_id" property="createdId"/>
+        <result column="modified_id" property="modifiedId"/>
+        <result column="created_time" property="createdTime"/>
+        <result column="modified_time" property="modifiedTime"/>
+        <result column="deleted" property="deleted"/>
     </resultMap>
-	
-	<!--表名 -->
-	<sql id="tableName">
+
+    <resultMap id="MemberInfoDTO" type="com.wgs.dto.member.MemberInfoDTO">
+        <result column="all_order_num" property="allOrderNum"></result>
+        <result column="avatar" property="avatar"></result>
+        <result column="nickname" property="nickname"></result>
+        <result column="no_pay" property="noPayOrderNum"></result>
+        <result column="pending_delivery" property="pendingDeliveryOrderNum"></result>
+        <result column="pending_received" property="pendingReceivedOrderNum"></result>
+    </resultMap>
+
+    <!--表名 -->
+    <sql id="tableName">
 		wgs_member
 	</sql>
-	
-	<!-- 字段 -->
-	<sql id="Field">
+
+    <!-- 字段 -->
+    <sql id="Field">
 		id,
 		nickname,
 		avatar,
@@ -32,9 +41,9 @@
 		modified_time,
 		deleted
 	</sql>
-	
-	<!-- 字段值 -->
-	<sql id="FieldValue">
+
+    <!-- 字段值 -->
+    <sql id="FieldValue">
 		#{id, jdbcType=INTEGER},
 		#{nickname, jdbcType=VARCHAR},
 		#{avatar, jdbcType=VARCHAR},
@@ -46,149 +55,158 @@
 		#{deleted, jdbcType=TINYINT}
 	</sql>
 
-	<!-- 查询全部记录 -->
+    <!-- 查询全部记录 -->
     <select id="findAll" resultMap="MemberMap">
         SELECT
-        	<include refid="Field"></include>
+        <include refid="Field"></include>
         FROM
-        	<include refid="tableName"></include>
-		WHERE
-			deleted = 0
+        <include refid="tableName"></include>
+        WHERE
+        deleted = 0
     </select>
-	
-	<!-- 新增-->
-<insert id="insert" parameterType="com.wgs.entity.Member" useGeneratedKeys="true" keyProperty="id">
+
+    <!-- 新增-->
+    <insert id="insert" parameterType="com.wgs.entity.Member" useGeneratedKeys="true" keyProperty="id">
 
         INSERT INTO
-			<include refid="tableName"></include>
+        <include refid="tableName"></include>
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
-				id,
+                id,
             </if>
             <if test="nickname != null">
-				nickname,
+                nickname,
             </if>
             <if test="avatar != null">
-				avatar,
+                avatar,
             </if>
             <if test="xcxOpenId != null">
-				xcx_open_id,
+                xcx_open_id,
             </if>
             <if test="createdId != null">
-				created_id,
+                created_id,
             </if>
             <if test="modifiedId != null">
-				modified_id,
+                modified_id,
             </if>
             <if test="createdTime != null">
-				created_time,
+                created_time,
             </if>
             <if test="modifiedTime != null">
-				modified_time,
+                modified_time,
             </if>
             <if test="deleted != null">
-				deleted,
+                deleted,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
-				#{id},
+                #{id},
             </if>
             <if test="nickname != null">
-				#{nickname},
+                #{nickname},
             </if>
             <if test="avatar != null">
-				#{avatar},
+                #{avatar},
             </if>
             <if test="xcxOpenId != null">
-				#{xcxOpenId},
+                #{xcxOpenId},
             </if>
             <if test="createdId != null">
-				#{createdId},
+                #{createdId},
             </if>
             <if test="modifiedId != null">
-				#{modifiedId},
+                #{modifiedId},
             </if>
             <if test="createdTime != null">
-				#{createdTime},
+                #{createdTime},
             </if>
             <if test="modifiedTime != null">
-				#{modifiedTime},
+                #{modifiedTime},
             </if>
             <if test="deleted != null">
-				#{deleted},
+                #{deleted},
             </if>
         </trim>
-	</insert>
-	
-	<!-- 删除-->
-	<delete id="delete" parameterType="java.lang.Integer">
-		UPDATE
-			<include refid="tableName"></include>
-		SET
-			deleted = 1
-		WHERE
-			id = #{id}
-	</delete>
+    </insert>
+
+    <!-- 删除-->
+    <delete id="delete" parameterType="java.lang.Integer">
+        UPDATE
+        <include refid="tableName"></include>
+        SET
+        deleted = 1
+        WHERE
+        id = #{id}
+    </delete>
 
     <!-- 批量删除 -->
     <delete id="deleteByIds">
         UPDATE
-        	<include refid="tableName"></include>
-		SET
-			deleted = 1
+        <include refid="tableName"></include>
+        SET
+        deleted = 1
         WHERE
-			id IN
-			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
-				#{item}
-			</foreach>
+        id IN
+        <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </delete>
-	
-	<!-- 更新记录 -->
-<update id="update" parameterType="com.wgs.entity.Member">
-		UPDATE
-			<include refid="tableName"></include>
+
+    <!-- 更新记录 -->
+    <update id="update" parameterType="com.wgs.entity.Member">
+        UPDATE
+        <include refid="tableName"></include>
         <set>
-			<if test="nickname != null">
-				nickname = #{nickname},
-			</if>
-			<if test="avatar != null">
-				avatar = #{avatar},
-			</if>
-			<if test="xcxOpenId != null">
-				xcx_open_id = #{xcxOpenId},
-			</if>
-			<if test="createdId != null">
-				created_id = #{createdId},
-			</if>
-			<if test="modifiedId != null">
-				modified_id = #{modifiedId},
-			</if>
-			<if test="createdTime != null">
-				created_time = #{createdTime},
-			</if>
-			<if test="modifiedTime != null">
-				modified_time = #{modifiedTime},
-			</if>
-			<if test="deleted != null">
-				deleted = #{deleted},
-			</if>
+            <if test="nickname != null">
+                nickname = #{nickname},
+            </if>
+            <if test="avatar != null">
+                avatar = #{avatar},
+            </if>
+            <if test="xcxOpenId != null">
+                xcx_open_id = #{xcxOpenId},
+            </if>
+            <if test="createdId != null">
+                created_id = #{createdId},
+            </if>
+            <if test="modifiedId != null">
+                modified_id = #{modifiedId},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+            <if test="modifiedTime != null">
+                modified_time = #{modifiedTime},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted},
+            </if>
         </set>
         WHERE id = #{id}
-	</update>
-	
-	<!-- 通过编号查询 -->
-	<select id="findById" parameterType="java.lang.Integer" resultMap="MemberMap">
-		SELECT
-			<include refid="Field"></include>
-		FROM
-			<include refid="tableName"></include>
-		WHERE id = #{id}
-	</select>
+    </update>
 
-	<select id="findByOpenId" resultMap="MemberMap">
+    <!-- 通过编号查询 -->
+    <select id="findById" parameterType="java.lang.Integer" resultMap="MemberMap">
+        SELECT
+        <include refid="Field"></include>
+        FROM
+        <include refid="tableName"></include>
+        WHERE id = #{id}
+    </select>
+
+    <select id="findByOpenId" resultMap="MemberMap">
 		SELECT * from wgs_member where xcx_open_id = #{openId}
 		and deleted = 0
 	</select>
+
+    <select id="findMemberInfo" resultMap="MemberInfoDTO">
+        select nickname,avatar,
+        (select count(0) FROM wgs_order where member_id = #{memberId} and `status` = 1 and deleted = 0) as no_pay,
+        (select count(0) FROM wgs_order where member_id = #{memberId} and `status` = 2 and deleted = 0) as pending_delivery,
+        (select count(0) FROM wgs_order where member_id = #{memberId} and `status` = 3 and deleted = 0) as pending_received,
+        (select count(0) FROM wgs_order where member_id = #{memberId} and deleted = 0) as all_order_num
+        from wgs_member where id = #{memberId}
+    </select>
 
 </mapper>

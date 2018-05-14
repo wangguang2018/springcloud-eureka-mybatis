@@ -225,4 +225,9 @@
         on i.id = c.sku_group_id
         where member_id = #{memberId} and g.deleted = 0 and c.deleted = 0 and i.deleted = 0
     </select>
+
+    <select id="countByMember" resultType="java.lang.Integer">
+        select count(0) from wgs_goods_car
+        WHERE  member_id = #{memberId} and deleted = 0
+    </select>
 </mapper>

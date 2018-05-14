@@ -2,6 +2,7 @@ package com.wgs.eurekaprovider.controller;
 
 import com.wgs.dto.BaseResult;
 import com.wgs.dto.goods.GoodsCarDTO;
+import com.wgs.dto.member.MemberInfoDTO;
 import com.wgs.entity.MemberToken;
 import com.wgs.eurekaprovider.service.goods.GoodsCarService;
 import com.wgs.eurekaprovider.service.member.MemberService;
@@ -70,6 +71,26 @@ public class MemberController{
     @RequestMapping("/getMemberIdByAccessToken")
     public BaseResult<Integer> getMemberIdByAccessToken(@RequestParam("accessToken") String accessToken){
         return new BaseResult(memberService.getMemberIdByAccessToken(accessToken));
+    }
+
+    /**
+     * 获取用户信息
+     * @param memberId
+     * @return
+     */
+    @RequestMapping("/findMemberInfo")
+    public BaseResult<MemberInfoDTO> findMemberInfo(@RequestParam("memberId") Integer memberId){
+        return new BaseResult<>(memberService.findMemberInfo(memberId));
+    }
+
+    /**
+     * 购物车数量
+     * @param memberId
+     * @return
+     */
+    @RequestMapping("/goodsCarCount")
+    public BaseResult<Integer> goodsCarCount(@RequestParam("memberId") Integer memberId){
+        return new BaseResult<>(goodsCarService.findGoodsCarCount(memberId));
     }
 
 }

@@ -1,6 +1,7 @@
 package com.wgs.api.service;
 
 import com.wgs.dto.BaseResult;
+import com.wgs.dto.member.MemberInfoDTO;
 import com.wgs.entity.MemberAddress;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,4 +46,8 @@ public interface MemberAddressService {
      */
     @RequestMapping("/address/delete")
     BaseResult deleteAddress(@RequestParam("memberId") Integer memberId, @RequestParam("addressId") Integer addressId);
+
+
+
+
 }

@@ -2,6 +2,7 @@ package com.wgs.api.service;
 
 import com.wgs.dto.BaseResult;
 import com.wgs.dto.goods.GoodsCarDTO;
+import com.wgs.dto.member.MemberInfoDTO;
 import com.wgs.entity.MemberToken;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,4 +59,14 @@ public interface MemberService {
     @RequestMapping("/getMemberIdByAccessToken")
     BaseResult<Integer> getMemberIdByAccessToken(@RequestParam("accessToken") String accessToken);
 
+    /**
+     * 获取用户信息
+     * @param memberId
+     * @return
+     */
+    @RequestMapping("/findMemberInfo")
+    BaseResult<MemberInfoDTO> findMemberInfo(@RequestParam("memberId") Integer memberId);
+
+    @RequestMapping("/goodsCarCount")
+    BaseResult<Integer> findGoodsCarCount(@RequestParam("memberId") Integer memberId);
 }
