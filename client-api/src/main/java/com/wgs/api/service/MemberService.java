@@ -67,6 +67,11 @@ public interface MemberService {
     @RequestMapping("/findMemberInfo")
     BaseResult<MemberInfoDTO> findMemberInfo(@RequestParam("memberId") Integer memberId);
 
+    /**
+     * 购物车数量
+     * @param memberId
+     * @return
+     */
     @RequestMapping("/goodsCarCount")
     BaseResult<Integer> findGoodsCarCount(@RequestParam("memberId") Integer memberId);
 }
