@@ -238,7 +238,7 @@
     </select>
 
     <select id="findGoodsSkuInfo" resultMap="GoodsSkuInfoDTOMap">
-        select id,`name` from wgs_goods_sku_info where goods_id = #{goodsId} and sku_id = #{skuId}
+        select id,`name`,img,big_img from wgs_goods_sku_info where goods_id = #{goodsId} and sku_id = #{skuId}
     </select>
 
     <select id="findGoodsSkuGroupByGoodsId" resultMap="GoodsSkuGroupDTOMap">

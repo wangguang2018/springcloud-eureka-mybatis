@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wgs.mapper.BannerMapper">
+
+<resultMap id="BannerMap" type="com.wgs.entity.Banner">
+
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="img" property="img" />
+		<result column="type" property="type" />
+		<result column="topic_id" property="topicId" />
+		<result column="goods_id" property="goodsId" />
+		<result column="sort" property="sort" />
+		<result column="created_id" property="createdId" />
+		<result column="modified_id" property="modifiedId" />
+		<result column="created_time" property="createdTime" />
+		<result column="modified_time" property="modifiedTime" />
+		<result column="deleted" property="deleted" />
+    </resultMap>
+	
+	<!--表名 -->
+	<sql id="tableName">
+		wgs_banner
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		id,
+		img,
+		type,
+		topic_id,
+		goods_id,
+		sort,
+		created_id,
+		modified_id,
+		created_time,
+		modified_time,
+		deleted
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{id, jdbcType=INTEGER},
+		#{img, jdbcType=VARCHAR},
+		#{type, jdbcType=TINYINT},
+		#{topicId, jdbcType=INTEGER},
+		#{goodsId, jdbcType=INTEGER},
+		#{sort, jdbcType=INTEGER},
+		#{createdId, jdbcType=INTEGER},
+		#{modifiedId, jdbcType=INTEGER},
+		#{createdTime, jdbcType=TIMESTAMP},
+		#{modifiedTime, jdbcType=TIMESTAMP},
+		#{deleted, jdbcType=TINYINT}
+	</sql>
+
+	<!-- 查询全部记录 -->
+    <select id="findAll" resultMap="BannerMap">
+        SELECT
+        	<include refid="Field"></include>
+        FROM
+        	<include refid="tableName"></include>
+		WHERE
+			deleted = 0
+    </select>
+	
+	<!-- 新增-->
+<insert id="insert" parameterType="com.wgs.entity.Banner" useGeneratedKeys="true" keyProperty="id">
+
+        INSERT INTO
+			<include refid="tableName"></include>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+				id,
+            </if>
+            <if test="img != null">
+				img,
+            </if>
+            <if test="type != null">
+				type,
+            </if>
+            <if test="topicId != null">
+				topic_id,
+            </if>
+            <if test="goodsId != null">
+				goods_id,
+            </if>
+            <if test="sort != null">
+				sort,
+            </if>
+            <if test="createdId != null">
+				created_id,
+            </if>
+            <if test="modifiedId != null">
+				modified_id,
+            </if>
+            <if test="createdTime != null">
+				created_time,
+            </if>
+            <if test="modifiedTime != null">
+				modified_time,
+            </if>
+            <if test="deleted != null">
+				deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+				#{id},
+            </if>
+            <if test="img != null">
+				#{img},
+            </if>
+            <if test="type != null">
+				#{type},
+            </if>
+            <if test="topicId != null">
+				#{topicId},
+            </if>
+            <if test="goodsId != null">
+				#{goodsId},
+            </if>
+            <if test="sort != null">
+				#{sort},
+            </if>
+            <if test="createdId != null">
+				#{createdId},
+            </if>
+            <if test="modifiedId != null">
+				#{modifiedId},
+            </if>
+            <if test="createdTime != null">
+				#{createdTime},
+            </if>
+            <if test="modifiedTime != null">
+				#{modifiedTime},
+            </if>
+            <if test="deleted != null">
+				#{deleted},
+            </if>
+        </trim>
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="java.lang.Integer">
+		UPDATE
+			<include refid="tableName"></include>
+		SET
+			deleted = 1
+		WHERE
+			id = #{id}
+	</delete>
+
+    <!-- 批量删除 -->
+    <delete id="deleteByIds">
+        UPDATE
+        	<include refid="tableName"></include>
+		SET
+			deleted = 1
+        WHERE
+			id IN
+			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+    </delete>
+	
+	<!-- 更新记录 -->
+<update id="update" parameterType="com.wgs.entity.Banner">
+		UPDATE
+			<include refid="tableName"></include>
+        <set>
+			<if test="img != null">
+				img = #{img},
+			</if>
+			<if test="type != null">
+				type = #{type},
+			</if>
+			<if test="topicId != null">
+				topic_id = #{topicId},
+			</if>
+			<if test="goodsId != null">
+				goods_id = #{goodsId},
+			</if>
+			<if test="sort != null">
+				sort = #{sort},
+			</if>
+			<if test="createdId != null">
+				created_id = #{createdId},
+			</if>
+			<if test="modifiedId != null">
+				modified_id = #{modifiedId},
+			</if>
+			<if test="createdTime != null">
+				created_time = #{createdTime},
+			</if>
+			<if test="modifiedTime != null">
+				modified_time = #{modifiedTime},
+			</if>
+			<if test="deleted != null">
+				deleted = #{deleted},
+			</if>
+        </set>
+        WHERE id = #{id}
+	</update>
+	
+	<!-- 通过编号查询 -->
+	<select id="findById" parameterType="java.lang.Integer" resultMap="BannerMap">
+		SELECT
+			<include refid="Field"></include>
+		FROM
+			<include refid="tableName"></include>
+		WHERE id = #{id}
+	</select>
+
+</mapper>
