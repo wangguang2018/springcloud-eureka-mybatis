@@ -52,6 +52,7 @@ public class MemberService extends BaseServiceImpl {
 
     /**
      * 小程序登录
+     *
      * @param code
      * @param nickname
      * @param avatar
@@ -81,7 +82,7 @@ public class MemberService extends BaseServiceImpl {
             token.setAccessToken(generateAccessToken(member.getXcxOpenId()));
             token.setMemberId(member.getId());
             token.setRefreshToken(generateRefreshToken(member.getXcxOpenId(), token.getAccessToken()));
-            token.setExpireTime(new Date(getCurrentTime().getTime()+ expireTime.time));
+            token.setExpireTime(new Date(getCurrentTime().getTime() + expireTime.time));
             memberTokenMapper.insert(token);
         } else {
             token.setMemberId(member.getId());
@@ -99,6 +100,7 @@ public class MemberService extends BaseServiceImpl {
 
     /**
      * 注册
+     *
      * @param openid
      * @param nickname
      * @param avatar
@@ -133,16 +135,13 @@ public class MemberService extends BaseServiceImpl {
 
     /**
      * 通过accessToken获取用户ID
+     *
      * @param accessToken
      * @return
      */
-    public Integer getMemberIdByAccessToken(String accessToken){
-        String id = cacheService.getEntity(AccessTokenInterceptor.ACCESS_TOKEN_CACHE_KEY + accessToken);
-        try {
-            return Integer.parseInt(id);
-        }catch (Exception e){
-            return null;
-        }
+    public Integer getMemberIdByAccessToken(String accessToken) {
+        Integer id = cacheService.getEntity(AccessTokenInterceptor.ACCESS_TOKEN_CACHE_KEY + accessToken);
+        return id;
     }
 
     /**
@@ -160,7 +159,7 @@ public class MemberService extends BaseServiceImpl {
     /**
      * 生成置换凭证
      *
-     * @param openId  openId
+     * @param openId      openId
      * @param accessToken 接口调用凭证
      * @return 置换凭证
      */
@@ -169,7 +168,7 @@ public class MemberService extends BaseServiceImpl {
     }
 
 
-    public Member findById(Integer memberId){
+    public Member findById(Integer memberId) {
         return memberMapper.findById(memberId);
     }
 }

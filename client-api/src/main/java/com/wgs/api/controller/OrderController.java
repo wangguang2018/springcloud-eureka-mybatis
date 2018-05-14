@@ -102,4 +102,40 @@ public class OrderController extends BaseApiController {
         BaseResult result = orderService.findOrderInfo(getLoginMemberId(),orderSn);
         return ResponseDTO.ok().addAttribute("data",result.getContent());
     }
+
+    /**
+     * 取消订单
+     * @param orderSn
+     * @return
+     */
+    @RequestMapping(value = "/cancel",method = RequestMethod.POST)
+    @AccessToken
+    public ResponseDTO cancelOrder(@RequestParam("orderSn") String orderSn){
+        orderService.cancelOrder(getLoginMemberId(),orderSn);
+        return ResponseDTO.ok();
+    }
+
+    /**
+     * 删除订单
+     * @param orderSn
+     * @return
+     */
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
+    @AccessToken
+    public ResponseDTO deleteOrder(@RequestParam("orderSn") String orderSn){
+        orderService.deleteOrder(getLoginMemberId(),orderSn);
+        return ResponseDTO.ok();
+    }
+
+    /**
+     * 确认收货
+     * @param orderSn
+     * @return
+     */
+    @RequestMapping(value = "/confirm",method = RequestMethod.POST)
+    @AccessToken
+    public ResponseDTO confirmOrder(@RequestParam("orderSn") String orderSn){
+        orderService.confirmOrder(getLoginMemberId(),orderSn);
+        return ResponseDTO.ok();
+    }
 }

@@ -72,4 +72,8 @@ public interface OrderMapper {
 
     OrderDTO findOrderInfo(@Param("orderSn") String orderSn,@Param("memberId") Integer memberId);
 
+    void updateOrderStatus(@Param("memberId") Integer memberId,@Param("orderSn") String orderSn,@Param("status") Byte status);
+
+    Order findOrderSn(@Param("orderSn") String orderSn,@Param("memberId") Integer memberId);
+
 }

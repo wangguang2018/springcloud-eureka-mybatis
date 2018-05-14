@@ -63,4 +63,32 @@ public interface OrderService {
 
     @RequestMapping("/findOrderInfo")
     BaseResult<OrderDTO> findOrderInfo(@RequestParam("memberId") Integer memberId, @RequestParam("orderSn") String orderSn);
+
+
+    /**
+     * 取消订单
+     * @param memberId
+     * @param orderSn
+     * @return
+     */
+    @RequestMapping("/cancelOrder")
+    BaseResult cancelOrder(@RequestParam("memberId")Integer memberId,@RequestParam("orderSn") String orderSn);
+
+    /**
+     * 删除订单
+     * @param memberId
+     * @param orderSn
+     * @return
+     */
+    @RequestMapping("/deleteOrder")
+    BaseResult deleteOrder(@RequestParam("memberId")Integer memberId,@RequestParam("orderSn") String orderSn);
+
+    /**
+     * 确认收货
+     * @param memberId
+     * @param orderSn
+     * @return
+     */
+    @RequestMapping("/confirmOrder")
+    BaseResult confirmOrder(@RequestParam("memberId")Integer memberId,@RequestParam("orderSn") String orderSn);
 }

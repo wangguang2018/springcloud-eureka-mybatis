@@ -88,4 +88,40 @@ public class OrderController {
     public BaseResult<OrderDTO> findOrderInfo(@RequestParam("memberId")Integer memberId,@RequestParam("orderSn") String orderSn){
         return new BaseResult<>(orderService.findOrderInfo(memberId,orderSn));
     }
+
+    /**
+     * 取消订单
+     * @param memberId
+     * @param orderSn
+     * @return
+     */
+    @RequestMapping("/cancelOrder")
+    public BaseResult cancelOrder(@RequestParam("memberId")Integer memberId,@RequestParam("orderSn") String orderSn){
+        orderService.cancelOrder(orderSn,memberId);
+        return new BaseResult();
+    }
+
+    /**
+     * 删除订单
+     * @param memberId
+     * @param orderSn
+     * @return
+     */
+    @RequestMapping("/deleteOrder")
+    public BaseResult deleteOrder(@RequestParam("memberId")Integer memberId,@RequestParam("orderSn") String orderSn){
+        orderService.deleteOrder(orderSn,memberId);
+        return new BaseResult();
+    }
+
+    /**
+     * 确认收货
+     * @param memberId
+     * @param orderSn
+     * @return
+     */
+    @RequestMapping("/confirmOrder")
+    public BaseResult confirmOrder(@RequestParam("memberId")Integer memberId,@RequestParam("orderSn") String orderSn){
+        orderService.confirmOrder(orderSn,memberId);
+        return new BaseResult();
+    }
 }

@@ -237,6 +237,51 @@ public class OrderService extends BaseServiceImpl {
     }
 
     /**
+     * 取消订单（只能取消未支付的）
+     * @param orderSn
+     * @param memberId
+     */
+    public void cancelOrder(String orderSn,Integer memberId){
+        Order order = orderMapper.findOrderSn(orderSn,memberId);
+        if(order == null)
+            return;
+        if(order.getStatus().intValue() != OrderStatusEnum.NO_PAY.value.intValue()){
+            return;
+        }
+        orderMapper.updateOrderStatus(memberId,orderSn,OrderStatusEnum.CLOSED.value);
+    }
+
+    /**
+     * 删除订单（只能删除交易关闭的）
+     * @param orderSn
+     * @param memberId
+     */
+    public void deleteOrder(String orderSn,Integer memberId){
+        Order order = orderMapper.findOrderSn(orderSn,memberId);
+        if(order == null)
+            return;
+        if(order.getStatus().intValue() != OrderStatusEnum.CLOSED.value.intValue()){
+            return;
+        }
+        orderMapper.delete(order.getId());
+    }
+
+    /**
+     * 确认收货 只能确认待收货的
+     * @param orderSn
+     * @param memberId
+     */
+    public void confirmOrder(String orderSn,Integer memberId){
+        Order order = orderMapper.findOrderSn(orderSn,memberId);
+        if(order == null)
+            return;
+        if(order.getStatus().intValue() != OrderStatusEnum.PENDING_RECEIVED.value.intValue()){
+            return;
+        }
+        orderMapper.updateOrderStatus(memberId,orderSn,OrderStatusEnum.DONE.value);
+    }
+
+    /**
      * 生成订单号
      *
      * @return
