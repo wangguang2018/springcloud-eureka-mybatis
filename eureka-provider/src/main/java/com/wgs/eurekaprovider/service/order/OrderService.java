@@ -227,6 +227,16 @@ public class OrderService extends BaseServiceImpl {
     }
 
     /**
+     * 获取订单详细
+     * @param memberId
+     * @param orderSn
+     * @return
+     */
+    public OrderDTO findOrderInfo(Integer memberId,String orderSn){
+        return orderMapper.findOrderInfo(orderSn,memberId);
+    }
+
+    /**
      * 生成订单号
      *
      * @return

@@ -1,6 +1,7 @@
 package com.wgs.eurekaprovider.controller;
 
 import com.wgs.dto.BaseResult;
+import com.wgs.dto.order.OrderDTO;
 import com.wgs.entity.MemberAddress;
 import com.wgs.eurekaprovider.service.order.OrderService;
 import com.ydd.framework.core.common.Pagination;
@@ -75,5 +76,16 @@ public class OrderController {
     public BaseResult<Pagination> findMemberOrderList(@RequestParam("memberId") Integer memberId,Pagination pagination){
         pagination = orderService.orderList(memberId,pagination);
         return new BaseResult<>(pagination);
+    }
+
+    /**
+     * 获取订单信息
+     * @param memberId
+     * @param orderSn
+     * @return
+     */
+    @RequestMapping("/findOrderInfo")
+    public BaseResult<OrderDTO> findOrderInfo(@RequestParam("memberId")Integer memberId,@RequestParam("orderSn") String orderSn){
+        return new BaseResult<>(orderService.findOrderInfo(memberId,orderSn));
     }
 }

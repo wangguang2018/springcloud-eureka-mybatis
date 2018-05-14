@@ -162,4 +162,16 @@
 		WHERE id = #{id}
 	</select>
 
+	<select id="findByOrderId" resultMap="OrderAddressMap">
+		SELECT
+			order_sn,
+			member_id,
+			address,
+			contact,
+			phone
+		FROM
+		<include refid="tableName"></include>
+		WHERE order_id = #{id}
+	</select>
+
 </mapper>

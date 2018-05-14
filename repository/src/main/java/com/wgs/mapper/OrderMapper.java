@@ -70,4 +70,6 @@ public interface OrderMapper {
 
     List<OrderDTO> findOrderList(@Param("memberId") Integer memberId);
 
+    OrderDTO findOrderInfo(@Param("orderSn") String orderSn,@Param("memberId") Integer memberId);
+
 }

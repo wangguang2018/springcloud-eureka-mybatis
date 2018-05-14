@@ -90,4 +90,16 @@ public class OrderController extends BaseApiController {
         BaseResult<Pagination> baseResult = orderService.findOrderListByMember(getLoginMemberId(),pagination);
         return ResponseDTO.ok().addAttribute("data",baseResult.getContent());
     }
+
+    /**
+     * 订单详细
+     * @param orderSn
+     * @return
+     */
+    @RequestMapping("/info")
+    @AccessToken
+    public ResponseDTO findOrderInfo(@RequestParam("orderSn") String orderSn){
+        BaseResult result = orderService.findOrderInfo(getLoginMemberId(),orderSn);
+        return ResponseDTO.ok().addAttribute("data",result.getContent());
+    }
 }

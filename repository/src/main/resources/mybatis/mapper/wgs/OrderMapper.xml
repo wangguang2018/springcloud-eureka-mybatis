@@ -24,6 +24,10 @@
         <collection property="goodsList" column="id" select="findOrderGoodsList"></collection>
     </resultMap>
 
+    <resultMap id="OrderInfoDTOMap" type="com.wgs.dto.order.OrderDTO" extends="OrderDTOMap">
+        <association property="orderAddress" select="com.wgs.mapper.OrderAddressMapper.findByOrderId" column="id"></association>
+    </resultMap>
+
     <resultMap id="OrderGoodsDTOMap" type="com.wgs.dto.order.OrderGoodsDTO">
         <result property="goodsId" column="goods_id"></result>
         <result property="goodsPrice" column="goods_price"></result>
@@ -281,9 +285,9 @@
 
 
     <select id="findOrderList" resultMap="OrderDTOMap">
-		select o.order_sn,o.pay_type,o.`status`,o.pay_price,o.pay_time,o.created_time
+		select o.id,o.order_sn,o.pay_type,o.`status`,o.pay_price,o.pay_time,o.created_time
 		from wgs_order o
-		where o.member_id = #{memberId}
+		where o.member_id = #{memberId} and o.deleted = 0
 	</select>
 
     <select id="findOrderGoodsList" resultMap="OrderGoodsDTOMap">
@@ -291,6 +295,12 @@
         LEFT JOIN wgs_order_goods_info i
         on og.id = i.order_goods_id
         where og.order_id = #{id}
+    </select>
+
+    <select id="findOrderInfo" resultMap="OrderInfoDTOMap">
+        select o.id,o.order_sn,o.pay_type,o.`status`,o.pay_price,o.pay_time,o.created_time
+		from wgs_order o
+		where o.member_id = #{memberId} and o.order_sn = #{orderSn} and o.deleted = 0
     </select>
 
 </mapper>

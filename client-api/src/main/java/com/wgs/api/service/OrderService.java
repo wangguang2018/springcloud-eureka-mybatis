@@ -1,6 +1,7 @@
 package com.wgs.api.service;
 
 import com.wgs.dto.BaseResult;
+import com.wgs.dto.order.OrderDTO;
 import com.wgs.entity.MemberAddress;
 import com.ydd.framework.core.common.Pagination;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -59,4 +60,7 @@ public interface OrderService {
      */
     @RequestMapping("/findMemberOrderList")
     BaseResult<Pagination> findOrderListByMember(@RequestParam("memberId") Integer memberId,Pagination pagination);
+
+    @RequestMapping("/findOrderInfo")
+    BaseResult<OrderDTO> findOrderInfo(@RequestParam("memberId") Integer memberId, @RequestParam("orderSn") String orderSn);
 }
