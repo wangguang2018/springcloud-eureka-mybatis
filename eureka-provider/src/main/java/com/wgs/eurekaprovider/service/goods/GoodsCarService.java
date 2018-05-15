@@ -7,6 +7,7 @@ import com.wgs.mapper.GoodsSkuInfoMapper;
 import com.wgs.mapper.MemberGoodsCarMapper;
 import com.ydd.framework.core.service.impl.BaseServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -31,6 +32,7 @@ public class GoodsCarService extends BaseServiceImpl {
      * @param skuGroupId
      * @param memberId
      */
+    @Transactional
     public void addGoodsCar(Integer skuGroupId, Integer memberId, Integer goodsId, Integer num) {
         Integer count = memberGoodsCarMapper.countBySkuGroupId(skuGroupId, memberId);
         if (count != null && count > 0) {
@@ -51,6 +53,7 @@ public class GoodsCarService extends BaseServiceImpl {
      * @param skuGroupId
      * @param memberId
      */
+    @Transactional
     public void delete(Integer skuGroupId, Integer memberId) {
         memberGoodsCarMapper.deleteBySkuGroupId(skuGroupId, memberId);
     }

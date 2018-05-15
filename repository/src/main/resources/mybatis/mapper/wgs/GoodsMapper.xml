@@ -43,6 +43,7 @@
     <resultMap id="GoodsSkuGroupDTOMap" type="com.wgs.dto.goods.GoodsSkuGroupDTO">
         <result column="goods_sku_info_ids" property="goodsSkuInfoIds"></result>
         <result column="price" property="price"></result>
+        <result column="id" property="id"></result>
         <result column="goods_id" property="goodsId"></result>
         <result column="lens_color" property="lensColor"></result>
         <result column="spectacles_frame_material" property="spectaclesFrameMaterial"></result>
@@ -242,10 +243,10 @@
     </select>
 
     <select id="findGoodsSkuGroupByGoodsId" resultMap="GoodsSkuGroupDTOMap">
-        select g.goods_sku_info_ids,g.price,g.goods_id,i.lens_color,i.spectacles_frame_material from wgs_goods_sku_group g
+        select g.goods_sku_info_ids,g.id,g.price,g.goods_id,i.lens_color,i.spectacles_frame_material from wgs_goods_sku_group g
         LEFT JOIN wgs_goods_sku_group_info i
         on g.id = i.sku_group_id
-        where goods_id = 1
+        where g.goods_id = #{goodsId}
     </select>
 
     <select id="findGoodsByCategory" resultMap="GoodsDTOMap">
