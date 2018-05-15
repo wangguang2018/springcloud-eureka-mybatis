@@ -5,6 +5,7 @@ import com.wgs.dto.order.OrderDTO;
 import com.wgs.entity.MemberAddress;
 import com.wgs.eurekaprovider.service.order.OrderService;
 import com.ydd.framework.core.common.Pagination;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,7 +35,7 @@ public class OrderController {
      * @param memberAddress
      */
     @RequestMapping("/orderWithGoodsCar/wechat/address")
-    public BaseResult orderWithGoodsCar(@RequestParam("memberId") Integer memberId, MemberAddress memberAddress){
+    public BaseResult orderWithGoodsCar(@RequestParam("memberId") Integer memberId, @RequestBody MemberAddress memberAddress){
         orderService.orderWithGoodsCar(memberId,memberAddress);
         return new BaseResult();
     }
@@ -60,7 +61,7 @@ public class OrderController {
      * @param num
      */
     @RequestMapping("/orderWithGoods/wechat/address")
-    public BaseResult orderWithGoods(@RequestParam("memberId") Integer memberId,MemberAddress memberAddress,
+    public BaseResult orderWithGoods(@RequestParam("memberId") Integer memberId,@RequestBody MemberAddress memberAddress,
                                @RequestParam("skuGroupId") Integer skuGroupId,@RequestParam("num") Integer num){
         orderService.orderWithGoods(memberId,memberAddress,skuGroupId,num);
         return new BaseResult();
@@ -73,7 +74,7 @@ public class OrderController {
      * @return
      */
     @RequestMapping("/findMemberOrderList")
-    public BaseResult<Pagination> findMemberOrderList(@RequestParam("memberId") Integer memberId,Pagination pagination){
+    public BaseResult<Pagination> findMemberOrderList(@RequestParam("memberId") Integer memberId,@RequestBody Pagination pagination){
         pagination = orderService.orderList(memberId,pagination);
         return new BaseResult<>(pagination);
     }

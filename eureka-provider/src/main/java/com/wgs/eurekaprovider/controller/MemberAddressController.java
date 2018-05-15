@@ -3,9 +3,7 @@ package com.wgs.eurekaprovider.controller;
 import com.wgs.dto.BaseResult;
 import com.wgs.entity.MemberAddress;
 import com.wgs.eurekaprovider.service.member.MemberAddressService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -17,9 +15,9 @@ public class MemberAddressController {
     @Resource
     private MemberAddressService memberAddressService;
 
-    @RequestMapping("/save")
-    public BaseResult save(MemberAddress memberAddress, @RequestParam("memberId") Integer memberId){
-        memberAddressService.save(memberAddress,memberId);
+    @RequestMapping(value = "/save",method = RequestMethod.POST)
+    public BaseResult save(@RequestBody MemberAddress memberAddress){
+        memberAddressService.save(memberAddress);
         return new BaseResult();
     }
 

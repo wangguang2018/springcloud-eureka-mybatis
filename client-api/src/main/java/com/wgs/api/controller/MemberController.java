@@ -84,7 +84,8 @@ public class MemberController extends BaseApiController {
     @AccessToken
     @RequestMapping(value = "/address/save",method = RequestMethod.POST)
     public ResponseDTO saveMemberAddress(MemberAddress memberAddress){
-        memberAddressService.save(memberAddress,getLoginMemberId());
+        memberAddress.setMemberId(getLoginMemberId());
+        memberAddressService.save(memberAddress);
         return ResponseDTO.ok();
     }
 

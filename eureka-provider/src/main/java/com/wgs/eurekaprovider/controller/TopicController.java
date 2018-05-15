@@ -4,6 +4,7 @@ import com.wgs.dto.BaseResult;
 import com.wgs.dto.topic.TopicDTO;
 import com.wgs.eurekaprovider.service.topic.TopicService;
 import com.ydd.framework.core.common.Pagination;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +18,7 @@ public class TopicController {
     private TopicService topicService;
 
     @RequestMapping("/findTopicList")
-    public BaseResult<Pagination> findTopicList(Pagination pagination){
+    public BaseResult<Pagination> findTopicList(@RequestBody Pagination pagination){
         return new BaseResult(topicService.findTopicList(pagination));
     }
 
@@ -27,7 +28,7 @@ public class TopicController {
     }
 
     @RequestMapping("/findTopicGoods")
-    public BaseResult<Pagination> findTopicGoodsList(Pagination pagination,@RequestParam("topicId") Integer topicId){
+    public BaseResult<Pagination> findTopicGoodsList(@RequestBody Pagination pagination, @RequestParam("topicId") Integer topicId){
         return new BaseResult(topicService.findTopicGoodsList(pagination,topicId));
     }
 }

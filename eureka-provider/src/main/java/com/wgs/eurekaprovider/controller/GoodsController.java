@@ -6,6 +6,7 @@ import com.wgs.dto.goods.GoodsSkuGroupDTO;
 import com.wgs.entity.GoodsCategory;
 import com.wgs.eurekaprovider.service.goods.GoodsCategoryService;
 import com.ydd.framework.core.common.Pagination;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,7 +39,7 @@ public class GoodsController {
     }
 
     @RequestMapping("/findGoodsByCategory")
-    public BaseResult<Pagination> findGoodsByCategory(@RequestParam("cateId") Integer cateId, Pagination pagination){
+    public BaseResult<Pagination> findGoodsByCategory(@RequestParam("cateId") Integer cateId,@RequestBody Pagination pagination){
         return new BaseResult(goodsService.findGoodsByCategory(cateId, pagination));
     }
 }

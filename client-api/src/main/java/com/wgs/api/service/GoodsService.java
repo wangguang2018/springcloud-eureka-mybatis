@@ -7,6 +7,7 @@ import com.wgs.dto.goods.GoodsSkuGroupDTO;
 import com.wgs.entity.GoodsCategory;
 import com.ydd.framework.core.common.Pagination;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,6 +48,6 @@ public interface GoodsService {
      * @return
      */
     @RequestMapping("/findGoodsByCategory")
-    BaseResult<Pagination> findGoodsByCategory(@RequestParam("cateId") Integer cateId, Pagination pagination);
+    BaseResult<Pagination> findGoodsByCategory(@RequestParam("cateId") Integer cateId, @RequestBody Pagination pagination);
 
 }

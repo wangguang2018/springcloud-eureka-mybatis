@@ -5,6 +5,7 @@ import com.wgs.dto.order.OrderDTO;
 import com.wgs.entity.MemberAddress;
 import com.ydd.framework.core.common.Pagination;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -59,7 +60,7 @@ public interface OrderService {
      * @return
      */
     @RequestMapping("/findMemberOrderList")
-    BaseResult<Pagination> findOrderListByMember(@RequestParam("memberId") Integer memberId,Pagination pagination);
+    BaseResult<Pagination> findOrderListByMember(@RequestParam("memberId") Integer memberId,@RequestBody Pagination pagination);
 
     @RequestMapping("/findOrderInfo")
     BaseResult<OrderDTO> findOrderInfo(@RequestParam("memberId") Integer memberId, @RequestParam("orderSn") String orderSn);

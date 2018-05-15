@@ -4,6 +4,7 @@ import com.wgs.dto.BaseResult;
 import com.wgs.dto.topic.TopicDTO;
 import com.ydd.framework.core.common.Pagination;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -16,7 +17,7 @@ public interface TopicService {
      * @return
      */
     @RequestMapping("/findTopicList")
-    BaseResult<Pagination> findTopicList(Pagination pagination);
+    BaseResult<Pagination> findTopicList(@RequestBody Pagination pagination);
 
     /**
      * 获取主题详细
@@ -33,6 +34,6 @@ public interface TopicService {
      * @return
      */
     @RequestMapping("/findTopicGoods")
-    BaseResult<Pagination> findTopicGoodsList(Pagination pagination,@RequestParam("topicId") Integer topicId);
+    BaseResult<Pagination> findTopicGoodsList(@RequestBody Pagination pagination,@RequestParam("topicId") Integer topicId);
 
 }

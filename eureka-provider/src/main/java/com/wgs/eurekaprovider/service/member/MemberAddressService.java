@@ -25,7 +25,7 @@ public class MemberAddressService extends BaseServiceImpl {
      * @param memberAddress
      */
     @Transactional
-    public void save(MemberAddress memberAddress, Integer memberId) {
+    public void save(MemberAddress memberAddress) {
         if (memberAddress.getId() == null) {
             memberAddressMapper.insert(memberAddress);
         } else {
