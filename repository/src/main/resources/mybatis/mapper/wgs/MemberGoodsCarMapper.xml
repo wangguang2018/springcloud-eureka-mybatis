@@ -218,7 +218,7 @@
     </update>
 
     <select id="findByMember" resultMap="MemberGoodsCarDTOMap">
-        select g.goods_name,g.goods_sn,g.cover,c.num,c.sku_group_id,i.price,i.goods_sku_info_ids from wgs_member_goods_car c
+        select g.id,g.goods_name,g.goods_sn,g.cover,c.num,c.sku_group_id,i.price,i.goods_sku_info_ids from wgs_member_goods_car c
         left JOIN wgs_goods g
         on c.goods_id = g.id
         LEFT JOIN wgs_goods_sku_group i
