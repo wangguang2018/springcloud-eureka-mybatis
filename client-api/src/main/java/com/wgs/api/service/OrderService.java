@@ -24,7 +24,7 @@ public interface OrderService {
      * @param addressId
      */
     @RequestMapping("/orderWithGoodsCar")
-    BaseResult orderWithGoodsCar(@RequestParam("memberId") Integer memberId, @RequestParam("addressId") Integer addressId);
+    BaseResult<String> orderWithGoodsCar(@RequestParam("memberId") Integer memberId, @RequestParam("addressId") Integer addressId);
 
     /**
      * 购物车下单（微信收货地址）
@@ -33,7 +33,7 @@ public interface OrderService {
      * @param memberAddress
      */
     @RequestMapping("/orderWithGoodsCar/wechat/address")
-    BaseResult orderWithGoodsCar(@RequestParam("memberId") Integer memberId, MemberAddress memberAddress);
+    BaseResult<String> orderWithGoodsCar(@RequestParam("memberId") Integer memberId, MemberAddress memberAddress);
 
     /**
      * 单个商品下单
@@ -43,7 +43,7 @@ public interface OrderService {
      * @param skuGroupId
      */
     @RequestMapping("/orderWithGoods")
-    BaseResult orderWithGoods(@RequestParam("memberId") Integer memberId, @RequestParam("addressId") Integer addressId,
+    BaseResult<String> orderWithGoods(@RequestParam("memberId") Integer memberId, @RequestParam("addressId") Integer addressId,
                               @RequestParam("skuGroupId") Integer skuGroupId, @RequestParam("num") Integer num);
 
     /**
@@ -55,7 +55,7 @@ public interface OrderService {
      * @param num
      */
     @RequestMapping("/orderWithGoods/wechat/address")
-    BaseResult orderWithGoods(@RequestParam("memberId") Integer memberId, MemberAddress memberAddress,
+    BaseResult<String> orderWithGoods(@RequestParam("memberId") Integer memberId, MemberAddress memberAddress,
                               @RequestParam("skuGroupId") Integer skuGroupId, @RequestParam("num") Integer num);
 
     /**

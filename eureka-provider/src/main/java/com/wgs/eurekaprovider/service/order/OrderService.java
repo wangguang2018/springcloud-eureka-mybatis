@@ -71,7 +71,7 @@ public class OrderService extends BaseServiceImpl {
      * @param goodsCarDTOS
      */
     @Transactional
-    public void order(Integer memberId, MemberAddress memberAddress, List<GoodsCarDTO> goodsCarDTOS) {
+    public String order(Integer memberId, MemberAddress memberAddress, List<GoodsCarDTO> goodsCarDTOS) {
         if (goodsCarDTOS != null && goodsCarDTOS.size() > 0) {
             //总价
             BigDecimal totalPrice = new BigDecimal(0);
@@ -110,7 +110,7 @@ public class OrderService extends BaseServiceImpl {
                 orderGoodsInfoList.add(orderGoodsInfo);
             }
             if(orderGoodsList.size() <= 0)
-                return;
+                return "";
             // 生成订单并且保存
             Order order = new Order();
             order.setMemberId(memberId);
@@ -124,16 +124,18 @@ public class OrderService extends BaseServiceImpl {
             saveOrderInfo(orderGoodsList,orderGoodsInfoList,order);
             //保存订单收货地址信息
             saveOrderAddress(memberId,order,memberAddress);
+            return order.getOrderSn();
         }
+        return "";
     }
 
 
     @Transactional
-    public void order(Integer memberId,Integer addressId, List<GoodsCarDTO> goodsCarDTOS){
+    public String order(Integer memberId,Integer addressId, List<GoodsCarDTO> goodsCarDTOS){
         MemberAddress address = memberAddressService.findById(memberId,addressId);
         if (address == null)
             throw new ServiceException(ORDER_ERROR);
-        order(memberId,address,goodsCarDTOS);
+        return order(memberId,address,goodsCarDTOS);
     }
 
     /**
@@ -142,11 +144,11 @@ public class OrderService extends BaseServiceImpl {
      * @param addressId
      */
     @Transactional
-    public void orderWithGoodsCar(Integer memberId,Integer addressId){
+    public String orderWithGoodsCar(Integer memberId,Integer addressId){
         List<GoodsCarDTO> goodsCarDTOS = goodsCarService.findGoodsCarByMember(memberId);
         if(goodsCarDTOS == null || goodsCarDTOS.size() <= 0)
             throw new ServiceException(ORDER_ERROR);
-        order(memberId,addressId,goodsCarDTOS);
+        return order(memberId,addressId,goodsCarDTOS);
     }
 
     /**
@@ -155,11 +157,11 @@ public class OrderService extends BaseServiceImpl {
      * @param memberAddress
      */
     @Transactional
-    public void orderWithGoodsCar(Integer memberId,MemberAddress memberAddress){
+    public String orderWithGoodsCar(Integer memberId,MemberAddress memberAddress){
         List<GoodsCarDTO> goodsCarDTOS = goodsCarService.findGoodsCarByMember(memberId);
         if(goodsCarDTOS == null || goodsCarDTOS.size() <= 0)
             throw new ServiceException(ORDER_ERROR);
-        order(memberId,memberAddress,goodsCarDTOS);
+        return order(memberId,memberAddress,goodsCarDTOS);
     }
 
     /**
@@ -169,9 +171,10 @@ public class OrderService extends BaseServiceImpl {
      * @param skuGroupId 商品sku组合ID
      * @param num 数量
      */
-    public void orderWithGoods(Integer memberId,Integer addressId,Integer skuGroupId,Integer num){
+    @Transactional
+    public String orderWithGoods(Integer memberId,Integer addressId,Integer skuGroupId,Integer num){
         List<GoodsCarDTO> goodsCarDTOS = getGoodsCarDTOS(skuGroupId, num);
-        order(memberId,addressId,goodsCarDTOS);
+        return order(memberId,addressId,goodsCarDTOS);
     }
 
     /**
@@ -181,9 +184,10 @@ public class OrderService extends BaseServiceImpl {
      * @param skuGroupId 商品sku组合ID
      * @param num 数量
      */
-    public void orderWithGoods(Integer memberId,MemberAddress memberAddress,Integer skuGroupId,Integer num) {
+    @Transactional
+    public String orderWithGoods(Integer memberId,MemberAddress memberAddress,Integer skuGroupId,Integer num) {
         List<GoodsCarDTO> goodsCarDTOS = getGoodsCarDTOS(skuGroupId, num);
-        order(memberId,memberAddress,goodsCarDTOS);
+        return order(memberId,memberAddress,goodsCarDTOS);
     }
 
 

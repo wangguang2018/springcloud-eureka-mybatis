@@ -36,8 +36,8 @@ public class OrderController extends BaseApiController {
     @AccessToken
     @RequestMapping(value = "/goods/car",method = RequestMethod.POST)
     public ResponseDTO orderWithGoodsCar(@RequestParam("addressId") Integer addressId){
-        orderService.orderWithGoodsCar(getLoginMemberId(),addressId);
-        return ResponseDTO.ok();
+        BaseResult result = orderService.orderWithGoodsCar(getLoginMemberId(),addressId);
+        return ResponseDTO.ok().addAttribute("data",result.getContent());
     }
 
     /**
@@ -51,8 +51,8 @@ public class OrderController extends BaseApiController {
     @RequestMapping(value = "/goods",method = RequestMethod.POST)
     public ResponseDTO orderWithGoods( @RequestParam("addressId") Integer addressId,
                                        @RequestParam("skuGroupId") Integer skuGroupId, @RequestParam("num") Integer num){
-        orderService.orderWithGoods(getLoginMemberId(),addressId,skuGroupId,num);
-        return ResponseDTO.ok();
+        BaseResult result = orderService.orderWithGoods(getLoginMemberId(),addressId,skuGroupId,num);
+        return ResponseDTO.ok().addAttribute("data",result.getContent());
     }
 
     /**
@@ -66,8 +66,8 @@ public class OrderController extends BaseApiController {
     @RequestMapping("/goods/wechat")
     public ResponseDTO orderWithGoodsWechatAddr(MemberAddress memberAddress,
                                        @RequestParam("skuGroupId") Integer skuGroupId, @RequestParam("num") Integer num){
-        orderService.orderWithGoods(getLoginMemberId(),memberAddress,skuGroupId,num);
-        return ResponseDTO.ok();
+        BaseResult result = orderService.orderWithGoods(getLoginMemberId(),memberAddress,skuGroupId,num);
+        return ResponseDTO.ok().addAttribute("data",result.getContent());
     }
 
     /**
@@ -78,8 +78,8 @@ public class OrderController extends BaseApiController {
     @AccessToken
     @RequestMapping("/goods/car/wechat")
     public ResponseDTO orderWithGoodsCarWechatAddr(MemberAddress memberAddress){
-        orderService.orderWithGoodsCar(getLoginMemberId(),memberAddress);
-        return ResponseDTO.ok();
+        BaseResult result = orderService.orderWithGoodsCar(getLoginMemberId(),memberAddress);
+        return ResponseDTO.ok().addAttribute("data",result.getContent());
     }
 
     /**

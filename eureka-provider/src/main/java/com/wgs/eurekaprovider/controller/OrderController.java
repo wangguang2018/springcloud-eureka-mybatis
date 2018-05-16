@@ -40,8 +40,8 @@ public class OrderController {
      */
     @RequestMapping("/orderWithGoodsCar")
     public BaseResult orderWithGoodsCar(@RequestParam("memberId") Integer memberId, @RequestParam("addressId") Integer addressId){
-        orderService.orderWithGoodsCar(memberId,addressId);
-        return new BaseResult();
+        String orderSn = orderService.orderWithGoodsCar(memberId,addressId);
+        return new BaseResult(orderSn);
     }
 
     /**
@@ -51,8 +51,8 @@ public class OrderController {
      */
     @RequestMapping("/orderWithGoodsCar/wechat/address")
     public BaseResult orderWithGoodsCar(@RequestParam("memberId") Integer memberId, @RequestBody MemberAddress memberAddress){
-        orderService.orderWithGoodsCar(memberId,memberAddress);
-        return new BaseResult();
+        String orderSn = orderService.orderWithGoodsCar(memberId,memberAddress);
+        return new BaseResult(orderSn);
     }
 
     /**
@@ -64,8 +64,8 @@ public class OrderController {
     @RequestMapping("/orderWithGoods")
     public BaseResult orderWithGoods(@RequestParam("memberId") Integer memberId,@RequestParam("addressId") Integer addressId,
                                @RequestParam("skuGroupId") Integer skuGroupId,@RequestParam("num") Integer num){
-        orderService.orderWithGoods(memberId,addressId,skuGroupId,num);
-        return new BaseResult();
+        String orderSn = orderService.orderWithGoods(memberId,addressId,skuGroupId,num);
+        return new BaseResult(orderSn);
     }
 
     /**
@@ -78,8 +78,8 @@ public class OrderController {
     @RequestMapping("/orderWithGoods/wechat/address")
     public BaseResult orderWithGoods(@RequestParam("memberId") Integer memberId,@RequestBody MemberAddress memberAddress,
                                @RequestParam("skuGroupId") Integer skuGroupId,@RequestParam("num") Integer num){
-        orderService.orderWithGoods(memberId,memberAddress,skuGroupId,num);
-        return new BaseResult();
+        String orderSn = orderService.orderWithGoods(memberId,memberAddress,skuGroupId,num);
+        return new BaseResult(orderSn);
     }
 
     /**
