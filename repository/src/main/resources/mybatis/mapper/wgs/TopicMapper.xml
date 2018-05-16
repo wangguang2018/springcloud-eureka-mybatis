@@ -232,7 +232,7 @@
         SELECT g.id,goods_name,`desc`,price,cover from wgs_goods g
         LEFT JOIN wgs_topic_goods t
         on t.goods_id = g.id
-        where t.topic_id = #{id} and t.deleted = 0 and g.deleted = 0
+        where t.topic_id = #{id} and t.deleted = 0 and g.deleted = 0 and g.status = 0
         <if test="recommend != null">
             and recommend = #{recommend}
         </if>

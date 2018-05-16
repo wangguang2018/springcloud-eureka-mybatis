@@ -250,6 +250,7 @@
     </select>
 
     <select id="findGoodsByCategory" resultMap="GoodsDTOMap">
-        SELECT id,goods_name,`desc`,price,cover from wgs_goods where category_id = #{categoryId} and deleted = 0
+        SELECT id,goods_name,`desc`,price,cover from wgs_goods
+        where category_id = #{categoryId} and deleted = 0 and status = 0
     </select>
 </mapper>
