@@ -2,12 +2,14 @@ package com.wgs.dto.wechat;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
+
 /**
  * 客户端签名参数返回对象
  * <p>
  * Created by peakren on 9/28/16.
  */
-public class OrderPaySignResponse {
+public class OrderPaySignResponse implements Serializable{
 
 
     private Integer isBalanceEnough;
@@ -63,7 +65,7 @@ public class OrderPaySignResponse {
     /**
      * 支付宝支付参数
      */
-    public static class AlipayPayParam {
+    public static class AlipayPayParam implements Serializable{
 
 
         private String appAuthToken;
@@ -204,7 +206,7 @@ public class OrderPaySignResponse {
      * <p>
      * Created by peakren on 9/28/16.
      */
-    public static class WechatPayParam {
+    public static class WechatPayParam implements Serializable{
 
         private String appId;
 

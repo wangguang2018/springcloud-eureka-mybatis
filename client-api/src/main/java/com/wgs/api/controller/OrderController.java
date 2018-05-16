@@ -1,7 +1,9 @@
 package com.wgs.api.controller;
 
 import com.wgs.api.service.OrderService;
+import com.wgs.api.util.StringHelper;
 import com.wgs.dto.BaseResult;
+import com.wgs.dto.wechat.OrderPaySignResponse;
 import com.wgs.entity.MemberAddress;
 import com.ydd.framework.core.annotation.AccessToken;
 import com.ydd.framework.core.common.Pagination;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 订单
@@ -138,4 +141,17 @@ public class OrderController extends BaseApiController {
         orderService.confirmOrder(getLoginMemberId(),orderSn);
         return ResponseDTO.ok();
     }
+
+    /**
+     * 微信下单支付
+     * @param orderSn
+     * @return
+     */
+    @AccessToken
+    @RequestMapping("/createUnifiedOrder")
+    public ResponseDTO order(@RequestParam("orderSn") String orderSn, HttpServletRequest request){
+        BaseResult<OrderPaySignResponse.WechatPayParam> result = orderService.createUnifiedOrder(orderSn,getLoginMemberId(), StringHelper.getIpAddr(request));
+        return ResponseDTO.ok().addAttribute("data",result.getContent());
+    }
+
 }

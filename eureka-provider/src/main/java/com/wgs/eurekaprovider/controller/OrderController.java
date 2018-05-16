@@ -2,21 +2,36 @@ package com.wgs.eurekaprovider.controller;
 
 import com.wgs.dto.BaseResult;
 import com.wgs.dto.order.OrderDTO;
+import com.wgs.dto.wechat.OrderPaySignResponse;
 import com.wgs.entity.MemberAddress;
+import com.wgs.entity.Order;
+import com.wgs.entity.exception.ExceptionCodeTemplate;
 import com.wgs.eurekaprovider.service.order.OrderService;
+import com.wgs.eurekaprovider.service.wechat.WechatService;
+import com.wgs.eurekaprovider.util.StringHelper;
 import com.ydd.framework.core.common.Pagination;
+import com.ydd.framework.core.exception.ServiceException;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.io.InputStream;
+import java.math.BigDecimal;
+import java.util.Map;
 
 @RestController
 public class OrderController {
 
     @Resource
-    public OrderService orderService;
+    private OrderService orderService;
+
+    @Resource
+    private WechatService wechatService;
 
     /**
      * 购物车下单
@@ -125,4 +140,28 @@ public class OrderController {
         orderService.confirmOrder(orderSn,memberId);
         return new BaseResult();
     }
+
+    /**
+     * 微信下单
+     * @param orderSn
+     * @param memberId
+     * @param ip
+     * @return
+     */
+    @RequestMapping("/createUnifiedOrder")
+    public BaseResult<OrderPaySignResponse.WechatPayParam> createUnifiedOrder(@RequestParam("orderSn") String orderSn, @RequestParam("memberId") Integer memberId,@RequestParam("ip") String ip){
+        return new BaseResult<>(orderService.createUnifiedOrder(orderSn,memberId,ip));
+    }
+
+    /**
+     * 微信回调
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping("/wechatNotify")
+    public BaseResult notify(@RequestBody Map<String,String> params) throws IOException {
+        wechatService.notify(params);
+        return new BaseResult();
+    }
+
 }

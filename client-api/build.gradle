@@ -32,6 +32,7 @@ ext {
 
 dependencies {
 	compile project(':entity')
+	compile fileTree(include: '*.jar', dir: 'src/libs')
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.0.1.RELEASE'
 	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-eureka', version: '1.4.4.RELEASE'
 	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-feign', version: '1.4.4.RELEASE'

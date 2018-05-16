@@ -2,12 +2,17 @@ package com.wgs.api.service;
 
 import com.wgs.dto.BaseResult;
 import com.wgs.dto.order.OrderDTO;
+import com.wgs.dto.wechat.OrderPaySignResponse;
 import com.wgs.entity.MemberAddress;
 import com.ydd.framework.core.common.Pagination;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Map;
 
 @FeignClient(value = "service-api")
 public interface OrderService {
@@ -55,12 +60,13 @@ public interface OrderService {
 
     /**
      * 用户订单列表
+     *
      * @param memberId
      * @param pagination
      * @return
      */
     @RequestMapping("/findMemberOrderList")
-    BaseResult<Pagination> findOrderListByMember(@RequestParam("memberId") Integer memberId,@RequestBody Pagination pagination);
+    BaseResult<Pagination> findOrderListByMember(@RequestParam("memberId") Integer memberId, @RequestBody Pagination pagination);
 
     @RequestMapping("/findOrderInfo")
     BaseResult<OrderDTO> findOrderInfo(@RequestParam("memberId") Integer memberId, @RequestParam("orderSn") String orderSn);
@@ -68,28 +74,52 @@ public interface OrderService {
 
     /**
      * 取消订单
+     *
      * @param memberId
      * @param orderSn
      * @return
      */
     @RequestMapping("/cancelOrder")
-    BaseResult cancelOrder(@RequestParam("memberId")Integer memberId,@RequestParam("orderSn") String orderSn);
+    BaseResult cancelOrder(@RequestParam("memberId") Integer memberId, @RequestParam("orderSn") String orderSn);
 
     /**
      * 删除订单
+     *
      * @param memberId
      * @param orderSn
      * @return
      */
     @RequestMapping("/deleteOrder")
-    BaseResult deleteOrder(@RequestParam("memberId")Integer memberId,@RequestParam("orderSn") String orderSn);
+    BaseResult deleteOrder(@RequestParam("memberId") Integer memberId, @RequestParam("orderSn") String orderSn);
 
     /**
      * 确认收货
+     *
      * @param memberId
      * @param orderSn
      * @return
      */
     @RequestMapping("/confirmOrder")
-    BaseResult confirmOrder(@RequestParam("memberId")Integer memberId,@RequestParam("orderSn") String orderSn);
+    BaseResult confirmOrder(@RequestParam("memberId") Integer memberId, @RequestParam("orderSn") String orderSn);
+
+    /**
+     * 微信下单
+     *
+     * @param orderSn
+     * @param memberId
+     * @param ip
+     * @return
+     */
+    @RequestMapping("/createUnifiedOrder")
+    BaseResult<OrderPaySignResponse.WechatPayParam> createUnifiedOrder(@RequestParam("orderSn") String orderSn, @RequestParam("memberId") Integer memberId, @RequestParam("ip") String ip);
+
+    /**
+     * 微信回调
+     *
+     * @param params
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping("/wechatNotify")
+    BaseResult notify(@RequestBody Map<String,String> params);
 }

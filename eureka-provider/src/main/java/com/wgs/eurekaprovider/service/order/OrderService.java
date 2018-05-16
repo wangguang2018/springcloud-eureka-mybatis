@@ -4,11 +4,15 @@ import com.github.pagehelper.PageHelper;
 import com.wgs.dto.goods.GoodsCarDTO;
 import com.wgs.dto.order.OrderDTO;
 import com.wgs.dto.order.OrderGoodsInfoDTO;
+import com.wgs.dto.wechat.OrderPaySignResponse;
 import com.wgs.entity.*;
 import com.wgs.entity.enums.OrderStatusEnum;
+import com.wgs.entity.exception.ExceptionCodeTemplate;
 import com.wgs.eurekaprovider.service.goods.GoodsCarService;
 import com.wgs.eurekaprovider.service.goods.GoodsService;
 import com.wgs.eurekaprovider.service.member.MemberAddressService;
+import com.wgs.eurekaprovider.service.wechat.WechatService;
+import com.wgs.eurekaprovider.util.StringHelper;
 import com.wgs.mapper.OrderAddressMapper;
 import com.wgs.mapper.OrderGoodsInfoMapper;
 import com.wgs.mapper.OrderGoodsMapper;
@@ -22,6 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +59,9 @@ public class OrderService extends BaseServiceImpl {
 
     @Resource
     private GoodsCarService goodsCarService;
+
+    @Resource
+    private WechatService wechatService;
 
     /**
      * 下单
@@ -279,6 +287,35 @@ public class OrderService extends BaseServiceImpl {
             return;
         }
         orderMapper.updateOrderStatus(memberId,orderSn,OrderStatusEnum.DONE.value);
+    }
+
+    /**
+     * 微信下单
+     * @param orderSn
+     * @param memberId
+     * @return
+     */
+    public OrderPaySignResponse.WechatPayParam createUnifiedOrder(String orderSn,Integer memberId, String ip){
+        Order order = orderMapper.findOrderSn(orderSn,memberId);
+        if(order == null)
+            throw new ServiceException(ExceptionCodeTemplate.ORDER_ERROR);
+        return wechatService.createUnifiedOrder(orderSn,order.getPayPrice(),ip,"JSAPI",memberId);
+    }
+
+    /**
+     * 支付成功
+     * @param orderId
+     */
+    @Transactional
+    public void paySuccess(Integer orderId,String tradeSn){
+        Order order = new Order();
+        order.setId(orderId);
+        order.setStatus(OrderStatusEnum.PENDING_DELIVERY.value.intValue());
+        orderMapper.update(order);
+    }
+
+    public Order findByOrderSn(String orderSn,Integer memberId){
+        return orderMapper.findOrderSn(orderSn,memberId);
     }
 
     /**

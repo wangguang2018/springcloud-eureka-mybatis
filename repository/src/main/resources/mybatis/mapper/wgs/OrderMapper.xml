@@ -314,6 +314,9 @@
         <include refid="Field"></include>
         FROM
         <include refid="tableName"></include>
-        WHERE order_sn = #{orderSn} and member_id = #{memberId}
+        WHERE order_sn = #{orderSn}
+        <if test="memberId != null">
+        and member_id = #{memberId}
+        </if>
     </select>
 </mapper>
