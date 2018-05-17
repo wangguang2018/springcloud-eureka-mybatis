@@ -127,7 +127,7 @@ public class OrderService extends BaseServiceImpl {
             saveOrderAddress(memberId,order,memberAddress);
             return order.getOrderSn();
         }
-        goodsCarService.clearGoods(memberId);
+        goodsCarService.clearGoodsCar(memberId);
         return "";
     }
 

@@ -8,6 +8,7 @@
         <result column="category_id" property="categoryId"/>
         <result column="desc" property="desc"/>
         <result column="goods_sn" property="goodsSn"/>
+        <result column="cover" property="cover"/>
         <result column="created_id" property="createdId"/>
         <result column="modified_id" property="modifiedId"/>
         <result column="created_time" property="createdTime"/>
@@ -60,6 +61,7 @@
 		category_id,
 		`desc`,
 		goods_sn,
+		cover,
 		created_id,
 		modified_id,
 		created_time,
