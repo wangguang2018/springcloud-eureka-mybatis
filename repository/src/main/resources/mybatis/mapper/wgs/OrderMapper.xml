@@ -309,7 +309,7 @@
     <update id="updateOrderStatus">
         UPDATE wgs_order
         SET status = #{status}
-        and member_id = #{memberId} and order_sn = #{orderSn}
+        where member_id = #{memberId} and order_sn = #{orderSn}
     </update>
 
     <select id="findOrderSn" resultMap="OrderMap">

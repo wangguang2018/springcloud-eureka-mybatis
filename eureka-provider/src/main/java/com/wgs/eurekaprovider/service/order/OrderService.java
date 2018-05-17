@@ -255,6 +255,7 @@ public class OrderService extends BaseServiceImpl {
      * @param orderSn
      * @param memberId
      */
+    @Transactional
     public void cancelOrder(String orderSn,Integer memberId){
         Order order = orderMapper.findOrderSn(orderSn,memberId);
         if(order == null)
@@ -270,6 +271,7 @@ public class OrderService extends BaseServiceImpl {
      * @param orderSn
      * @param memberId
      */
+    @Transactional
     public void deleteOrder(String orderSn,Integer memberId){
         Order order = orderMapper.findOrderSn(orderSn,memberId);
         if(order == null)
@@ -285,6 +287,7 @@ public class OrderService extends BaseServiceImpl {
      * @param orderSn
      * @param memberId
      */
+    @Transactional
     public void confirmOrder(String orderSn,Integer memberId){
         Order order = orderMapper.findOrderSn(orderSn,memberId);
         if(order == null)
