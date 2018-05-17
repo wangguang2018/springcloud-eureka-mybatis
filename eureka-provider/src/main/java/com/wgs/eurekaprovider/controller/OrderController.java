@@ -11,6 +11,7 @@ import com.wgs.eurekaprovider.service.wechat.WechatService;
 import com.wgs.eurekaprovider.util.StringHelper;
 import com.ydd.framework.core.common.Pagination;
 import com.ydd.framework.core.exception.ServiceException;
+import org.apache.ibatis.annotations.Param;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -89,8 +90,8 @@ public class OrderController {
      * @return
      */
     @RequestMapping("/findMemberOrderList")
-    public BaseResult<Pagination> findMemberOrderList(@RequestParam("memberId") Integer memberId,@RequestBody Pagination pagination){
-        pagination = orderService.orderList(memberId,pagination);
+    public BaseResult<Pagination> findMemberOrderList(@RequestParam("memberId") Integer memberId, @RequestParam(value = "status",required = false) Integer status, @RequestBody Pagination pagination){
+        pagination = orderService.orderList(memberId,status,pagination);
         return new BaseResult<>(pagination);
     }
 

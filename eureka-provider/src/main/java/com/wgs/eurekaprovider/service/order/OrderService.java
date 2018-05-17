@@ -29,6 +29,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static com.wgs.entity.exception.ExceptionCodeTemplate.ORDER_ERROR;
@@ -126,6 +127,7 @@ public class OrderService extends BaseServiceImpl {
             saveOrderAddress(memberId,order,memberAddress);
             return order.getOrderSn();
         }
+        goodsCarService.clearGoods(memberId);
         return "";
     }
 
@@ -232,9 +234,9 @@ public class OrderService extends BaseServiceImpl {
      * @param pagination
      * @return
      */
-    public Pagination orderList(Integer memberId, Pagination pagination){
+    public Pagination orderList(Integer memberId, Integer status,Pagination pagination){
         PageHelper.startPage(pagination.getPage(), pagination.getPageSize());
-        pagination.setQueryResult(orderMapper.findOrderList(memberId));
+        pagination.setQueryResult(orderMapper.findOrderList(memberId,status));
         return pagination;
     }
 
@@ -315,6 +317,8 @@ public class OrderService extends BaseServiceImpl {
         Order order = new Order();
         order.setId(orderId);
         order.setStatus(OrderStatusEnum.PENDING_DELIVERY.value.intValue());
+        order.setTransactionSn(tradeSn);
+        order.setPayTime(new Date());
         orderMapper.update(order);
     }
 

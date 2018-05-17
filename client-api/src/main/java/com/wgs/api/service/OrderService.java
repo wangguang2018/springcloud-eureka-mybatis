@@ -66,7 +66,7 @@ public interface OrderService {
      * @return
      */
     @RequestMapping("/findMemberOrderList")
-    BaseResult<Pagination> findOrderListByMember(@RequestParam("memberId") Integer memberId, @RequestBody Pagination pagination);
+    BaseResult<Pagination> findOrderListByMember(@RequestParam("memberId") Integer memberId,@RequestParam(value = "status",required = false) Integer status, @RequestBody Pagination pagination);
 
     @RequestMapping("/findOrderInfo")
     BaseResult<OrderDTO> findOrderInfo(@RequestParam("memberId") Integer memberId, @RequestParam("orderSn") String orderSn);

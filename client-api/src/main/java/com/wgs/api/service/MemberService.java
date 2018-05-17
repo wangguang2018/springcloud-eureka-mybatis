@@ -53,6 +53,15 @@ public interface MemberService {
     BaseResult deleteGoodsCar(@RequestParam("skuGroupId") Integer skuGroupId, @RequestParam("memberId") Integer memberId);
 
     /**
+     * 清空购物车
+     * @param memberId
+     * @return
+     */
+    @RequestMapping("/clearGoodsCar")
+    BaseResult clearGoodsCar(@RequestParam("memberId") Integer memberId);
+
+
+    /**
      * 通过token获取用户ID
      * @param accessToken
      */

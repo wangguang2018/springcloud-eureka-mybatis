@@ -68,4 +68,6 @@ public interface MemberGoodsCarMapper {
     List<GoodsCarDTO> findByMember(@Param("memberId") Integer memberId);
 
     Integer countByMember(@Param("memberId") Integer memberId);
+
+    void deleteByMember(@Param("memberId") Integer memberId);
 }

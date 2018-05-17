@@ -81,7 +81,7 @@ oss:
 wechat:
   appId: wx6196d98aa4b9692a
   secrectKey: 52a01c2305121507e273f2b2a3d40e9c
-  cert: C:\Users\Administrator\Desktop\wgs.p12
+  cert: /opt/cert/wgs.p12
   key: abcdefghijklmnopqrstuvwxyz123456
   mchId: 1218518601
   notifyUrl: https://api.vegoos.com/pay/wechat/notify

@@ -288,6 +288,9 @@
 		select o.id,o.order_sn,o.pay_type,o.`status`,o.pay_price,o.pay_time,o.created_time
 		from wgs_order o
 		where o.member_id = #{memberId} and o.deleted = 0
+		<if test="status != null">
+            and o.status = #{status}
+        </if>
 	</select>
 
     <select id="findOrderGoodsList" resultMap="OrderGoodsDTOMap">

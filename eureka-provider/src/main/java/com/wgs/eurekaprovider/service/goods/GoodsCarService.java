@@ -85,4 +85,13 @@ public class GoodsCarService extends BaseServiceImpl {
         return count == null ? 0:count;
     }
 
+    /**
+     * 清空购物车
+     * @param memberId
+     */
+    @Transactional
+    public void clearGoodsCar(Integer memberId){
+        memberGoodsCarMapper.deleteByMember(memberId);
+    }
+
 }

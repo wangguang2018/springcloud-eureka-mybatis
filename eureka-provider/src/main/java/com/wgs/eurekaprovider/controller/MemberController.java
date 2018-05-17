@@ -64,6 +64,17 @@ public class MemberController{
     }
 
     /**
+     * 清空购物车
+     * @param memberId
+     * @return
+     */
+    @RequestMapping("/clearGoodsCar")
+    public BaseResult clearGoodsCar( @RequestParam("memberId") Integer memberId){
+        goodsCarService.clearGoodsCar(memberId);
+        return new BaseResult();
+    }
+
+    /**
      * 通过accessToken获取用户ID
      * @param accessToken
      * @return

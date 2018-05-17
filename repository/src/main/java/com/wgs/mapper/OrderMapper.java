@@ -68,7 +68,7 @@ public interface OrderMapper {
      */
     int updateStatus(@Param("ids") Integer[] ids, @Param("status") Byte status);
 
-    List<OrderDTO> findOrderList(@Param("memberId") Integer memberId);
+    List<OrderDTO> findOrderList(@Param("memberId") Integer memberId,@Param("status") Integer status);
 
     OrderDTO findOrderInfo(@Param("orderSn") String orderSn,@Param("memberId") Integer memberId);
 

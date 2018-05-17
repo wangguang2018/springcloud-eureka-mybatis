@@ -20,9 +20,11 @@ import com.ydd.framework.core.service.impl.BaseServiceImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.time.DateFormatUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import javax.annotation.Resource;
@@ -35,7 +37,7 @@ import static com.wgs.entity.exception.ExceptionCodeTemplate.SERVER_ERROR;
 
 @Service
 public class WechatService extends BaseServiceImpl {
-    private Logger logger = Logger.getLogger(WechatService.class);
+    private Logger logger = LoggerFactory.getLogger(WechatService.class);
 
     //小程序登录 获取信息url
     private static final String ACCESS_TOKEN_URL = "https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code";
@@ -98,14 +100,13 @@ public class WechatService extends BaseServiceImpl {
             Date current = getCurrentTime();
             Calendar expire = Calendar.getInstance();
             expire.setTime(current);
-            expire.add(Calendar.SECOND, 60 * 30);
+            expire.add(Calendar.HOUR_OF_DAY, 24);
             Assert.hasText(certPath, "证书找不到");
             String nonceStr = CommonUtils.CreateNonceStr(30);
             WeChatPayHelper weChatPayHelper = new WeChatPayHelper(certPath);
             weChatPayHelper.setAppId(xcxAppId);
             weChatPayHelper.setMchId(mchId);
             weChatPayHelper.setKey(key);
-            weChatPayHelper.setParameter("device_info", "WEB");
             weChatPayHelper.setParameter("nonce_str", nonceStr);
             weChatPayHelper.setParameter("body", "游戏币充值");
             weChatPayHelper.setParameter("detail", "游戏币充值");
@@ -118,24 +119,17 @@ public class WechatService extends BaseServiceImpl {
             weChatPayHelper.setParameter("time_expire", DateFormatUtils.format(expire.getTime(), "yyyyMMddHHmmss"));
             weChatPayHelper.setParameter("notify_url", notifyUrl);
             weChatPayHelper.setParameter("trade_type", tradeType);
+            //使用公众号的appid
+            Member member = memberService.findById(memberId);
+            weChatPayHelper.setParameter("openid", member.getXcxOpenId());
 
-            if ("APP".equals(tradeType)) {
-
-            } else if ("JSAPI".equals(tradeType)) {
-                //使用公众号的appid
-                Member member = memberService.findById(memberId);
-                weChatPayHelper.setAppId(xcxAppId);
-                weChatPayHelper.setParameter("openid", member.getXcxOpenId());
-            } else if ("MWEB".equalsIgnoreCase(tradeType)) {
-                weChatPayHelper.setParameter("scene_info", "{\"h5_info\": {\"type\":\"Wap\",\"wap_url\": \"http://h5.toy.ydd100.cn\",\"wap_name\": \"娃娃机\"}}");
-            }
             logger.info("统一订单请求参数" + ToStringBuilder.reflectionToString(weChatPayHelper));
             // 调用统一下单接口
             OrderResponse response = weChatPayHelper.unifiedOrder();
 
             // 记录统一下单接口返回
             logger.info(ToStringBuilder.reflectionToString(response));
-
+            System.out.println(ToStringBuilder.reflectionToString(response));
             if (response.isSuccess()) {
                 wechatPayParam = this.createGzhBizPackage(response);
                 logger.info("返回的结果为：" + ToStringBuilder.reflectionToString(wechatPayParam));
@@ -177,6 +171,7 @@ public class WechatService extends BaseServiceImpl {
         return wechatPayParam;
     }
 
+    @Transactional
     public void notify(Map<String,String> params ) throws IOException {
         logger.info("微信回调参数:" + JsonMapper.nonNullMapper().toJson(params));
         // 读取输入流

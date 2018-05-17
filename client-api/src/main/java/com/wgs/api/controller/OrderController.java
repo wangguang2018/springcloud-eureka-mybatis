@@ -89,8 +89,8 @@ public class OrderController extends BaseApiController {
      */
     @AccessToken
     @RequestMapping("/list")
-    public ResponseDTO orderList(Pagination pagination){
-        BaseResult<Pagination> baseResult = orderService.findOrderListByMember(getLoginMemberId(),pagination);
+    public ResponseDTO orderList(Pagination pagination,@RequestParam(value = "status",required = false) Integer status){
+        BaseResult<Pagination> baseResult = orderService.findOrderListByMember(getLoginMemberId(),status,pagination);
         return ResponseDTO.ok().addAttribute("data",baseResult.getContent());
     }
 

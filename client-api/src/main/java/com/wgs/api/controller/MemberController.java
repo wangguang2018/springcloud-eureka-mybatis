@@ -77,6 +77,17 @@ public class MemberController extends BaseApiController {
     }
 
     /**
+     * 清空购物车
+     * @return
+     */
+    @RequestMapping(value = "/goods/car/clear",method = RequestMethod.POST)
+    @AccessToken
+    public ResponseDTO clearGoodsCar(){
+        memberService.clearGoodsCar(getLoginMemberId());
+        return ResponseDTO.ok();
+    }
+
+    /**
      * 保存收货地址
      * @param memberAddress
      * @return
