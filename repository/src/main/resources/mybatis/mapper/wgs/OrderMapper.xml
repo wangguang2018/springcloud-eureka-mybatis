@@ -25,6 +25,8 @@
     </resultMap>
 
     <resultMap id="OrderInfoDTOMap" type="com.wgs.dto.order.OrderDTO" extends="OrderDTOMap">
+        <result column="express_name" property="expressName"></result>
+        <result column="express_no" property="expressNo"></result>
         <association property="orderAddress" select="com.wgs.mapper.OrderAddressMapper.findByOrderId" column="id"></association>
     </resultMap>
 
@@ -302,7 +304,10 @@
 
     <select id="findOrderInfo" resultMap="OrderInfoDTOMap">
         select o.id,o.order_sn,o.pay_type,o.`status`,o.pay_price,o.pay_time,o.created_time
+        ,e.express_name,e.express_no
 		from wgs_order o
+        LEFT JOIN wgs_order_express e
+        on e.order_id = o.id
 		where o.member_id = #{memberId} and o.order_sn = #{orderSn} and o.deleted = 0
     </select>
 

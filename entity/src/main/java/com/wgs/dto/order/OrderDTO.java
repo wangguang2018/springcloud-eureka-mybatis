@@ -8,6 +8,10 @@ import java.util.List;
 
 public class OrderDTO extends Order {
 
+    private String expressName;
+    private String expressNo;
+
+
     private List<OrderGoodsDTO> goodsList;
 
     private OrderAddress orderAddress;
@@ -26,5 +30,21 @@ public class OrderDTO extends Order {
 
     public void setOrderAddress(OrderAddress orderAddress) {
         this.orderAddress = orderAddress;
+    }
+
+    public String getExpressName() {
+        return expressName;
+    }
+
+    public void setExpressName(String expressName) {
+        this.expressName = expressName;
+    }
+
+    public String getExpressNo() {
+        return expressNo;
+    }
+
+    public void setExpressNo(String expressNo) {
+        this.expressNo = expressNo;
     }
 }
