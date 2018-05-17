@@ -11,4 +11,6 @@ public class ExceptionCodeTemplate implements Serializable {
     public static final ExceptionCode SERVER_ERROR = ExceptionCode.init(-1, "服务器异常，请稍后再试");
 
     public static final ExceptionCode ORDER_ERROR = ExceptionCode.init(10002, "下单失败");
+
+    public static final ExceptionCode MEMBER_IN_VALID = ExceptionCode.init(10003, "用户已被封禁");
 }

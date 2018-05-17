@@ -1,7 +1,9 @@
 package com.wgs.api.interceptor;
 
 import com.wgs.api.service.MemberService;
+import com.wgs.dto.BaseResult;
 import com.ydd.framework.core.annotation.AccessToken;
+import com.ydd.framework.core.exception.ExceptionCode;
 import com.ydd.framework.core.exception.ExceptionCodeTemplate;
 import com.ydd.framework.core.exception.ServiceException;
 import org.apache.commons.lang3.StringUtils;
@@ -65,7 +67,11 @@ public class AccessTokensInterceptor extends HandlerInterceptorAdapter {
         }
 
         // 查询缓存获取登录用户编号
-        Integer memberId = memberService.getMemberIdByAccessToken(accessToken).getContent();
+        BaseResult<Integer> result = memberService.getMemberIdByAccessToken(accessToken);
+        if(!result.getSuccess()){
+            throw new ServiceException(new ExceptionCode(result.getCode(),result.getMessage()));
+        }
+        Integer memberId = result.getContent();
         // 判断登录用户编号是否合法
         if (memberId == null) {
             throw new ServiceException(ExceptionCodeTemplate.INVALID_ACCESS_TOKEN);

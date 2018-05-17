@@ -3,11 +3,11 @@
 <mapper namespace="com.wgs.mapper.MemberMapper">
 
     <resultMap id="MemberMap" type="com.wgs.entity.Member">
-
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="nickname" property="nickname"/>
         <result column="avatar" property="avatar"/>
         <result column="xcx_open_id" property="xcxOpenId"/>
+        <result column="status" property="status"></result>
         <result column="created_id" property="createdId"/>
         <result column="modified_id" property="modifiedId"/>
         <result column="created_time" property="createdTime"/>
@@ -34,6 +34,7 @@
 		id,
 		nickname,
 		avatar,
+		status,
 		xcx_open_id,
 		created_id,
 		modified_id,
@@ -192,7 +193,7 @@
         <include refid="Field"></include>
         FROM
         <include refid="tableName"></include>
-        WHERE id = #{id}
+        WHERE id = #{id} and deleted = 0
     </select>
 
     <select id="findByOpenId" resultMap="MemberMap">

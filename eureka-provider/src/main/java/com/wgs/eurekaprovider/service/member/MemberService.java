@@ -142,7 +142,20 @@ public class MemberService extends BaseServiceImpl {
      */
     public Integer getMemberIdByAccessToken(String accessToken) {
         Integer id = cacheService.getEntity(AccessTokenInterceptor.ACCESS_TOKEN_CACHE_KEY + accessToken);
+        boolean flag = checkMemberValid(id);
+        if(!flag){
+            throw new ServiceException(ExceptionCodeTemplate.MEMBER_IN_VALID);
+        }
         return id;
+    }
+
+    private boolean checkMemberValid(Integer memberId){
+        Member member = memberMapper.findById(memberId);
+        if(member.getStatus().intValue() == 1){
+            //用户已经被封禁
+            return false;
+        }
+        return true;
     }
 
     /**

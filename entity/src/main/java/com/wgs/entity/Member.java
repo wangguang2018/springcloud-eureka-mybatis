@@ -43,6 +43,11 @@ public class Member implements Serializable {
     private Integer modifiedId;
 
     /**
+     * 封号状态：0正常 1封号
+     */
+    private Integer status;
+
+    /**
      * 创建时间
      */
     private Date createdTime;
@@ -233,4 +238,11 @@ public class Member implements Serializable {
         return deleted;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 }
