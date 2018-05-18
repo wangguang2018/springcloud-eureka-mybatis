@@ -15,3 +15,7 @@ dependencies {
     compile "com.ydd:framework-core:${frameworkVersion}"
 
 }
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}

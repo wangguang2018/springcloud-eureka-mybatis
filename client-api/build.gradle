@@ -45,3 +45,8 @@ dependencyManagement {
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
 	}
 }
+
+
+tasks.withType(JavaCompile) {
+	options.encoding = "UTF-8"
+}

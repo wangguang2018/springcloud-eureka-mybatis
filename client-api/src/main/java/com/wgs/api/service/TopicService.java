@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @FeignClient(value = "service-api")
 public interface TopicService {
 
@@ -17,7 +19,7 @@ public interface TopicService {
      * @return
      */
     @RequestMapping("/findTopicList")
-    BaseResult<Pagination> findTopicList(@RequestBody Pagination pagination);
+    BaseResult<List<TopicDTO>> findTopicList(@RequestBody Pagination pagination);
 
     /**
      * 获取主题详细

@@ -25,8 +25,7 @@ public class TopicService extends BaseServiceImpl {
      * @return
      */
     public Pagination findTopicList(Pagination pagination){
-        PageHelper.startPage(pagination.getPage(), pagination.getPageSize());
-        pagination.setQueryResult(topicMapper.findList());
+        pagination.setData(topicMapper.findList());
         return pagination;
     }
 

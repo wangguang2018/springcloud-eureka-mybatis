@@ -1,6 +1,5 @@
 package com.wgs.eurekaprovider.service.member;
 
-import com.wgs.dto.BaseResult;
 import com.wgs.dto.member.MemberInfoDTO;
 import com.wgs.entity.Member;
 import com.wgs.entity.MemberToken;

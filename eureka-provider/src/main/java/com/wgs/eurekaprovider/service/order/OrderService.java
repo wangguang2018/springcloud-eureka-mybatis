@@ -12,7 +12,6 @@ import com.wgs.eurekaprovider.service.goods.GoodsCarService;
 import com.wgs.eurekaprovider.service.goods.GoodsService;
 import com.wgs.eurekaprovider.service.member.MemberAddressService;
 import com.wgs.eurekaprovider.service.wechat.WechatService;
-import com.wgs.eurekaprovider.util.StringHelper;
 import com.wgs.mapper.OrderAddressMapper;
 import com.wgs.mapper.OrderGoodsInfoMapper;
 import com.wgs.mapper.OrderGoodsMapper;
@@ -26,7 +25,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;

@@ -233,7 +233,7 @@
     </select>
 
     <select id="findGoodsInfoById" resultMap="GoodsInfoDTOMap">
-        SELECT id,goods_name,`desc`,price,cover from wgs_goods where id = #{goodsId} and deleted = 0
+        SELECT id,goods_name,goods_sn,`desc`,price,cover from wgs_goods where id = #{goodsId} and deleted = 0
     </select>
 
     <select id="findGoodsSkuById" resultMap="GoodsSkuDTOMap">
