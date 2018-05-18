@@ -19,7 +19,7 @@ public interface TopicService {
      * @return
      */
     @RequestMapping("/findTopicList")
-    BaseResult<List<TopicDTO>> findTopicList(@RequestBody Pagination pagination);
+    BaseResult<Pagination> findTopicList(@RequestBody Pagination pagination);
 
     /**
      * 获取主题详细
