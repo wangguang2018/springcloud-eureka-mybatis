@@ -43,6 +43,11 @@ public class Topic implements Serializable {
     private Integer sort;
 
     /**
+     * 主题色
+     */
+    private String color;
+
+    /**
      * 创建者编号
      */
     private Integer createdId;
@@ -281,4 +286,11 @@ public class Topic implements Serializable {
         return deleted;
     }
 
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
 }

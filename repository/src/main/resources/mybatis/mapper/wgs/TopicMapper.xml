@@ -9,6 +9,7 @@
         <result column="desc" property="desc"/>
         <result column="img" property="img"/>
         <result column="sort" property="sort"/>
+        <result column="color" property="color"/>
         <result column="created_id" property="createdId"/>
         <result column="modified_id" property="modifiedId"/>
         <result column="created_time" property="createdTime"/>
@@ -219,7 +220,7 @@
     </select>
 
     <select id="findList" resultMap="TopicDTOMap">
-        SELECT id,`name`,title,`desc`,`img`,1 as recommend from wgs_topic
+        SELECT id,`name`,title,`desc`,`img`,color,1 as recommend from wgs_topic
         where deleted = 0
         ORDER BY sort desc
     </select>
