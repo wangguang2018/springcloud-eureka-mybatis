@@ -36,7 +36,7 @@ public class GoodsCarService extends BaseServiceImpl {
     public void addGoodsCar(Integer skuGroupId, Integer memberId, Integer goodsId, Integer num) {
         Integer number = memberGoodsCarMapper.numberBySkuGroupId(skuGroupId, memberId);
         if (number != null) {
-            if(num + number < 0){
+            if(num + number <= 0){
                 //添加数量之后小于0 将改产品移除购物车
                 delete(skuGroupId,memberId);
             }else {
