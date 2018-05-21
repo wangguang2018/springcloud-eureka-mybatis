@@ -201,7 +201,7 @@
         SELECT g.id,goods_name,`desc`,price,cover from wgs_goods g
         LEFT JOIN wgs_video_goods v
         on v.goods_id = g.id
-        where v.id = #{id} and v.deleted= 0 and g.deleted= 0  and g.status = 0
+        where v.video_id = #{id} and v.deleted= 0 and g.deleted= 0  and g.status = 0
     </select>
 
 </mapper>

@@ -60,6 +60,7 @@ spring:
     log-resolved-exception: false
   jackson:
     default-property-inclusion: NON_NULL
+    timeZone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
     serialization:
       WRITE_NULL_MAP_VALUES: false
