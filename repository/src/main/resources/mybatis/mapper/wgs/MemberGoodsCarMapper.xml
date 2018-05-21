@@ -200,8 +200,8 @@
         WHERE id = #{id}
     </select>
 
-    <select id="countBySkuGroupId" resultType="java.lang.Integer">
-        SELECT count(0) from wgs_member_goods_car
+    <select id="numberBySkuGroupId" resultType="java.lang.Integer">
+        SELECT num from wgs_member_goods_car
         WHERE deleted = 0 and member_id = #{memberId} and sku_group_id = #{skuGroupId}
     </select>
 

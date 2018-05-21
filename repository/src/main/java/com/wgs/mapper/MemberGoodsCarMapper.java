@@ -59,7 +59,7 @@ public interface MemberGoodsCarMapper {
      */
     List<MemberGoodsCar> findAll();
 
-    Integer countBySkuGroupId(@Param("skuGroupId") Integer skuGroupId, @Param("memberId") Integer memberId);
+    Integer numberBySkuGroupId(@Param("skuGroupId") Integer skuGroupId, @Param("memberId") Integer memberId);
 
     void updateNumBySkuGroupId(@Param("skuGroupId") Integer skuGroupId, @Param("memberId") Integer memberId,@Param("num") Integer num);
 

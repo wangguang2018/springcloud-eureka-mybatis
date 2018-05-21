@@ -34,9 +34,14 @@ public class GoodsCarService extends BaseServiceImpl {
      */
     @Transactional
     public void addGoodsCar(Integer skuGroupId, Integer memberId, Integer goodsId, Integer num) {
-        Integer count = memberGoodsCarMapper.countBySkuGroupId(skuGroupId, memberId);
-        if (count != null && count > 0) {
-            memberGoodsCarMapper.updateNumBySkuGroupId(skuGroupId, memberId, num);
+        Integer number = memberGoodsCarMapper.numberBySkuGroupId(skuGroupId, memberId);
+        if (number != null) {
+            if(num + number < 0){
+                //添加数量之后小于0 将改产品移除购物车
+                delete(skuGroupId,memberId);
+            }else {
+                memberGoodsCarMapper.updateNumBySkuGroupId(skuGroupId, memberId, num);
+            }
         } else {
             MemberGoodsCar memberGoodsCar = new MemberGoodsCar();
             memberGoodsCar.setMemberId(memberId);

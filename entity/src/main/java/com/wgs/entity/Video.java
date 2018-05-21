@@ -33,6 +33,11 @@ public class Video implements Serializable {
     private String cover;
 
     /**
+     * 视频名称
+     */
+    private String name;
+
+    /**
      * 创建者编号
      */
     private Integer createdId;
@@ -233,4 +238,11 @@ public class Video implements Serializable {
         return deleted;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

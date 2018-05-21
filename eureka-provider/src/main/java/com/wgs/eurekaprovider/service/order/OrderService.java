@@ -85,6 +85,8 @@ public class OrderService extends BaseServiceImpl {
                 Goods goods = goodsService.findById(skuGroup.getGoodsId());
                 if (goods == null)
                     continue;
+                if(g.getNum() <= 0)
+                    continue;
                 GoodsSkuGroupInfo goodsSkuGroupInfo = goodsService.findSkuGroupInfoByGroupId(skuGroup.getId());
                 //商品总价
                 OrderGoods orderGoods = new OrderGoods();
@@ -123,9 +125,9 @@ public class OrderService extends BaseServiceImpl {
             saveOrderInfo(orderGoodsList,orderGoodsInfoList,order);
             //保存订单收货地址信息
             saveOrderAddress(memberId,order,memberAddress);
+            goodsCarService.clearGoodsCar(memberId);
             return order.getOrderSn();
         }
-        goodsCarService.clearGoodsCar(memberId);
         return "";
     }
 

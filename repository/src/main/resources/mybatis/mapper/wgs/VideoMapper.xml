@@ -7,6 +7,7 @@
         <result column="video_url" property="videoUrl"/>
         <result column="sort" property="sort"/>
         <result column="cover" property="cover"/>
+        <result column="name" property="name"/>
         <result column="created_id" property="createdId"/>
         <result column="modified_id" property="modifiedId"/>
         <result column="created_time" property="createdTime"/>
@@ -190,7 +191,7 @@
     </select>
 
     <select id="findVideoList" resultMap="VideoDTOMap">
-        SELECT id,video_url,cover from
+        SELECT id,video_url,cover,name from
         <include refid="tableName"></include>
         where deleted= 0
         ORDER BY sort desc
