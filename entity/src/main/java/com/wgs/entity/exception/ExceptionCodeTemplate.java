@@ -9,5 +9,5 @@ public class ExceptionCodeTemplate {
 
     public static final ExceptionCode ORDER_ERROR = ExceptionCode.init(10002, "下单失败");
 
-    public static final ExceptionCode MEMBER_IN_VALID = ExceptionCode.init(10003, "用户已被封禁");
+    public static final ExceptionCode MEMBER_IN_VALID = ExceptionCode.init(10008, "用户已被封禁");
 }

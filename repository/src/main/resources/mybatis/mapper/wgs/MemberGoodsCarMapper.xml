@@ -228,9 +228,9 @@
 
     <select id="countByMember" resultType="java.lang.Integer">
         select sum(c.num) from wgs_member_goods_car c
-        left JOIN wgs_goods g
-        on c.goods_id = g.id
-        WHERE  c.member_id = #{memberId} and c.deleted = 0 and g.deleted = 0 and g.status = 0
+        left JOIN wgs_goods_sku_group g
+        on c.sku_group_id = g.id
+        WHERE c.member_id = #{memberId} and c.deleted = 0 and g.deleted = 0
     </select>
 
     <update id="deleteByMember">

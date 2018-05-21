@@ -141,6 +141,8 @@ public class MemberService extends BaseServiceImpl {
      */
     public Integer getMemberIdByAccessToken(String accessToken) {
         Integer id = cacheService.getEntity(AccessTokenInterceptor.ACCESS_TOKEN_CACHE_KEY + accessToken);
+        if(id == null)
+            throw new ServiceException(com.ydd.framework.core.exception.ExceptionCodeTemplate.INVALID_ACCESS_TOKEN);
         boolean flag = checkMemberValid(id);
         if(!flag){
             throw new ServiceException(ExceptionCodeTemplate.MEMBER_IN_VALID);
