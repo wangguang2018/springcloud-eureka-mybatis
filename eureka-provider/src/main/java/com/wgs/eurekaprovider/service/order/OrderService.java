@@ -125,7 +125,6 @@ public class OrderService extends BaseServiceImpl {
             saveOrderInfo(orderGoodsList,orderGoodsInfoList,order);
             //保存订单收货地址信息
             saveOrderAddress(memberId,order,memberAddress);
-            goodsCarService.clearGoodsCar(memberId);
             return order.getOrderSn();
         }
         return "";
@@ -150,7 +149,9 @@ public class OrderService extends BaseServiceImpl {
         List<GoodsCarDTO> goodsCarDTOS = goodsCarService.findGoodsCarByMember(memberId);
         if(goodsCarDTOS == null || goodsCarDTOS.size() <= 0)
             throw new ServiceException(ORDER_ERROR);
-        return order(memberId,addressId,goodsCarDTOS);
+        String orderSn = order(memberId,addressId,goodsCarDTOS);
+        goodsCarService.clearGoodsCar(memberId);
+        return orderSn;
     }
 
     /**
@@ -163,7 +164,9 @@ public class OrderService extends BaseServiceImpl {
         List<GoodsCarDTO> goodsCarDTOS = goodsCarService.findGoodsCarByMember(memberId);
         if(goodsCarDTOS == null || goodsCarDTOS.size() <= 0)
             throw new ServiceException(ORDER_ERROR);
-        return order(memberId,memberAddress,goodsCarDTOS);
+        String orderSn = order(memberId,memberAddress,goodsCarDTOS);
+        goodsCarService.clearGoodsCar(memberId);
+        return orderSn;
     }
 
     /**
