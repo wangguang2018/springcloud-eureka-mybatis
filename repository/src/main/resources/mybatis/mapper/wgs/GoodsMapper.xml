@@ -23,6 +23,7 @@
         <result property="cover" column="cover"></result>
         <result column="goods_sn" property="goodsSn"></result>
         <result property="price" column="price"></result>
+        <result property="topicImg" column="img"></result>
     </resultMap>
 
     <resultMap id="GoodsInfoDTOMap" type="com.wgs.dto.goods.GoodsDTO" extends="GoodsDTOMap">

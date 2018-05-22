@@ -152,6 +152,8 @@ public class MemberService extends BaseServiceImpl {
 
     private boolean checkMemberValid(Integer memberId){
         Member member = memberMapper.findById(memberId);
+        if(member == null)
+            throw new ServiceException(com.ydd.framework.core.exception.ExceptionCodeTemplate.INVALID_ACCESS_TOKEN);
         if(member.getStatus().intValue() == 1){
             //用户已经被封禁
             return false;

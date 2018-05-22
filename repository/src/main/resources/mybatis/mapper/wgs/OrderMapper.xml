@@ -293,6 +293,7 @@
 		<if test="status != null">
             and o.status = #{status}
         </if>
+        order by o.created_time desc
 	</select>
 
     <select id="findOrderGoodsList" resultMap="OrderGoodsDTOMap">

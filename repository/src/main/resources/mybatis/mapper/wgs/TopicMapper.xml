@@ -231,7 +231,7 @@
     </select>
 
     <select id="findTopicGoods" resultMap="com.wgs.mapper.GoodsMapper.GoodsDTOMap">
-        SELECT g.id,goods_name,g.goods_sn,`desc`,price,cover from wgs_goods g
+        SELECT g.id,goods_name,g.goods_sn,`desc`,price,cover,t.img from wgs_goods g
         LEFT JOIN wgs_topic_goods t
         on t.goods_id = g.id
         where t.topic_id = #{id} and t.deleted = 0 and g.deleted = 0 and g.status = 0

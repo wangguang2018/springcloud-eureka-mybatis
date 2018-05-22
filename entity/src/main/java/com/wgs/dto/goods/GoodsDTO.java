@@ -10,6 +10,7 @@ public class GoodsDTO implements Serializable {
     private String goodsSn;
     private String desc;
     private String cover;
+    private String topicImg;
     private BigDecimal price;
     private List<GoodsSkuDTO> skuList;
 
@@ -67,5 +68,13 @@ public class GoodsDTO implements Serializable {
 
     public void setGoodsSn(String goodsSn) {
         this.goodsSn = goodsSn;
+    }
+
+    public String getTopicImg() {
+        return topicImg;
+    }
+
+    public void setTopicImg(String topicImg) {
+        this.topicImg = topicImg;
     }
 }
