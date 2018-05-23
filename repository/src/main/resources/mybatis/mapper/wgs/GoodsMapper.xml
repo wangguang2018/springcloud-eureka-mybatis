@@ -24,6 +24,8 @@
         <result column="goods_sn" property="goodsSn"></result>
         <result property="price" column="price"></result>
         <result property="topicImg" column="img"></result>
+        <result column="status" property="status"/>
+        <result column="deleted" property="deleted"/>
     </resultMap>
 
     <resultMap id="GoodsInfoDTOMap" type="com.wgs.dto.goods.GoodsDTO" extends="GoodsDTOMap">
@@ -234,7 +236,8 @@
     </select>
 
     <select id="findGoodsInfoById" resultMap="GoodsInfoDTOMap">
-        SELECT id,goods_name,goods_sn,`desc`,price,cover from wgs_goods where id = #{goodsId} and deleted = 0
+        SELECT id,goods_name,goods_sn,`desc`,price,cover,deleted,status from wgs_goods
+        where id = #{goodsId}
     </select>
 
     <select id="findGoodsSkuById" resultMap="GoodsSkuDTOMap">

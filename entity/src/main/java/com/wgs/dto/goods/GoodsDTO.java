@@ -12,6 +12,8 @@ public class GoodsDTO implements Serializable {
     private String cover;
     private String topicImg;
     private BigDecimal price;
+    private Integer status;
+    private Integer deleted;
     private List<GoodsSkuDTO> skuList;
 
     public Integer getId() {
@@ -76,5 +78,21 @@ public class GoodsDTO implements Serializable {
 
     public void setTopicImg(String topicImg) {
         this.topicImg = topicImg;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Integer getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Integer deleted) {
+        this.deleted = deleted;
     }
 }
