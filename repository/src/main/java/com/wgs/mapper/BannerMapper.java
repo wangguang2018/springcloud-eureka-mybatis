@@ -58,4 +58,5 @@ public interface BannerMapper {
      */
     List<Banner> findAll();
 
+    String findLaunchImg();
 }

@@ -12,4 +12,7 @@ public interface BannerService {
 
     @RequestMapping("/findBannerList")
     BaseResult<List<Banner>> findBannerList();
+
+    @RequestMapping("/findLaunchImg")
+    BaseResult<String> findLaunchImg();
 }

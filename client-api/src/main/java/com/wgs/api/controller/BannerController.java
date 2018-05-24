@@ -22,4 +22,10 @@ public class BannerController extends BaseApiController {
         return ResponseDTO.ok().addAttribute("data",result.getContent());
     }
 
+    @RequestMapping("/launch")
+    public ResponseDTO findLaunchImg(){
+        BaseResult result = bannerService.findLaunchImg();
+        return ResponseDTO.ok().addAttribute("data",result.getContent());
+    }
+
 }

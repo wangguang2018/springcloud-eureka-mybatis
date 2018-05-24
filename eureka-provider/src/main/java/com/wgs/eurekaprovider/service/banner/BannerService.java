@@ -21,4 +21,8 @@ public class BannerService {
         return bannerMapper.findAll();
     }
 
+    public String findLaunchImg(){
+        return bannerMapper.findLaunchImg();
+    }
+
 }

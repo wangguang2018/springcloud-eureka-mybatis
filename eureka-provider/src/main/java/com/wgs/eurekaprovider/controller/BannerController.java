@@ -25,4 +25,9 @@ public class BannerController {
         return new BaseResult(bannerService.findBanners());
     }
 
+    @RequestMapping("/findLaunchImg")
+    public BaseResult<String> findLaunchImg(){
+        return new BaseResult(bannerService.findLaunchImg());
+    }
+
 }
