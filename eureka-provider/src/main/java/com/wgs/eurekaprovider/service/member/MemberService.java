@@ -2,6 +2,7 @@ package com.wgs.eurekaprovider.service.member;
 
 import com.wgs.dto.member.MemberInfoDTO;
 import com.wgs.entity.Member;
+import com.wgs.entity.MemberPrescription;
 import com.wgs.entity.MemberToken;
 import com.wgs.entity.enums.LiveTime;
 import com.wgs.entity.exception.ExceptionCodeTemplate;
@@ -9,6 +10,7 @@ import com.wgs.eurekaprovider.service.wechat.WechatService;
 import com.wgs.eurekaprovider.util.Md5Util;
 import com.wgs.eurekaprovider.util.OSSHelper;
 import com.wgs.mapper.MemberMapper;
+import com.wgs.mapper.MemberPrescriptionMapper;
 import com.wgs.mapper.MemberTokenMapper;
 import com.ydd.framework.core.exception.ServiceException;
 import com.ydd.framework.core.interceptor.AccessTokenInterceptor;
@@ -28,6 +30,7 @@ import javax.annotation.Resource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 用户
@@ -46,6 +49,9 @@ public class MemberService extends BaseServiceImpl {
 
     @Resource
     private CacheService cacheService;
+
+    @Resource
+    private MemberPrescriptionMapper memberPrescriptionMapper;
 
 
     public static final LiveTime expireTime = LiveTime.DAYS_15;
@@ -196,5 +202,38 @@ public class MemberService extends BaseServiceImpl {
      */
     public MemberInfoDTO findMemberInfo(Integer memberId){
         return memberMapper.findMemberInfo(memberId);
+    }
+
+    public List<MemberPrescription> findPrescription(Integer memberId) {
+        List<MemberPrescription> memberPrescriptions = memberPrescriptionMapper.findAll(memberId);
+        return memberPrescriptions;
+    }
+
+    public MemberPrescription findOnePrescription(Integer memberId, Integer id) {
+        return memberPrescriptionMapper.findById(id);
+    }
+
+    /**
+     * 修改
+     *
+     * @param memberPrescription
+     */
+    @Transactional
+    public void save(MemberPrescription memberPrescription) {
+        if (memberPrescription.getId() == null) {
+            memberPrescriptionMapper.insert(memberPrescription);
+        } else {
+            memberPrescriptionMapper.update(memberPrescription);
+        }
+    }
+
+    /**
+     * 删除处方
+     * @param memberId
+     * @param id
+     */
+    @Transactional
+    public void deleteOnePrescription(Integer memberId,Integer id){
+        memberPrescriptionMapper.delete(id);
     }
 }

@@ -6,6 +6,7 @@ import com.wgs.dto.BaseResult;
 import com.wgs.dto.goods.GoodsCarDTO;
 import com.wgs.dto.member.MemberInfoDTO;
 import com.wgs.entity.MemberAddress;
+import com.wgs.entity.MemberPrescription;
 import com.wgs.entity.MemberToken;
 import com.ydd.framework.core.annotation.AccessToken;
 import com.ydd.framework.core.common.dto.ResponseDTO;
@@ -155,6 +156,53 @@ public class MemberController extends BaseApiController {
     public ResponseDTO findGoodsCarCount(){
         BaseResult result = memberService.findGoodsCarCount(getLoginMemberId());
         return ResponseDTO.ok().addAttribute("data",result.getContent());
+    }
+
+    /**
+     * 获取用户处方信息
+     * @return
+     */
+    @RequestMapping("/prescription/findPrescription")
+    @AccessToken
+    public ResponseDTO findPrescription(){
+        BaseResult<List<MemberPrescription>> result = memberService.findPrescription(getLoginMemberId());
+        return ResponseDTO.ok().addAttribute("data",result.getContent());
+    }
+
+    /**
+     * 获取用户处方单个信息
+     * @return
+     */
+    @RequestMapping("/prescription/findOnePrescription")
+    @AccessToken
+    public ResponseDTO findOnePrescription(@RequestParam("id") Integer id){
+        BaseResult<MemberPrescription> result = memberService.findOnePrescription(getLoginMemberId(),id);
+        return ResponseDTO.ok().addAttribute("data",result.getContent());
+    }
+
+    /**
+     * 保存处方信息
+     * @param memberPrescription
+     * @return
+     */
+    @AccessToken
+    @RequestMapping(value = "/prescription/saveOnePrescription",method = RequestMethod.POST)
+    public ResponseDTO saveMemberAddress(MemberPrescription memberPrescription){
+        memberPrescription.setMemberId(getLoginMemberId());
+        memberService.save(memberPrescription);
+        return ResponseDTO.ok();
+    }
+
+    /**
+     * 删除处方信息
+     * @param id
+     * @return
+     */
+    @AccessToken
+    @RequestMapping(value = "/prescription/deletePrescription",method = RequestMethod.POST)
+    public ResponseDTO deletePrescription(@RequestParam("id") Integer id){
+        memberService.deletePrescription(getLoginMemberId(),id);
+        return ResponseDTO.ok();
     }
 
 }

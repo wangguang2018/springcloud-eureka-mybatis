@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wgs.mapper.MemberPrescriptionMapper">
+
+    <resultMap id="MemberPrescriptionMap" type="com.wgs.entity.MemberPrescription">
+
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" property="name"/>
+        <result column="member_id" property="memberId"/>
+        <result column="right_pupil_distance" property="rightPupilDistance"/>
+        <result column="left_pupil_distance" property="leftPupilDistance"/>
+        <result column="right_astigmatism" property="rightAstigmatism"/>
+        <result column="left_astigmatism" property="leftAstigmatism"/>
+        <result column="right_degree" property="rightDegree"/>
+        <result column="left_degree" property="leftDegree"/>
+        <result column="created_id" property="createdId"/>
+        <result column="modified_id" property="modifiedId"/>
+        <result column="created_time" property="createdTime"/>
+        <result column="modified_time" property="modifiedTime"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <!--表名 -->
+    <sql id="tableName">
+        wgs_member_prescription
+    </sql>
+
+    <!-- 字段 -->
+    <sql id="Field">
+        id,
+        name,
+        member_id,
+        right_pupil_distance,
+        left_pupil_distance,
+        right_astigmatism,
+        left_astigmatism,
+        right_degree,
+        left_degree,
+        created_id,
+        modified_id,
+        created_time,
+        modified_time,
+        deleted
+    </sql>
+
+    <!-- 字段值 -->
+    <sql id="FieldValue">
+        #{id, jdbcType=INTEGER},
+        #{name, jdbcType=VARCHAR},
+        #{memberId, jdbcType=INTEGER},
+        #{rightPupilDistance, jdbcType=VARCHAR},
+        #{leftPupilDistance, jdbcType=VARCHAR},
+        #{rightAstigmatism, jdbcType=VARCHAR},
+        #{leftAstigmatism, jdbcType=VARCHAR},
+        #{rightDegree, jdbcType=VARCHAR},
+        #{leftDegree, jdbcType=VARCHAR},
+        #{createdId, jdbcType=INTEGER},
+        #{modifiedId, jdbcType=INTEGER},
+        #{createdTime, jdbcType=TIMESTAMP},
+        #{modifiedTime, jdbcType=TIMESTAMP},
+        #{deleted, jdbcType=TINYINT}
+    </sql>
+
+    <!-- 查询全部记录 -->
+    <select id="findAll" parameterType="java.lang.Integer" resultMap="MemberPrescriptionMap">
+        SELECT
+        <include refid="Field"></include>
+        FROM
+        <include refid="tableName"></include>
+        WHERE
+        deleted = 0 and member_id = #{memberId}
+    </select>
+
+    <!-- 新增-->
+    <insert id="insert" parameterType="com.wgs.entity.MemberPrescription" useGeneratedKeys="true" keyProperty="id">
+
+        INSERT INTO
+        <include refid="tableName"></include>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="memberId != null">
+                member_id,
+            </if>
+            <if test="rightPupilDistance != null">
+                right_pupil_distance,
+            </if>
+            <if test="leftPupilDistance != null">
+                left_pupil_distance,
+            </if>
+            <if test="rightAstigmatism != null">
+                right_astigmatism,
+            </if>
+            <if test="leftAstigmatism != null">
+                left_astigmatism,
+            </if>
+            <if test="rightDegree != null">
+                right_degree,
+            </if>
+            <if test="leftDegree != null">
+                left_degree,
+            </if>
+            <if test="createdId != null">
+                created_id,
+            </if>
+            <if test="modifiedId != null">
+                modified_id,
+            </if>
+            <if test="createdTime != null">
+                created_time,
+            </if>
+            <if test="modifiedTime != null">
+                modified_time,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="memberId != null">
+                #{memberId},
+            </if>
+            <if test="rightPupilDistance != null">
+                #{rightPupilDistance},
+            </if>
+            <if test="leftPupilDistance != null">
+                #{leftPupilDistance},
+            </if>
+            <if test="rightAstigmatism != null">
+                #{rightAstigmatism},
+            </if>
+            <if test="leftAstigmatism != null">
+                #{leftAstigmatism},
+            </if>
+            <if test="rightDegree != null">
+                #{rightDegree},
+            </if>
+            <if test="leftDegree != null">
+                #{leftDegree},
+            </if>
+            <if test="createdId != null">
+                #{createdId},
+            </if>
+            <if test="modifiedId != null">
+                #{modifiedId},
+            </if>
+            <if test="createdTime != null">
+                #{createdTime},
+            </if>
+            <if test="modifiedTime != null">
+                #{modifiedTime},
+            </if>
+            <if test="deleted != null">
+                #{deleted},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 删除-->
+    <delete id="delete" parameterType="java.lang.Integer">
+        UPDATE
+        <include refid="tableName"></include>
+        SET
+        deleted = 1
+        WHERE
+        id = #{id}
+    </delete>
+
+    <!-- 批量删除 -->
+    <delete id="deleteByIds">
+        UPDATE
+        <include refid="tableName"></include>
+        SET
+        deleted = 1
+        WHERE
+        id IN
+        <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <!-- 更新记录 -->
+    <update id="update" parameterType="com.wgs.entity.MemberPrescription">
+        UPDATE
+        <include refid="tableName"></include>
+        <set>
+            <if test="id != null">
+                id = #{id},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="memberId != null">
+                member_id = #{memberId},
+            </if>
+            <if test="rightPupilDistance != null">
+                right_pupil_distance = #{rightPupilDistance},
+            </if>
+            <if test="leftPupilDistance != null">
+                left_pupil_distance = #{leftPupilDistance},
+            </if>
+            <if test="rightAstigmatism != null">
+                right_astigmatism = #{rightAstigmatism},
+            </if>
+            <if test="leftAstigmatism != null">
+                left_astigmatism = #{leftAstigmatism},
+            </if>
+            <if test="rightDegree != null">
+                right_degree = #{rightDegree},
+            </if>
+            <if test="leftDegree != null">
+                left_degree = #{leftDegree},
+            </if>
+            <if test="createdId != null">
+                created_id = #{createdId},
+            </if>
+            <if test="modifiedId != null">
+                modified_id = #{modifiedId},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+            <if test="modifiedTime != null">
+                modified_time = #{modifiedTime},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!-- 通过编号查询 -->
+    <select id="findById" parameterType="java.lang.Integer" resultMap="MemberPrescriptionMap">
+        SELECT
+        <include refid="Field"></include>
+        FROM
+        <include refid="tableName"></include>
+        WHERE id = #{id}
+    </select>
+
+</mapper>
