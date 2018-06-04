@@ -214,7 +214,7 @@ public class MemberService extends BaseServiceImpl {
     }
 
     /**
-     * 修改
+     * 修改处方
      *
      * @param memberPrescription
      */

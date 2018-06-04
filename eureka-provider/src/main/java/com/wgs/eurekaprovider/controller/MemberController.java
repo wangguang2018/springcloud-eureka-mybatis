@@ -110,7 +110,7 @@ public class MemberController{
      */
     @RequestMapping("/findPrescription")
     public BaseResult<List<MemberPrescription>> findPrescription(@RequestParam("memberId") Integer memberId){
-        Integer a = memberId;
+
         return new BaseResult(memberService.findPrescription(memberId));
     }
 

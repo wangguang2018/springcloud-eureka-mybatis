@@ -56,6 +56,16 @@ public class MemberPrescription implements Serializable {
     private String leftDegree;
 
     /**
+     * 右眼轴位
+     */
+    private String rightAxialPosition;
+
+    /**
+     * 左眼轴位
+     */
+    private String leftAxialPosition;
+
+    /**
      * 创建者编号
      */
     private Integer createdId;
@@ -193,5 +203,21 @@ public class MemberPrescription implements Serializable {
 
     public void setLeftPupilDistance(String leftPupilDistance) {
         this.leftPupilDistance = leftPupilDistance;
+    }
+
+    public String getRightAxialPosition() {
+        return rightAxialPosition;
+    }
+
+    public void setRightAxialPosition(String rightAxialPosition) {
+        this.rightAxialPosition = rightAxialPosition;
+    }
+
+    public String getLeftAxialPosition() {
+        return leftAxialPosition;
+    }
+
+    public void setLeftAxialPosition(String leftAxialPosition) {
+        this.leftAxialPosition = leftAxialPosition;
     }
 }

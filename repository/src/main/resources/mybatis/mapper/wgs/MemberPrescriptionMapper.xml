@@ -3,7 +3,6 @@
 <mapper namespace="com.wgs.mapper.MemberPrescriptionMapper">
 
     <resultMap id="MemberPrescriptionMap" type="com.wgs.entity.MemberPrescription">
-
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="name" property="name"/>
         <result column="member_id" property="memberId"/>
@@ -36,6 +35,8 @@
         left_astigmatism,
         right_degree,
         left_degree,
+        left_axial_position,
+        right_axial_position
         created_id,
         modified_id,
         created_time,
@@ -104,6 +105,12 @@
             <if test="leftDegree != null">
                 left_degree,
             </if>
+            <if test="leftAxialPosition != null">
+                left_axial_position,
+            </if>
+            <if test="rightAxialPosition != null">
+                right_axial_position,
+            </if>
             <if test="createdId != null">
                 created_id,
             </if>
@@ -147,6 +154,12 @@
             </if>
             <if test="leftDegree != null">
                 #{leftDegree},
+            </if>
+            <if test="leftAxialPosition != null">
+                #{leftAxialPosition},
+            </if>
+            <if test="rightAxialPosition != null">
+                #{rightAxialPosition},
             </if>
             <if test="createdId != null">
                 #{createdId},
@@ -220,6 +233,12 @@
             </if>
             <if test="leftDegree != null">
                 left_degree = #{leftDegree},
+            </if>
+            <if test="leftAxialPosition != null">
+                left_axial_position = #{leftAxialPosition},
+            </if>
+            <if test="rightAxialPosition != null">
+                right_axial_position = #{rightAxialPosition},
             </if>
             <if test="createdId != null">
                 created_id = #{createdId},
