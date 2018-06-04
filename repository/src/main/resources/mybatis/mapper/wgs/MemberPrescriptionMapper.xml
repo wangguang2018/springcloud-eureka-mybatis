@@ -38,7 +38,7 @@
         right_degree,
         left_degree,
         left_axial_position,
-        right_axial_position
+        right_axial_position,
         created_id,
         modified_id,
         created_time,
