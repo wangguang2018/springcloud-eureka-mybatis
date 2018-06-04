@@ -12,6 +12,8 @@
         <result column="left_astigmatism" property="leftAstigmatism"/>
         <result column="right_degree" property="rightDegree"/>
         <result column="left_degree" property="leftDegree"/>
+        <result column="left_axial_position" property="leftAxialPosition"/>
+        <result column="right_axial_position" property="rightAxialPosition"/>
         <result column="created_id" property="createdId"/>
         <result column="modified_id" property="modifiedId"/>
         <result column="created_time" property="createdTime"/>
