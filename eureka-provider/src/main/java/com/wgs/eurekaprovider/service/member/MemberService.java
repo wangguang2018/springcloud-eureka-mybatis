@@ -205,6 +205,7 @@ public class MemberService extends BaseServiceImpl {
     }
 
     public List<MemberPrescription> findPrescription(Integer memberId) {
+        
         List<MemberPrescription> memberPrescriptions = memberPrescriptionMapper.findAll(memberId);
         return memberPrescriptions;
     }
