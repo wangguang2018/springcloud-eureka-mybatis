@@ -1,6 +1,6 @@
 package com.wgs.mapper;
 import com.wgs.entity.MemberCoupon;
-
+import org.apache.ibatis.annotations.Param;
 
 
 import java.util.List;
