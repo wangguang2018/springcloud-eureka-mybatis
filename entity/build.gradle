@@ -13,6 +13,8 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile "com.ydd:framework-core:${frameworkVersion}"
+    //dozer  对象复制
+    compile "net.sf.dozer:dozer:5.5.1"
 
 }
 
