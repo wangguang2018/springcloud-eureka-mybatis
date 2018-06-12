@@ -56,7 +56,7 @@ public class MemberCoupon implements Serializable {
     /**
      * 结束日期
      */
-    private Date emdTime;
+    private Date endTime;
 
     /**
      * 使用优惠券的最低限制金额
@@ -255,14 +255,13 @@ public class MemberCoupon implements Serializable {
         return startTime;
     }
 
-
     /**
-     * 设置结束日期
+     * 获取结束日期
      *
-     * @param emdTime 结束日期
+     * @return 结束日期
      */
-    public void setEmdTime(Date emdTime){
-        this.emdTime = emdTime;
+    public Date getEndTime() {
+        return endTime;
     }
 
     /**
@@ -270,10 +269,9 @@ public class MemberCoupon implements Serializable {
      *
      * @return 结束日期
      */
-    public Date getEmdTime(){
-        return emdTime;
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
-
 
     /**
      * 设置使用优惠券的最低限制金额

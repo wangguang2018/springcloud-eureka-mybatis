@@ -2,7 +2,7 @@ package com.wgs.entity.utils;
 
 import java.util.Date;
 
-public class CommonDto {
+public class DateBean {
 
     /**
      * 创建时间

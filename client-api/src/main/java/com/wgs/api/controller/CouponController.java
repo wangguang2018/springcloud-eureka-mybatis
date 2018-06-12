@@ -1,13 +1,15 @@
 package com.wgs.api.controller;
 
 import com.wgs.api.service.MemberAddressService;
+import com.wgs.api.service.MemberCouponService;
 import com.wgs.api.service.MemberService;
 import com.wgs.dto.BaseResult;
 import com.wgs.dto.goods.GoodsCarDTO;
-import com.wgs.dto.member.MemberInfoDTO;
 import com.wgs.entity.MemberAddress;
+import com.wgs.entity.MemberCoupon;
 import com.wgs.entity.MemberPrescription;
 import com.wgs.entity.MemberToken;
+import com.wgs.entity.enums.EnumMemberCouponStatus;
 import com.ydd.framework.core.annotation.AccessToken;
 import com.ydd.framework.core.common.dto.ResponseDTO;
 import com.ydd.framework.core.controller.BaseApiController;
@@ -20,189 +22,27 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@RequestMapping("/member")
-public class MemberController extends BaseApiController {
+@RequestMapping("/coupon")
+public class CouponController extends BaseApiController {
 
     @Resource
     private MemberService memberService;
 
     @Resource
-    private MemberAddressService memberAddressService;
+    private MemberCouponService memberCouponService;
+
 
     /**
-     * 小程序登录
-     * @param code
-     * @param nickname
-     * @param avatar
+     * 获取用户待使用的优惠券
      * @return
      */
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public ResponseDTO login(@RequestParam("code") String code, @RequestParam("nickname") String nickname, @RequestParam("avatar") String avatar){
-        BaseResult<MemberToken> memberToken = memberService.login(code,nickname,avatar);
-        return ResponseDTO.ok().addAttribute("data",memberToken.getContent());
-    }
-
-    /**
-     * 获取用户购物车
-     * @return
-     */
-    @RequestMapping("/goods/car")
+    @RequestMapping("/member")
     @AccessToken
     public ResponseDTO goodsCarList(){
-        BaseResult<List<GoodsCarDTO>> result = memberService.findGoodsCar(getLoginMemberId());
+        BaseResult<List<MemberCoupon>> result = memberCouponService.findMemberCoupon(getLoginMemberId(), EnumMemberCouponStatus.no_yet.value);
         return ResponseDTO.ok().addAttribute("data",result.getContent());
     }
 
-    /**
-     *
-     * @param skuGroupId 商品sku组合ID
-     * @return
-     */
-    @RequestMapping(value = "/goods/car/add",method = RequestMethod.POST)
-    @AccessToken
-    public ResponseDTO addGoodsToCar(@RequestParam("skuGroupId") Integer skuGroupId,@RequestParam("goodsId") Integer goodsId,@RequestParam("num") Integer num){
-        memberService.addGoodsCar(skuGroupId,getLoginMemberId(),goodsId,num);
-        return ResponseDTO.ok();
-    }
 
-    /**
-     * 购物车删除产品
-     * @param skuGroupId
-     * @return
-     */
-    @RequestMapping(value = "/goods/car/delete",method = RequestMethod.POST)
-    @AccessToken
-    public ResponseDTO deleteGoodsFromCar(@RequestParam("skuGroupId") Integer skuGroupId){
-        memberService.deleteGoodsCar(skuGroupId,getLoginMemberId());
-        return ResponseDTO.ok();
-    }
-
-    /**
-     * 清空购物车
-     * @return
-     */
-    @RequestMapping(value = "/goods/car/clear",method = RequestMethod.POST)
-    @AccessToken
-    public ResponseDTO clearGoodsCar(){
-        memberService.clearGoodsCar(getLoginMemberId());
-        return ResponseDTO.ok();
-    }
-
-    /**
-     * 保存收货地址
-     * @param memberAddress
-     * @return
-     */
-    @AccessToken
-    @RequestMapping(value = "/address/save",method = RequestMethod.POST)
-    public ResponseDTO saveMemberAddress(MemberAddress memberAddress){
-        memberAddress.setMemberId(getLoginMemberId());
-        memberAddressService.save(memberAddress);
-        return ResponseDTO.ok();
-    }
-
-    /**
-     * 用户收货地址列表
-     * @return
-     */
-    @AccessToken
-    @RequestMapping(value = "/address/list",method = RequestMethod.GET)
-    public ResponseDTO memberAddressList(){
-        BaseResult<List<MemberAddress>> result = memberAddressService.findMemberAddress(getLoginMemberId());
-        return ResponseDTO.ok().addAttribute("data",result.getContent());
-    }
-
-    /**
-     * 删除收货地址
-     * @param addressId
-     * @return
-     */
-    @AccessToken
-    @RequestMapping(value = "/address/delete",method = RequestMethod.POST)
-    public ResponseDTO deleteMemberAddress(@RequestParam("addressId") Integer addressId){
-        memberAddressService.deleteAddress(getLoginMemberId(),addressId);
-        return ResponseDTO.ok();
-    }
-
-    /**
-     * 将地址设为默认
-     * @param addressId
-     * @return
-     */
-    @AccessToken
-    @RequestMapping(value = "/address/default",method = RequestMethod.POST)
-    public ResponseDTO defaultMemberAddress(@RequestParam("addressId") Integer addressId){
-        memberAddressService.setAddressDefault(getLoginMemberId(),addressId);
-        return ResponseDTO.ok();
-    }
-
-    /**
-     * 获取用户信息
-     * @return
-     */
-    @RequestMapping("/info")
-    @AccessToken
-    public ResponseDTO findMemberInfo(){
-        BaseResult result = memberService.findMemberInfo(getLoginMemberId());
-        return ResponseDTO.ok().addAttribute("data",result.getContent());
-    }
-
-    /**
-     * 获取用户信息
-     * @return
-     */
-    @RequestMapping("/goodscar/count")
-    @AccessToken
-    public ResponseDTO findGoodsCarCount(){
-        BaseResult result = memberService.findGoodsCarCount(getLoginMemberId());
-        return ResponseDTO.ok().addAttribute("data",result.getContent());
-    }
-
-    /**
-     * 获取用户处方信息
-     * @return
-     */
-    @RequestMapping("/prescription/findPrescription")
-    @AccessToken
-    public ResponseDTO findPrescription(){
-        BaseResult<List<MemberPrescription>> result = memberService.findPrescription(getLoginMemberId());
-        return ResponseDTO.ok().addAttribute("data",result.getContent());
-    }
-
-    /**
-     * 获取用户处方单个信息
-     * @return
-     */
-    @RequestMapping("/prescription/findOnePrescription")
-    @AccessToken
-    public ResponseDTO findOnePrescription(@RequestParam("id") Integer id){
-        BaseResult<MemberPrescription> result = memberService.findOnePrescription(getLoginMemberId(),id);
-        return ResponseDTO.ok().addAttribute("data",result.getContent());
-    }
-
-    /**
-     * 保存处方信息
-     * @param memberPrescription
-     * @return
-     */
-    @AccessToken
-    @RequestMapping(value = "/prescription/saveOnePrescription",method = RequestMethod.POST)
-    public ResponseDTO saveMemberAddress(MemberPrescription memberPrescription){
-        memberPrescription.setMemberId(getLoginMemberId());
-        memberService.save(memberPrescription);
-        return ResponseDTO.ok();
-    }
-
-    /**
-     * 删除处方信息
-     * @param id
-     * @return
-     */
-    @AccessToken
-    @RequestMapping(value = "/prescription/deletePrescription",method = RequestMethod.POST)
-    public ResponseDTO deletePrescription(@RequestParam("id") Integer id){
-        memberService.deletePrescription(getLoginMemberId(),id);
-        return ResponseDTO.ok();
-    }
 
 }

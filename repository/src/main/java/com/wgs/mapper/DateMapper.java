@@ -1,10 +1,7 @@
-package com.wgs.mapper.utils;
+package com.wgs.mapper;
 
-import com.wgs.entity.Banner;
+
 import com.wgs.entity.utils.DateBean;
-
-import java.util.Date;
-import java.util.List;
 
 /**
  * Mapper - Dater
@@ -18,5 +15,5 @@ public interface DateMapper {
      * 获取现在
      * @return
      */
-    Object getNow();
+    DateBean getNow();
 }

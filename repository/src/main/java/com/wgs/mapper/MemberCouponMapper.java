@@ -65,6 +65,14 @@ public interface MemberCouponMapper {
      * @param status 状态
      * @return 更新数量
      */
-    int updateStatus(@Param("ids") Integer[] ids, @Param("status") Byte status);
+    int updateStatus(@Param("ids") List<Integer> ids, @Param("status") Byte status);
+
+    /**
+     * 获取用户的优惠券
+     * @param memberId
+     * @param status
+     * @return
+     */
+    List<MemberCoupon> findByMemberId(@Param("memberId") Integer memberId,@Param("status") Byte status);
 
 }

@@ -1,15 +1,14 @@
 package com.wgs.entity.enums;
 
-public enum EnumMemberCouponStatus {
+public enum EnumMemberExpireType {
 
-    overdue("已过期",(byte)-1),
-    no_yet("未使用",(byte)0),
-    userd("已使用",(byte)1);
+    days("有效天数",(byte)1),
+    period("优惠券时间",(byte)2);
 
     public String name;
     public Byte value;
 
-    EnumMemberCouponStatus(String name, Byte value){
+    EnumMemberExpireType(String name, Byte value){
         this.name = name;
         this.value = value;
     }

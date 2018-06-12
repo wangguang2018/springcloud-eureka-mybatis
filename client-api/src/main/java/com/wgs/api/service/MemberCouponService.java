@@ -1,8 +1,8 @@
 package com.wgs.api.service;
 
 import com.wgs.dto.BaseResult;
-import com.wgs.dto.member.MemberInfoDTO;
 import com.wgs.entity.MemberAddress;
+import com.wgs.entity.MemberCoupon;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,42 +12,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @FeignClient(value = "service-api")
-public interface MemberAddressService {
-    /**
-     * 保存收货地址
-     *
-     * @param memberAddress
-     */
-    @RequestMapping(value = "/address/save",method = RequestMethod.POST)
-    BaseResult save(@RequestBody MemberAddress memberAddress);
+public interface MemberCouponService {
+
 
     /**
-     * 获取用户地址
-     *
+     * 获取用户优惠券
      * @param memberId
+     * @param status
      * @return
      */
-    @RequestMapping("/address/list")
-    BaseResult<List<MemberAddress>> findMemberAddress(@RequestParam("memberId") Integer memberId);
+    @RequestMapping("/member/coupon/list")
+    BaseResult<List<MemberCoupon>> findMemberCoupon(@RequestParam("memberId") Integer memberId,@RequestParam("status") Byte status);
 
 
-    /**
-     * 将地址设为默认
-     *
-     * @param memberId
-     * @param addressId
-     */
-    @RequestMapping("/address/default")
-    BaseResult setAddressDefault(@RequestParam("memberId") Integer memberId, @RequestParam("addressId") Integer addressId);
 
-    /**
-     * 删除收货地址
-     *
-     * @param memberId
-     * @param addressId
-     */
-    @RequestMapping("/address/delete")
-    BaseResult deleteAddress(@RequestParam("memberId") Integer memberId, @RequestParam("addressId") Integer addressId);
 
 
 

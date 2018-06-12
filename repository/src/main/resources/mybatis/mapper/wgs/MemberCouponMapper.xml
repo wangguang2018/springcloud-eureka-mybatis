@@ -12,7 +12,7 @@
 		<result column="scope" property="scope" />
 		<result column="expire_type" property="expireType" />
 		<result column="start_time" property="startTime" />
-		<result column="emd_time" property="emdTime" />
+		<result column="end_time" property="endTime" />
 		<result column="least_price" property="leastPrice" />
 		<result column="discount_price" property="discountPrice" />
 		<result column="status" property="status" />
@@ -38,7 +38,7 @@
 		scope,
 		expire_type,
 		start_time,
-		emd_time,
+		end_time,
 		least_price,
 		discount_price,
 		status,
@@ -59,7 +59,7 @@
 		#{scope, jdbcType=TINYINT},
 		#{expireType, jdbcType=TINYINT},
 		#{startTime, jdbcType=TIMESTAMP},
-		#{emdTime, jdbcType=TIMESTAMP},
+		#{endTime, jdbcType=TIMESTAMP},
 		#{leastPrice, jdbcType=DECIMAL},
 		#{discountPrice, jdbcType=DECIMAL},
 		#{status, jdbcType=TINYINT},
@@ -110,8 +110,8 @@
             <if test="startTime != null">
 				start_time,
             </if>
-            <if test="emdTime != null">
-				emd_time,
+            <if test="endTime != null">
+				end_time,
             </if>
             <if test="leastPrice != null">
 				least_price,
@@ -163,8 +163,8 @@
             <if test="startTime != null">
 				#{startTime},
             </if>
-            <if test="emdTime != null">
-				#{emdTime},
+            <if test="endTime != null">
+				#{endTime},
             </if>
             <if test="leastPrice != null">
 				#{leastPrice},
@@ -242,8 +242,8 @@
 			<if test="startTime != null">
 				start_time = #{startTime},
 			</if>
-			<if test="emdTime != null">
-				emd_time = #{emdTime},
+			<if test="endTime != null">
+				end_time = #{endTime},
 			</if>
 			<if test="leastPrice != null">
 				least_price = #{leastPrice},

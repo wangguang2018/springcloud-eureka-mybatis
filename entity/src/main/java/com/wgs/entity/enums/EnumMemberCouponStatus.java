@@ -1,15 +1,28 @@
 package com.wgs.entity.enums;
 
-public enum OrderStatusEnum {
+public enum EnumMemberCouponStatus {
 
-    CLOSED("交易关闭",(byte)-1),NO_PAY("待付款",(byte)1),PENDING_DELIVERY("待发货",(byte)2),
-    PENDING_RECEIVED("待收货",(byte)3),DONE("已完成",(byte)4);
+    overdue("已过期",(byte)-1),
+    no_yet("未使用",(byte)0),
+    userd("已使用",(byte)1);
 
     public String name;
     public Byte value;
 
-    OrderStatusEnum(String name,Byte value){
+    EnumMemberCouponStatus(String name, Byte value){
         this.name = name;
         this.value = value;
+    }
+
+    public static EnumMemberCouponStatus getEnum(Byte value){
+        if(value==null){
+            return null;
+        }
+        for(EnumMemberCouponStatus status : EnumMemberCouponStatus.values()){
+            if(value.intValue() == status.value){
+                return status;
+            }
+        }
+        return  null;
     }
 }

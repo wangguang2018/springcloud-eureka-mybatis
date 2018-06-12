@@ -1,28 +1,30 @@
-package com.wgs.eurekaprovider.service.banner;
+package com.wgs.eurekaprovider.service.utils;
 
-import com.wgs.entity.Banner;
-import com.wgs.mapper.BannerMapper;
+import com.wgs.entity.utils.DateBean;
+import com.wgs.mapper.DateMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
+import java.util.Date;
 
 @Service
-public class BannerService {
+public class DateService {
+
+    private static Logger logger = LoggerFactory.getLogger(DateService.class);
 
     @Resource
-    private BannerMapper bannerMapper;
+    private DateMapper dateMapper;
 
     /**
-     * 获取banner
+     * 获取当前时间
      * @return
      */
-    public List<Banner> findBanners(){
-        return bannerMapper.findAll();
+    public Date getNow(){
+        DateBean now  = dateMapper.getNow();
+        return now.getNow();
     }
 
-    public String findLaunchImg(){
-        return bannerMapper.findLaunchImg();
-    }
 
 }
